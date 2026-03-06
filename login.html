@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Student Login</title>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<style>
+
+body{
+background:#0b1320;
+color:white;
+font-family:sans-serif;
+text-align:center;
+padding-top:80px;
+}
+
+.box{
+background:#111827;
+padding:30px;
+width:300px;
+margin:auto;
+border-radius:10px;
+}
+
+input{
+width:90%;
+padding:10px;
+margin:8px;
+border-radius:6px;
+border:none;
+}
+
+button{
+padding:10px 20px;
+margin-top:10px;
+background:#3b82f6;
+border:none;
+color:white;
+border-radius:6px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Student Signup</h2>
+
+<input id="name" placeholder="Full Name">
+<input id="phone" placeholder="Phone Number">
+<input id="username" placeholder="Username">
+<input id="password" placeholder="Password">
+
+<button onclick="signup()">Sign Up</button>
+
+<hr>
+
+<h2>Login</h2>
+
+<input id="loginUser" placeholder="Username">
+<input id="loginPass" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<script>
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyC-WBjo...",
+authDomain: "ssc-library.firebaseapp.com",
+projectId: "ssc-library"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+function signup(){
+
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let username=document.getElementById("username").value;
+let password=document.getElementById("password").value;
+
+db.collection("students").doc(username).get().then((doc)=>{
+
+if(doc.exists){
+
+alert("Username already exists ❌");
+
+}else{
+
+db.collection("students").doc(username).set({
+
+name:name,
+phone:phone,
+username:username,
+password:password
+
+});
+
+alert("Signup successful ✅");
+
+}
+
+});
+
+}
+
+function login(){
+
+let user=document.getElementById("loginUser").value;
+let pass=document.getElementById("loginPass").value;
+
+db.collection("students").doc(user).get().then((doc)=>{
+
+if(doc.exists){
+
+let data=doc.data();
+
+if(data.password===pass){
+
+localStorage.setItem("student", user);
+
+alert("Login Success ✅");
+
+window.location="dashboard.html";
+
+}else{
+
+alert("Wrong Password ❌");
+
+}
+
+}else{
+
+alert("User not found ❌");
+
+}
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>
