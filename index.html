@@ -311,20 +311,23 @@ count.innerText=notifications.length;
 
 function toggleNotifications(){
 
-let panel=document.getElementById("notifPanel");
+let panel = document.getElementById("notifPanel") || document.querySelector(".notifPanel");
 
 panel.style.display = panel.style.display==="block" ? "none" : "block";
 
 }
-
 function addNotification(msg){
+
+let notifications = JSON.parse(localStorage.getItem("ssc_notifications")) || [];
 
 notifications.unshift(msg);
 
-localStorage.setItem("ssc_notifications",JSON.stringify(notifications));
+localStorage.setItem("ssc_notifications", JSON.stringify(notifications));
 
-updateNotificationUI();
+alert("Notification Added");
+
 location.reload();
+
 }
 
 updateNotificationUI();
