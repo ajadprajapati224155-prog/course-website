@@ -65,6 +65,13 @@ box-shadow:0 0 10px #3b82f6;
 <textarea id="message" placeholder="Notification Message"></textarea>
 
 <button onclick="sendNotification()">Send Notification</button>
+ <h3>➕ Add New Course</h3>
+
+<input id="courseName" placeholder="Course Name">
+
+<input id="courseLink" placeholder="Course Page Link (example: maths.html)">
+
+<button onclick="addCourse()">Add Course</button>
 </div> 
 </div>
 
@@ -98,8 +105,23 @@ time:new Date().toLocaleString()
 
 alert("Notification Sent ✅");
  }
-function checkLogin(){
+ function addCourse(){
 
+let name=document.getElementById("courseName").value;
+let link=document.getElementById("courseLink").value;
+
+db.collection("courses").add({
+
+name:name,
+link:link
+
+});
+
+alert("Course Added Successfully ✅");
+
+ }
+function checkLogin(){
+ 
 let pass = document.getElementById("adminPass").value;
 
 if(pass === "ssc123"){
