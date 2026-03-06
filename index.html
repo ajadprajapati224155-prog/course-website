@@ -543,7 +543,36 @@ document.getElementById("noticePopup").style.opacity="1";
 },500);
 }
 </script>
+<script>
 
+db.collection("courses").onSnapshot((snapshot)=>{
+
+let container=document.querySelector(".container");
+
+snapshot.docChanges().forEach((change)=>{
+
+if(change.type==="added"){
+
+let data=change.doc.data();
+
+let courseHTML=`
+<div class="course">
+<h2>${data.name}</h2>
+
+<a class="btn" href="${data.link}">📺 Classes</a>
+
+</div>
+`;
+
+container.innerHTML+=courseHTML;
+
+}
+
+});
+
+});
+
+</script>
 </body>
   
 </html>
