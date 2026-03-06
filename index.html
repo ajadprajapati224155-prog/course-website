@@ -226,10 +226,14 @@ border-radius:15px;
 color:white;
 text-decoration:none;
 
-background:linear-gradient(135deg,#007bff,#00c6ff,#4da3ff);
+background:linear-gradient(270deg,#007bff,#00c6ff,#4da3ff,#007bff);
+background-size:400% 400%;
+
+animation:blueMove 6s ease infinite;
+
 box-shadow:0 0 10px #00c6ff,
 0 0 20px #007bff,
-0 0 35px #4da3ff;
+0 0 40px #4da3ff;
 
 transition:0.3s;
 }
@@ -244,6 +248,16 @@ box-shadow:0 0 15px #00c6ff,
 0%{background-position:0% 50%;}
 50%{background-position:100% 50%;}
 100%{background-position:0% 50%;}
+}
+@keyframes blueMove{
+0%{
+background-position:0% 50%;
+}
+50%{
+background-position:100% 50%;
+}
+100%{
+background-position:0% 50%;
 }
 </style>
 
