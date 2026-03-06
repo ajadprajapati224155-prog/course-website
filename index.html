@@ -313,7 +313,27 @@ font-weight:bold;
 </head>
 
 <body>
+<div id="noticePopup" class="popup">
+<div class="popup-box">
 
+<h2>📢 IMPORTANT NOTICE</h2>
+
+<p>
+All courses and materials on this website are provided
+<b>completely free of cost</b>.
+If anyone asks for money, <span class="red">DO NOT PAY.</span>
+</p>
+
+<button class="joinBtn" onclick="window.open('https://t.me/yourchannel')">
+🔔 JOIN OFFICIAL CHANNEL
+</button>
+
+<button class="closeBtn" onclick="closePopup()">
+I HAVE ALREADY JOINED
+</button>
+
+</div>
+</div>
 <div class="header">
 <h1>SSC LIBRARY</h1>
 </div>
@@ -502,27 +522,7 @@ window.onload = function(){
 document.getElementById("noticePopup").style.display="flex";
 }
 </script>
-<div id="noticePopup" class="popup">
-  <div class="popup-box">
 
-    <h2>📢 IMPORTANT NOTICE</h2>
-
-    <p>
-    All courses and materials on this website are provided 
-    <b>completely free of cost</b>.
-    If anyone asks for money, <span class="red">DO NOT PAY.</span>
-    </p>
-
-    <button class="joinBtn" onclick="window.open('https://t.me/yourchannel')">
-    🔔 JOIN OFFICIAL CHANNEL
-    </button>
-
-    <button class="closeBtn" onclick="closePopup()">
-    I HAVE ALREADY JOINED
-    </button>
-
-  </div>
-</div>
 </body>
   
 </html>
