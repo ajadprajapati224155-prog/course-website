@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +14,6 @@ background:#0b0f1f;
 font-family:sans-serif;
 color:white;
 margin:0;
-overflow-y:auto;
 }
 
 .header{
@@ -23,6 +23,7 @@ padding:25px;
 
 .header h1{
 color:#4da3ff;
+font-size:30px;
 }
 
 .search{
@@ -41,18 +42,19 @@ background:linear-gradient(45deg,#1a1a1a,#222);
 margin:20px;
 padding:20px;
 border-radius:20px;
-box-shadow:0 0 10px #000;
+box-shadow:0 0 15px #000;
 }
 
 .btn{
 display:block;
-margin-top:15px;
+margin-top:12px;
 padding:15px;
 text-decoration:none;
 background:#1e88ff;
 border-radius:10px;
 color:white;
 text-align:center;
+font-size:16px;
 }
 
 .social{
@@ -66,8 +68,29 @@ padding:12px;
 }
 
 .social a{
+font-size:22px;
+padding:10px 15px;
+border-radius:12px;
+background:linear-gradient(45deg,#0072ff,#00c6ff);
+box-shadow:0 0 10px #0072ff;
 color:white;
 text-decoration:none;
+transition:0.3s;
+}
+
+.social a:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px #00c6ff;
+}
+
+.notify{
+position:fixed;
+top:10px;
+right:10px;
+background:#1e88ff;
+padding:10px 15px;
+border-radius:10px;
+cursor:pointer;
 }
 
 </style>
@@ -76,11 +99,13 @@ text-decoration:none;
 
 <body>
 
+<div class="notify" onclick="enableNotification()">🔔</div>
+
 <div class="header">
 
 <h1>SSC LIBRARY</h1>
 
-<input class="search" placeholder="Search your course...">
+<input id="search" class="search" onkeyup="searchCourse()" placeholder="Search your course...">
 
 </div>
 
@@ -88,9 +113,9 @@ text-decoration:none;
 
 <h2>Maths SPL VOD Batch</h2>
 
-<a class="btn" href="https://youtube.com">📹 Classes</a>
+<a class="btn" href="maths.html">📹 Classes</a>
 
-<a class="btn" href="https://google.com">📄 Notes</a>
+<a class="btn" href="notes.html">📄 Notes</a>
 
 </div>
 
@@ -98,9 +123,9 @@ text-decoration:none;
 
 <h2>Reasoning SPL Batch</h2>
 
-<a class="btn" href="https://youtube.com">📹 Classes</a>
+<a class="btn" href="reasoning.html">📹 Classes</a>
 
-<a class="btn" href="https://google.com">📄 Notes</a>
+<a class="btn" href="notes.html">📄 Notes</a>
 
 </div>
 
@@ -108,23 +133,57 @@ text-decoration:none;
 
 <h2>English Special Batch</h2>
 
-<a class="btn" href="https://youtube.com">📹 Classes</a>
+<a class="btn" href="english.html">📹 Classes</a>
 
-<a class="btn" href="https://google.com">📄 Notes</a>
+<a class="btn" href="notes.html">📄 Notes</a>
 
 </div>
 
 <div class="social">
 
-<a href="https://whatsapp.com/channel/0029Vb7aw0SHgZWffpYiLf3K">🟢 WhatsApp</a>
+<a href="">🟢</a>
 
-<a href="https://t.me/ssc_exam_helper">🔵 Telegram</a>
+<a href="https://t.me/ssc_exam_helper">✈️</a>
+https://whatsapp.com/channel/0029Vb7aw0SHgZWffpYiLf3K
+<a href="https://www.instagram.com/creator_ajad?igsh=MW5rYjB4dm5jNmx6OA==">📸</a>
 
-<a href="https://www.instagram.com/creator_ajad?igsh=MW5rYjB4dm5jNmx6OA==">📸 Instagram</a>
-
-<a href="https://youtube.com/@ssc_library-1m?si=7v6kWAlr3jjDd4zS">▶ YouTube</a>
+<a href="https://youtube.com/@ssc_library-1m?si=7v6kWAlr3jjDd4zS">▶</a>
 
 </div>
+
+<script>
+
+function searchCourse(){
+
+let input=document.getElementById("search").value.toLowerCase();
+
+let courses=document.querySelectorAll(".course");
+
+courses.forEach(course=>{
+
+let text=course.innerText.toLowerCase();
+
+course.style.display=text.includes(input)?"block":"none";
+
+});
+
+}
+
+function enableNotification(){
+
+Notification.requestPermission().then(function(permission){
+
+if(permission==="granted"){
+
+new Notification("SSC Library",{body:"Notifications Enabled 🔔"});
+
+}
+
+});
+
+}
+
+</script>
 
 </body>
 
