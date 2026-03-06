@@ -4,8 +4,10 @@
 <head>
 
 <title>Video Lecture</title>
+
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+
 <style>
 
 body{
@@ -17,8 +19,29 @@ text-align:center;
 
 video{
 width:90%;
-margin-top:30px;
+margin-top:20px;
 border-radius:10px;
+}
+
+.playlist{
+margin-top:30px;
+}
+
+.playlist button{
+display:block;
+width:200px;
+margin:10px auto;
+padding:10px;
+border:none;
+border-radius:8px;
+background:#3b82f6;
+color:white;
+font-size:16px;
+}
+
+.notes{
+margin-top:20px;
+font-size:18px;
 }
 
 </style>
@@ -27,17 +50,37 @@ border-radius:10px;
 
 <body>
 
-<h1>📺 Video Lecture</h1>
+<h1>📺 SSC Lecture Player</h1>
 
 <video id="player" controls>
 
-<source src="lecture.mp4" type="video/mp4">
+<source src="lecture720.mp4" type="video/mp4" size="720">
+<source src="lecture360.mp4" type="video/mp4" size="360">
 
 </video>
+
+<div class="notes">
+
+<a href="notes.pdf" target="_blank" style="color:#4da3ff;">
+📄 Open Notes
+</a>
+
+</div>
+
+<div class="playlist">
+
+<h2>Lecture Playlist</h2>
+
+<button onclick="changeVideo('lecture1.mp4')">Lecture 1</button>
+<button onclick="changeVideo('lecture2.mp4')">Lecture 2</button>
+<button onclick="changeVideo('lecture3.mp4')">Lecture 3</button>
+
+</div>
+
 <script>
 
-const player = new Plyr('#player', {
-controls: [
+const player = new Plyr('#player',{
+controls:[
 'play',
 'progress',
 'current-time',
@@ -46,11 +89,25 @@ controls: [
 'settings',
 'fullscreen'
 ],
-settings: ['speed'],
-speed: { selected: 1, options: [0.5, 1, 1.5, 2] }
+settings:['speed','quality'],
+speed:{selected:1,options:[0.5,1,1.5,2]}
 });
 
-</script>
-</body>
+function changeVideo(video){
 
+player.source = {
+type:'video',
+sources:[
+{
+src:video,
+type:'video/mp4'
+}
+]
+};
+
+}
+
+</script>
+
+</body>
 </html>
