@@ -43,6 +43,19 @@ box-shadow:0 0 10px #3b82f6;
 
 <body>
 
+<div id="loginBox" style="text-align:center;margin-top:100px;">
+<h2>🔐 Admin Login</h2>
+
+<input type="password" id="adminPass" placeholder="Enter Admin Password">
+
+<br><br>
+
+<button onclick="checkLogin()">Login</button>
+
+</div>
+
+<div id="adminPanel" style="display:none;">
+
 <h2>⚙️ SSC Library Admin Panel</h2>
 
 <div class="card">
@@ -52,7 +65,7 @@ box-shadow:0 0 10px #3b82f6;
 <textarea id="message" placeholder="Notification Message"></textarea>
 
 <button onclick="sendNotification()">Send Notification</button>
-
+</div> 
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
