@@ -101,10 +101,12 @@ transition:0.3s;
 transform:scale(1.2);
 }
 .notify{
-position:absolute;
-top:20px;
-right:20px;
-font-size:24px;
+display:block;
+width:fit-content;
+margin:10px auto;
+background:#1e88ff;
+padding:6px 10px;
+border-radius:10px;
 cursor:pointer;
 }
 
@@ -212,8 +214,9 @@ padding:15px;
 <body>
 
 <div class="header">
-
 <h1>SSC LIBRARY</h1>
+</div>
+
 <div class="notify" onclick="toggleNotifications()">
 🔔
 <span id="notifCount" class="notifCount">0</span>
