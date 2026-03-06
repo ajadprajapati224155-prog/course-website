@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SSC Library Admin</title>
+
+<style>
+body{
+font-family:sans-serif;
+background:#0b1320;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+input,textarea{
+width:90%;
+padding:12px;
+margin:10px;
+border-radius:10px;
+border:none;
+}
+
+button{
+padding:12px 20px;
+background:#3b82f6;
+color:white;
+border:none;
+border-radius:10px;
+font-size:16px;
+}
+
+.card{
+background:#111827;
+padding:20px;
+border-radius:15px;
+max-width:400px;
+margin:auto;
+box-shadow:0 0 10px #3b82f6;
+}
+</style>
+</head>
+
+<body>
+
+<h2>⚙️ SSC Library Admin Panel</h2>
+
+<div class="card">
+
+<input id="title" placeholder="Notification Title">
+
+<textarea id="message" placeholder="Notification Message"></textarea>
+
+<button onclick="sendNotification()">Send Notification</button>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script>
+
+const firebaseConfig = {
+apiKey: "AIzaSyC-WBjodD1mPq5RRTknOICq4b0pCBRx-FGc",
+authDomain: "ssc-library.firebaseapp.com",
+projectId: "ssc-library",
+storageBucket: "ssc-library.firebasestorage.app",
+messagingSenderId: "1062574277938",
+appId: "1:1062574277938:web:0e9427e75888816c07c32b"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+function sendNotification(){
+
+let title=document.getElementById("title").value;
+let message=document.getElementById("message").value;
+
+db.collection("notifications").add({
+title:title,
+message:message,
+time:new Date().toLocaleString()
+});
+
+alert("Notification Sent ✅");
+
+}
+
+</script>
+
+</body>
+</html>
