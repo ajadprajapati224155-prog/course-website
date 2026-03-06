@@ -264,55 +264,47 @@ new Notification("SSC Library",{body:"Notifications Enabled 🔔"});
 
 <!-- Firebase Notification Code -->
 
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
 <script>
-let notifications = JSON.parse(localStorage.getItem("ssc_notifications")) || [];
+const firebaseConfig = {
+apiKey: "AIzaSyC-WBjodD1mPq5RRTknOICq4b0pCBRx-FGc",
+authDomain: "ssc-library.firebaseapp.com",
+projectId: "ssc-library",
+storageBucket: "ssc-library.firebasestorage.app",
+messagingSenderId: "1062574277938",
+appId: "1:1062574277938:web:0e9427e75888816c07c32b"
+};
 
-function updateNotificationUI(){
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-let list = document.getElementById("notifList");
-let count = document.getElementById("notifCount");
+const notifList = document.getElementById("notifList");
+const notifCount = document.getElementById("notifCount");
 
-list.innerHTML="";
+db.collection("notifications").onSnapshot((snapshot)=>{
 
-notifications.forEach(msg=>{
+notifList.innerHTML="";
+let unread = 0;
+
+snapshot.forEach((doc)=>{
+
+let data = doc.data();
+
 let li=document.createElement("li");
-li.innerText=msg;
-list.appendChild(li);
+li.innerHTML="<b>"+data.title+"</b><br>"+data.message;
+
+notifList.appendChild(li);
+
+unread++;
+
 });
 
-count.innerText=notifications.length;
+notifCount.innerText=unread;
 
-}
-
-function toggleNotifications(){
-
-let panel = document.getElementById("notifPanel") || document.querySelector(".notifPanel");
-
-panel.style.display = panel.style.display==="block" ? "none" : "block";
-
-}
-function addNotification(msg){
-
-let notifications = JSON.parse(localStorage.getItem("ssc_notifications")) || [];
-
-notifications.unshift(msg);
-
-localStorage.setItem("ssc_notifications", JSON.stringify(notifications));
-
-alert("Notification Added");
-
-location.reload();
-
-}
-
-updateNotificationUI();
-
+});
 </script>
-<button onclick="addNotification('Test Notification')" 
-style="position:fixed;bottom:20px;left:20px;padding:12px 16px;background:red;color:white;border:none;border-radius:10px;">
-Test Notification
-</button>
 </body>
   
 </html>
