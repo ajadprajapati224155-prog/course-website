@@ -32,6 +32,11 @@ letter-spacing:3px;
 white-space:nowrap;
 margin:0;
 }
+.course-img{
+width:100%;
+border-radius:10px;
+margin-bottom:10px;
+}
 
 .notify{
 position:absolute;
@@ -557,6 +562,9 @@ let data=change.doc.data();
 
 let courseHTML=`
 <div class="course">
+
+<img src="${data.image}" class="course-img">
+
 <h2>${data.name}</h2>
 
 <a class="btn" href="${data.link}">📺 Classes</a>
