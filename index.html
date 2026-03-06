@@ -95,7 +95,58 @@ transition:0.3s;
 .social a:hover{
 transform:scale(1.2);
 }
+.notify{
+position:fixed;
+top:20px;
+right:20px;
+font-size:24px;
+cursor:pointer;
+}
 
+.notifCount{
+position:absolute;
+top:-5px;
+right:-5px;
+background:red;
+color:white;
+font-size:12px;
+padding:3px 6px;
+border-radius:50%;
+}
+
+.notifPanel{
+display:none;
+position:fixed;
+top:70px;
+right:20px;
+width:300px;
+background:#111;
+color:white;
+border-radius:10px;
+padding:15px;
+box-shadow:0 0 10px #000;
+}
+
+.notifPanel ul{
+list-style:none;
+padding:0;
+}
+
+.notifPanel li{
+padding:10px;
+border-bottom:1px solid #333;
+}
+
+.notifHeader{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+}
+
+.notificationBox li{
+padding:10px;
+border-bottom:1px solid #333;
+}
 </style>
 
 </head>
@@ -105,9 +156,18 @@ transform:scale(1.2);
 <div class="header">
 
 <h1>SSC LIBRARY</h1>
-
-<div class="notify" onclick="enableNotification()">
+<div class="notify" onclick="toggleNotifications()">
 🔔
+<span id="notifCount" class="notifCount">0</span>
+</div>
+
+<div id="notifPanel" class="notifPanel">
+<div class="notifHeader">
+🔔 Notifications
+<span onclick="toggleNotifications()" class="closeBtn">✖</span>
+</div>
+
+<ul id="notifList"></ul>
 </div>
 
 <input id="search" class="search" onkeyup="searchCourse()" placeholder="Search your course...">
@@ -228,6 +288,46 @@ console.log("User Token:",token);
 });
 }
 });
+<script>
+
+let notifications = JSON.parse(localStorage.getItem("ssc_notifications")) || [];
+
+function updateNotificationUI(){
+
+let list = document.getElementById("notifList");
+let count = document.getElementById("notifCount");
+
+list.innerHTML="";
+
+notifications.forEach(msg=>{
+let li=document.createElement("li");
+li.innerText=msg;
+list.appendChild(li);
+});
+
+count.innerText=notifications.length;
+
+}
+
+function toggleNotifications(){
+
+let panel=document.getElementById("notifPanel");
+
+panel.style.display = panel.style.display==="block" ? "none" : "block";
+
+}
+
+function addNotification(msg){
+
+notifications.unshift(msg);
+
+localStorage.setItem("ssc_notifications",JSON.stringify(notifications));
+
+updateNotificationUI();
+
+}
+
+updateNotificationUI();
 
 </script>
 
