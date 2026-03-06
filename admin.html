@@ -75,6 +75,10 @@ box-shadow:0 0 10px #3b82f6;
 </div> 
 </div>
 
+ <h3>👨‍🎓 Students List</h3>
+
+<div id="studentList"></div>
+ 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
@@ -122,6 +126,30 @@ image:image
 alert("Course Added Successfully ✅");
 
 }
+
+db.collection("students").get().then((snapshot)=>{
+
+snapshot.forEach((doc)=>{
+
+let data=doc.data();
+
+let div=document.createElement("div");
+
+div.innerHTML=`
+
+<p>
+👤 ${data.name}  
+📱 ${data.phone}  
+🆔 ${data.username}
+</p>
+
+`;
+
+document.getElementById("studentList").appendChild(div);
+
+});
+
+});
 function checkLogin(){
  
 let pass = document.getElementById("adminPass").value;
