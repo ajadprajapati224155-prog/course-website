@@ -7,6 +7,8 @@
 
 <title>SSC Library</title>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 
 body{
@@ -14,29 +16,40 @@ background:#0b0f1f;
 font-family:sans-serif;
 color:white;
 margin:0;
-min-height:150vh;
-padding-bottom:90px;
+padding:0;
 }
 
 .header{
 text-align:center;
-padding:25px;
+padding:20px;
 }
 
 .header h1{
 color:#4da3ff;
-font-size:30px;
+}
+
+.notify{
+position:absolute;
+right:20px;
+top:20px;
+background:#1e88ff;
+padding:10px 14px;
+border-radius:10px;
+cursor:pointer;
 }
 
 .search{
 width:90%;
-margin:auto;
 padding:14px;
-border-radius:15px;
 border:none;
+border-radius:15px;
 background:#111;
 color:white;
-display:block;
+margin-top:15px;
+}
+
+.container{
+padding-bottom:40px;
 }
 
 .course{
@@ -47,55 +60,40 @@ border-radius:20px;
 box-shadow:0 0 15px #000;
 }
 
+.course h2{
+margin-top:0;
+}
+
 .btn{
 display:block;
-margin-top:12px;
+margin-top:15px;
 padding:15px;
 text-decoration:none;
 background:#1e88ff;
 border-radius:10px;
 color:white;
 text-align:center;
-font-size:16px;
 }
 
 .social{
-position:fixed;
-bottom:0;
-width:100%;
-background:#000;
 display:flex;
-justify-content:space-around;
-padding:12px;
+justify-content:center;
+gap:20px;
+padding:30px;
 }
 
 .social a{
-font-size:26px;
-padding:12px;
-border-radius:15px;
+font-size:28px;
+color:white;
 background:linear-gradient(45deg,#0072ff,#00c6ff);
-box-shadow:0 0 12px #0072ff;
+padding:14px;
+border-radius:15px;
+box-shadow:0 0 15px #0072ff;
 transition:0.3s;
 }
 
 .social a:hover{
 transform:scale(1.2);
-box-shadow:0 0 20px #00c6ff;
-}
-
-.social a:hover{
-transform:scale(1.1);
-box-shadow:0 0 20px #00c6ff;
-}
-
-.notify{
-position:fixed;
-top:10px;
-right:10px;
-background:#1e88ff;
-padding:10px 15px;
-border-radius:10px;
-cursor:pointer;
 }
 
 </style>
@@ -104,15 +102,19 @@ cursor:pointer;
 
 <body>
 
-<div class="notify" onclick="enableNotification()">🔔</div>
-
 <div class="header">
 
 <h1>SSC LIBRARY</h1>
 
+<div class="notify" onclick="enableNotification()">
+🔔
+</div>
+
 <input id="search" class="search" onkeyup="searchCourse()" placeholder="Search your course...">
 
 </div>
+
+<div class="container">
 
 <div class="course">
 
@@ -144,15 +146,25 @@ cursor:pointer;
 
 </div>
 
+</div>
+
 <div class="social">
 
-<a href="">🟢</a>
+<a href="https://whatsapp.com/channel/0029Vb7aw0SHgZWffpYiLf3K" target="_blank">
+<i class="fab fa-whatsapp"></i>
+</a>
 
-<a href="https://t.me/ssc_exam_helper">✈️</a>
-https://whatsapp.com/channel/0029Vb7aw0SHgZWffpYiLf3K
-<a href="https://www.instagram.com/creator_ajad?igsh=MW5rYjB4dm5jNmx6OA==">📸</a>
+<a href="https://t.me/ssc_exam_helper" target="_blank">
+<i class="fab fa-telegram"></i>
+</a>
 
-<a href="https://youtube.com/@ssc_library-1m?si=7v6kWAlr3jjDd4zS">▶</a>
+<a href="https://www.instagram.com/creator_ajad?igsh=MW5rYjB4dm5jNmx6OA==" target="_blank">
+<i class="fab fa-instagram"></i>
+</a>
+
+<a href="https://youtube.com/@ssc_library-1m?si=7v6kWAlr3jjDd4zS" target="_blank">
+<i class="fab fa-youtube"></i>
+</a>
 
 </div>
 
