@@ -4,7 +4,8 @@
 <head>
 
 <title>Video Lecture</title>
-
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 <style>
 
 body{
@@ -28,12 +29,28 @@ border-radius:10px;
 
 <h1>📺 Video Lecture</h1>
 
-<video controls>
+<video id="player" controls>
 
 <source src="lecture.mp4" type="video/mp4">
 
 </video>
+<script>
 
+const player = new Plyr('#player', {
+controls: [
+'play',
+'progress',
+'current-time',
+'mute',
+'volume',
+'settings',
+'fullscreen'
+],
+settings: ['speed'],
+speed: { selected: 1, options: [0.5, 1, 1.5, 2] }
+});
+
+</script>
 </body>
 
 </html>
