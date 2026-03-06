@@ -207,31 +207,37 @@ align-items:center;
 gap:10px;
 padding:15px;
 }
+.social-icons{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:18px;
+margin-top:20px;
+}
 .social-icons a{
-display:inline-flex;
+display:flex;
 align-items:center;
 justify-content:center;
 width:60px;
 height:60px;
-margin:10px;
-font-size:28px;
+font-size:26px;
 border-radius:15px;
 color:white;
 text-decoration:none;
-background:linear-gradient(45deg,red,orange,yellow,green,cyan,blue,violet);
-background-size:400% 400%;
-animation:rgbGlow 6s linear infinite;
-box-shadow:0 0 10px rgba(0,255,255,0.7),
-0 0 20px rgba(0,255,255,0.6),
-0 0 40px rgba(0,255,255,0.4);
+
+background:linear-gradient(135deg,#ff0080,#7928ca,#00c6ff);
+box-shadow:0 0 10px #00c6ff,
+0 0 20px #7928ca,
+0 0 30px #ff0080;
+
 transition:0.3s;
 }
 
 .social-icons a:hover{
 transform:scale(1.15);
-box-shadow:0 0 20px #00ffff,
-0 0 40px #00ffff,
-0 0 60px #00ffff;
+box-shadow:0 0 15px #00c6ff,
+0 0 35px #7928ca,
+0 0 60px #ff0080;
 }
 
 @keyframes rgbGlow{
