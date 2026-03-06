@@ -260,7 +260,6 @@ background-position:100% 50%;
 background-position:0% 50%;
 }
 .popup{
-display:none;
 position:fixed;
 top:0;
 left:0;
@@ -271,6 +270,8 @@ display:flex;
 justify-content:center;
 align-items:center;
 z-index:9999999;
+visibility:hidden;
+opacity:0;
 }
 .popup-box{
 background:#0b1320;
@@ -516,12 +517,14 @@ count.innerText = "0";   // red number reset
 </script>
 <script>
 function closePopup(){
-document.getElementById("noticePopup").style.display="none";
+document.getElementById("noticePopup").style.visibility="hidden";
+document.getElementById("noticePopup").style.opacity="0";
 }
 
 window.onload = function(){
 setTimeout(function(){
-document.getElementById("noticePopup").style.display="flex";
+document.getElementById("noticePopup").style.visibility="visible";
+document.getElementById("noticePopup").style.opacity="1";
 },500);
 }
 </script>
