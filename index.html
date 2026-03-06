@@ -264,31 +264,7 @@ new Notification("SSC Library",{body:"Notifications Enabled 🔔"});
 
 <!-- Firebase Notification Code -->
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-compat.js"></script>
-<script>
 
-const firebaseConfig = {
-    apiKey: "AIzaSyBCTfaDf4Am2O0rwOMVczPSj2Y_-zJGvUA",
-    authDomain: "maths-e8a8f.firebaseapp.com",
-    projectId: "maths-e8a8f",
-    storageBucket: "maths-e8a8f.firebasestorage.app",
-    messagingSenderId: "989519808044",
-    appId: "1:989519808044:web:8a6179e829773ef858b389"
-  };
-
-firebase.initializeApp(firebaseConfig);
-
-const messaging = firebase.messaging();
-
-Notification.requestPermission().then((permission)=>{
-if(permission==="granted"){
-messaging.getToken().then((token)=>{
-console.log("User Token:",token);
-});
-}
-});
-<script>
 
 let notifications = JSON.parse(localStorage.getItem("ssc_notifications")) || [];
 
