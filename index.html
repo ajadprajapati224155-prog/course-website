@@ -325,6 +325,33 @@ color:white;
 color:#ff4d4d;
 font-weight:bold;
 }
+.menuBtn{
+font-size:28px;
+position:absolute;
+left:20px;
+top:20px;
+cursor:pointer;
+color:white;
+}
+
+.sideMenu{
+
+position:fixed;
+left:-300px;
+top:0;
+width:260px;
+height:100%;
+background:#111;
+padding:20px;
+transition:0.4s;
+z-index:999;
+color:white;
+
+}
+.dark{background:#0b1320;}
+.light{background:white;color:black;}
+.blue{background:#001f3f;}
+    
 </style>
 
 </head>
@@ -339,7 +366,55 @@ if(!user){
 window.location="login.html";
 
 }
+function openMenu(){
+document.getElementById("sideMenu").style.left="0";
+}
 
+function closeMenu(){
+document.getElementById("sideMenu").style.left="-300px";
+}
+function uploadPhoto(event){
+
+let reader = new FileReader();
+
+reader.onload=function(){
+
+localStorage.setItem("profilePic",reader.result);
+
+document.getElementById("profilePic").src=reader.result;
+
+}
+
+reader.readAsDataURL(event.target.files[0]);
+
+}
+function setTheme(theme){
+
+document.body.className=theme;
+
+localStorage.setItem("theme",theme);
+
+}
+let start = Date.now();
+
+window.onbeforeunload=function(){
+
+let time = Date.now() - start;
+
+let total = Number(localStorage.getItem("studyTime")||0);
+
+localStorage.setItem("studyTime", total + time);
+
+}
+
+let total = localStorage.getItem("studyTime");
+
+if(total){
+
+document.getElementById("studyTime").innerText =
+Math.floor(total/60000) + " Minutes";
+
+}
 </script>
 <div id="noticePopup" class="popup">
 <div class="popup-box">
@@ -595,6 +670,38 @@ container.innerHTML+=courseHTML;
 });
 
 </script>
+<div id="sideMenu" class="sideMenu">
+
+<h2>👤 Student Profile</h2>
+
+<img id="profilePic" width="80" style="border-radius:50%">
+
+<input type="file" onchange="uploadPhoto(event)">
+
+<br><br>
+
+📅 Date of Birth  
+<input id="dob" type="date">
+
+<br><br>
+
+🎨 Theme  
+<br>
+
+<button onclick="setTheme('dark')">Dark</button>
+<button onclick="setTheme('light')">Light</button>
+<button onclick="setTheme('blue')">Blue</button>
+
+<br><br>
+
+⏱ Study Time  
+<p id="studyTime">0 Minutes</p>
+
+<br>
+
+<button onclick="closeMenu()">Close</button>
+
+</div>
 </body>
   
 </html>
