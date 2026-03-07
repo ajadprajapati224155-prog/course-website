@@ -465,6 +465,7 @@ document.getElementById("sideMenu").style.left="-300px";
 document.getElementById("overlay").style.display="none";
 document.getElementById("mainContent").classList.remove("blur");
 }
+document.getElementById("overlay").onclick = closeMenu;
 function uploadPhoto(event){
 
 let reader = new FileReader();
