@@ -918,11 +918,7 @@ container.innerHTML+=courseHTML;
 });
 
 });
-let user = JSON.parse(localStorage.getItem("student"));
 
-if(user){
-document.getElementById("displayName").innerText = user.name;
-}
 </script>
 </div>
 <div id="sideMenu" class="sideMenu">
@@ -961,7 +957,15 @@ document.getElementById("displayName").innerText = user.name;
 <p>©2026-27 SSC LIBRARY HUB</p>
 <p><b>Developer Ajad Prajapati</b></p>
 </div>
+<script>
 
+let user = JSON.parse(localStorage.getItem("student"));
+
+if(user){
+document.getElementById("displayName").innerText = user.name;
+}
+
+</script>
 </body>
   
 </html>
