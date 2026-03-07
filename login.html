@@ -90,12 +90,15 @@ font-size:14px;
 <input type="tel" id="phone" placeholder="Phone Number" maxlength="10">
 <p id="phoneError" style="color:red;font-size:13px;"></p>
   
-<input type="text" id="username" placeholder="Username">
+<input type="text" id="username" placeholder="@username" maxlength="12">
 <p id="userError" style="color:red;font-size:13px;"></p>
 
 <div style="position:relative;">
-<input type="password" id="password" placeholder="Password">
+<input type="password" id="password" placeholder="Password" maxlength="12">
 <span onclick="togglePass()" style="position:absolute;right:10px;top:10px;cursor:pointer;">👁</span>
+</div>
+
+<p id="passError" style="color:red;font-size:13px;"></p>
 </div>
 
 <p id="passError" style="color:red;font-size:13px;"></p>
@@ -145,9 +148,12 @@ document.getElementById("nameError").innerText="";
 document.getElementById("phoneError").innerText="";
 document.getElementById("userError").innerText="";
 document.getElementById("passError").innerText="";
+document.getElementById("msg").innerText="";
 
 let namePattern=/^[A-Za-z ]{3,15}$/;
 let phonePattern=/^[0-9]{10}$/;
+let userPattern=/^@[a-zA-Z0-9]{3,11}$/;
+let passPattern=/^[A-Za-z0-9]{5,12}$/;
 
 if(!namePattern.test(name)){
 document.getElementById("nameError").innerText="Name must be letters only (max 15)";
@@ -155,20 +161,18 @@ return;
 }
 
 if(!phonePattern.test(phone)){
-document.getElementById("phoneError").innerText="Enter valid 10 digit phone number";
+document.getElementById("phoneError").innerText="Phone must be 10 digits";
 return;
 }
 
-if(username.length<4){
-document.getElementById("userError").innerText="Username must be at least 4 characters";
+if(!userPattern.test(username)){
+document.getElementById("userError").innerText="Username must start with @ (example: @amit)";
 return;
 }
 
-if(password.length<5){
-document.getElementById("passError").innerText="Password must be at least 5 characters";
+if(!passPattern.test(password)){
+document.getElementById("passError").innerText="Password 5-12 letters or numbers only";
 return;
-}
-
 }
 
 db.collection("students")
@@ -177,11 +181,12 @@ db.collection("students")
 .then((query)=>{
 
 if(!query.empty){
-alert("Phone number already registered ❌");
+document.getElementById("phoneError").innerText="Phone already registered";
 return;
 }
 
 db.collection("students").doc(username).set({
+
 name:name,
 phone:phone,
 username:username,
@@ -198,6 +203,14 @@ username:username
 
 }));
 
+document.getElementById("msg").style.color="lightgreen";
+document.getElementById("msg").innerText="Signup successful ✅ Now login";
+
+});
+
+});
+
+}
 alert("Signup successful ✅");
 
 window.location="index.html";
