@@ -996,23 +996,24 @@ function toggleTheme(){
 
 let theme = localStorage.getItem("theme") || "dark";
 
-if(theme === "dark"){
-document.body.className = "light";
+document.body.classList.remove("dark","light","blue");
+
+if(theme==="dark"){
+document.body.classList.add("light");
 localStorage.setItem("theme","light");
 }
 
-else if(theme === "light"){
-document.body.className = "blue";
+else if(theme==="light"){
+document.body.classList.add("blue");
 localStorage.setItem("theme","blue");
 }
 
 else{
-document.body.className = "dark";
+document.body.classList.add("dark");
 localStorage.setItem("theme","dark");
 }
 
 }
-
 window.onload = function(){
 
 let savedTheme = localStorage.getItem("theme") || "dark";
