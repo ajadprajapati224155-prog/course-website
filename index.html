@@ -395,23 +395,6 @@ transition:0.3s;
 transform:scale(1.05);
 }
 
-.themeButtons{
-display:flex;
-gap:6px;
-}
-
-.themeButtons button{
-flex:1;
-}
-
-#studyTime{
-font-size:18px;
-color:#4da3ff;
-font-weight:bold;
-}
-.dark{background:#0b1320;}
-.light{background:white;color:black;}
-.blue{background:#001f3f;}
 .blur{
 filter:blur(6px);
 pointer-events:none;
@@ -947,7 +930,6 @@ container.innerHTML+=courseHTML;
 
 <div class="profileHeader">
 <h3>👤 Student Profile</h3>
-<button onclick="toggleTheme()">Change Theme</button>
 </div>
 
 <div class="profilePhotoBox">
@@ -986,44 +968,6 @@ document.getElementById("displayName").innerText = user.name;
 }
 let studySeconds = Number(localStorage.getItem("studySeconds")) || 0;
 
-function changeTheme(){
-
-let theme = localStorage.getItem("theme");
-
-if(theme === "light"){
-document.body.style.background = "#001f3f";
-localStorage.setItem("theme","blue");
-}
-
-else if(theme === "blue"){
-document.body.style.background = "#0b1320";
-localStorage.setItem("theme","dark");
-}
-
-else{
-document.body.style.background = "white";
-document.body.style.color = "black";
-localStorage.setItem("theme","light");
-}
-
-}
-window.onload = function(){
-
-let savedTheme = localStorage.getItem("theme") || "dark";
-let theme = localStorage.getItem("theme");
-
-if(theme === "light"){
-document.body.style.background="white";
-document.body.style.color="black";
-}
-
-if(theme === "blue"){
-document.body.style.background="#001f3f";
-}
-
-if(theme === "dark"){
-document.body.style.background="#0b1320";
-}
 
 let bio = localStorage.getItem("bio");
 let dob = localStorage.getItem("dob");
