@@ -957,8 +957,17 @@ container.innerHTML+=courseHTML;
 <p class="devText">Developer : Ajad Prajapati</p>
 </div>
 <script>
+function saveProfile(){
 
-let user = JSON.parse(localStorage.getItem("student"));
+let bio = document.getElementById("bio").value;
+let dob = document.getElementById("dob").value;
+
+localStorage.setItem("bio", bio);
+localStorage.setItem("dob", dob);
+
+alert("Profile saved ✅");
+
+}
 
 if(user){
 document.getElementById("displayName").innerText = user.name;
