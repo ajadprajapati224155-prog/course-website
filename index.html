@@ -947,7 +947,7 @@ container.innerHTML+=courseHTML;
 
 <div class="profileHeader">
 <h3>👤 Student Profile</h3>
-<span class="themeTop" onclick="toggleTheme()">✨</span>
+<div class="themeTop" onclick="toggleTheme()">✨</div>
 </div>
 
 <div class="profilePhotoBox">
@@ -979,10 +979,6 @@ container.innerHTML+=courseHTML;
 </div>
 <script>
 
-let savedTheme = localStorage.getItem("theme") || "dark";
-document.body.classList.remove("dark","light","blue");
-document.body.classList.add(savedTheme);
-
 let user = JSON.parse(localStorage.getItem("student"));
 
 if(user){
@@ -994,20 +990,18 @@ function toggleTheme(){
 
 let theme = localStorage.getItem("theme") || "dark";
 
-document.body.classList.remove("dark","light","blue");
-
 if(theme==="dark"){
-document.body.classList.add("light");
+document.body.className="light";
 localStorage.setItem("theme","light");
 }
 
 else if(theme==="light"){
-document.body.classList.add("blue");
+document.body.className="blue";
 localStorage.setItem("theme","blue");
 }
 
 else{
-document.body.classList.add("dark");
+document.body.className="dark";
 localStorage.setItem("theme","dark");
 }
 
