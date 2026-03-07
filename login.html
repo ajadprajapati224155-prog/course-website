@@ -84,21 +84,21 @@ font-size:14px;
 <!-- SIGNUP -->
 <h3>Student Signup</h3>
 
-<input type="text" id="fullName" placeholder="Full Name">
+<input type="text" id="fullName" placeholder="Full Name" maxlength="15">
 <p id="nameError" style="color:red;font-size:13px;"></p>
 
-<input type="tel" id="phone" placeholder="Phone Number">
+<input type="tel" id="phone" placeholder="Phone Number" maxlength="10">
 <p id="phoneError" style="color:red;font-size:13px;"></p>
-
+  
 <input type="text" id="username" placeholder="Username">
 <p id="userError" style="color:red;font-size:13px;"></p>
 
 <div style="position:relative;">
 <input type="password" id="password" placeholder="Password">
-<span onclick="togglePass()" 
-style="position:absolute;right:10px;top:10px;cursor:pointer;">👁</span>
+<span onclick="togglePass()" style="position:absolute;right:10px;top:10px;cursor:pointer;">👁</span>
 </div>
 
+<p id="passError" style="color:red;font-size:13px;"></p>
 <button onclick="signup()">Create Account</button>
 
 <hr>
