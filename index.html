@@ -602,17 +602,7 @@ if(loginUser){
 document.getElementById("displayName").innerText = loginUser;
 }
 
-function saveProfile(){
 
-let bio=document.getElementById("bio").value;
-let dob=document.getElementById("dob").value;
-
-localStorage.setItem("bio",bio);
-localStorage.setItem("dob",dob);
-
-alert("Profile Saved ✅");
-
-}
 
 window.onload=function(){
 
@@ -623,6 +613,12 @@ let pic=localStorage.getItem("profilePic");
 if(bio) document.getElementById("bio").value=bio;
 if(dob) document.getElementById("dob").value=dob;
 if(pic) document.getElementById("profilePic").src=pic;
+  
+let user = JSON.parse(localStorage.getItem("student"));
+
+if(user){
+document.getElementById("displayName").innerText = user.name;
+}
 
 }
 function saveProfile(){
