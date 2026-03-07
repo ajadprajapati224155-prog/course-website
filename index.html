@@ -453,7 +453,71 @@ margin-top:20px;
 text-align:center;
 font-size:12px;
 color:#aaa;
-}    
+}
+.profilePhotoBox{
+position:relative;
+width:90px;
+margin:auto;
+}
+
+#profilePic{
+width:90px;
+height:90px;
+border-radius:50%;
+border:4px solid #4da3ff;
+object-fit:cover;
+}
+
+.editPhoto{
+position:absolute;
+bottom:0;
+right:0;
+background:#4da3ff;
+width:28px;
+height:28px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+font-size:14px;
+}
+
+#displayName{
+text-align:center;
+margin-top:10px;
+color:#4da3ff;
+}
+
+#bio{
+width:100%;
+padding:8px;
+border-radius:8px;
+background:#111;
+color:white;
+border:none;
+margin-bottom:10px;
+}
+
+.studyBox{
+background:#111;
+padding:10px;
+border-radius:10px;
+text-align:center;
+margin-bottom:10px;
+}
+
+.footerLine{
+margin-top:15px;
+border:0.5px solid #333;
+}
+
+.profileFooter{
+text-align:center;
+font-size:12px;
+color:#aaa;
+margin-top:8px;
+}
 </style>
 
 </head>
@@ -524,6 +588,39 @@ if(total){
 
 document.getElementById("studyTime").innerText =
 Math.floor(total/60000) + " Minutes";
+
+}
+function editPhoto(){
+document.getElementById("photoInput").click();
+}
+
+let loginUser = localStorage.getItem("student");
+
+if(loginUser){
+document.getElementById("displayName").innerText = loginUser;
+}
+
+function saveProfile(){
+
+let bio=document.getElementById("bio").value;
+let dob=document.getElementById("dob").value;
+
+localStorage.setItem("bio",bio);
+localStorage.setItem("dob",dob);
+
+alert("Profile Saved ✅");
+
+}
+
+window.onload=function(){
+
+let bio=localStorage.getItem("bio");
+let dob=localStorage.getItem("dob");
+let pic=localStorage.getItem("profilePic");
+
+if(bio) document.getElementById("bio").value=bio;
+if(dob) document.getElementById("dob").value=dob;
+if(pic) document.getElementById("profilePic").src=pic;
 
 }
 function saveProfile(){
@@ -834,29 +931,26 @@ container.innerHTML+=courseHTML;
 
 <input type="file" onchange="uploadPhoto(event)">
 
-<label>👤 Student Name</label>
-<input type="text" id="studentName" placeholder="Enter your name">
+<h3>👤 Student Profile</h3>
+
+<div class="profilePhotoBox">
+<img id="profilePic">
+
+<div class="editPhoto" onclick="editPhoto()">✏️</div>
+
+<input type="file" id="photoInput" onchange="uploadPhoto(event)" hidden>
+</div>
+
+<h2 id="displayName"></h2>
+
+<textarea id="bio" placeholder="Write your bio..."></textarea>
 
 <label>🎂 Date of Birth</label>
 <input type="date" id="dob">
 
-<label>🎨 Theme</label>
-
-<div class="themeButtons">
-<button onclick="setTheme('dark')">Dark</button>
-<button onclick="setTheme('light')">Light</button>
-<button onclick="setTheme('blue')">Blue</button>
-</div>
-
-<label>🔥 Study Streak</label>
-<p id="streak">0 Days</p>
-
-<label>⏱ Study Time</label>
+<div class="studyBox">
+⏱ Study Time  
 <p id="studyTime">0 Minutes</p>
-
-<label>📊 Profile Progress</label>
-<div class="progressBar">
-<div id="progressFill"></div>
 </div>
 
 <button onclick="saveProfile()">💾 Save Profile</button>
@@ -865,9 +959,11 @@ container.innerHTML+=courseHTML;
 
 <button onclick="closeMenu()">Close</button>
 
+<hr class="footerLine">
+
 <div class="profileFooter">
-<p>© 2026-27 AJADSWEETHEART</p>
-<p><b>Developer: Ajad Prajapati</b></p>
+<p>©2026-27 SSC LIBRARY HUB</p>
+<p><b>Developer Ajad Prajapati</b></p>
 </div>
 
 </body>
