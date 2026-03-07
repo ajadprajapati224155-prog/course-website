@@ -85,10 +85,13 @@ font-size:14px;
 <h3>Student Signup</h3>
 
 <input type="text" id="fullName" placeholder="Full Name">
+<p id="nameError" style="color:red;font-size:13px;"></p>
 
 <input type="tel" id="phone" placeholder="Phone Number">
+<p id="phoneError" style="color:red;font-size:13px;"></p>
 
 <input type="text" id="username" placeholder="Username">
+<p id="userError" style="color:red;font-size:13px;"></p>
 
 <div style="position:relative;">
 <input type="password" id="password" placeholder="Password">
@@ -133,33 +136,39 @@ const db = firebase.firestore();
 
 function signup(){
 
-let name=document.getElementById("name").value.trim();
+let name=document.getElementById("fullName").value.trim();
 let phone=document.getElementById("phone").value.trim();
 let username=document.getElementById("username").value.trim();
 let password=document.getElementById("password").value.trim();
 
-let namePattern=/^[A-Za-z ]{3,}$/;
+document.getElementById("nameError").innerText="";
+document.getElementById("phoneError").innerText="";
+document.getElementById("userError").innerText="";
+document.getElementById("passError").innerText="";
+
+let namePattern=/^[A-Za-z ]{3,15}$/;
 let phonePattern=/^[0-9]{10}$/;
-let userPattern=/^[a-zA-Z0-9_]{4,}$/;
 
 if(!namePattern.test(name)){
-alert("Enter valid name (letters only)");
+document.getElementById("nameError").innerText="Name must be letters only (max 15)";
 return;
 }
 
 if(!phonePattern.test(phone)){
-alert("Enter valid 10 digit phone number");
+document.getElementById("phoneError").innerText="Enter valid 10 digit phone number";
 return;
 }
 
-if(!userPattern.test(username)){
-alert("Username must be 4+ letters or numbers");
+if(username.length<4){
+document.getElementById("userError").innerText="Username must be at least 4 characters";
 return;
 }
 
 if(password.length<5){
-alert("Password must be at least 5 characters");
+document.getElementById("passError").innerText="Password must be at least 5 characters";
 return;
+}
+
 }
 
 db.collection("students")
