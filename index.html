@@ -963,6 +963,35 @@ container.innerHTML+=courseHTML;
 <p class="devText">Developer : Ajad Prajapati</p>
 </div>
 <script>
+document.addEventListener("DOMContentLoaded", function(){
+
+// PHOTO LOAD
+let savedPic = localStorage.getItem("profilePic");
+if(savedPic){
+document.getElementById("profilePic").src = savedPic;
+}
+
+// BIO LOAD
+let savedBio = localStorage.getItem("bio");
+if(savedBio){
+document.getElementById("bio").value = savedBio;
+}
+
+// DOB LOAD
+let savedDob = localStorage.getItem("dob");
+if(savedDob){
+document.getElementById("dob").value = savedDob;
+}
+
+// USER NAME LOAD
+let user = JSON.parse(localStorage.getItem("student"));
+if(user){
+document.getElementById("displayName").innerText = user.name;
+}
+
+});
+
+
 // PHOTO UPLOAD
 document.getElementById("photoInput").addEventListener("change", function(){
 
@@ -993,34 +1022,6 @@ alert("Profile saved successfully ✅");
 });
 
 
-// AUTO LOAD DATA
-window.onload = function(){
-
-let savedBio = localStorage.getItem("bio");
-let savedDob = localStorage.getItem("dob");
-let savedPic = localStorage.getItem("profilePic");
-
-if(savedBio){
-document.getElementById("bio").value = savedBio;
-}
-
-if(savedDob){
-document.getElementById("dob").value = savedDob;
-}
-
-if(savedPic){
-document.getElementById("profilePic").src = savedPic;
-}
-
-let user = JSON.parse(localStorage.getItem("student"));
-
-if(user){
-document.getElementById("displayName").innerText = user.name;
-}
-
-}
-
-
 // LOGOUT
 function logout(){
 
@@ -1028,20 +1029,8 @@ localStorage.removeItem("student");
 
 alert("Logged out successfully");
 
-window.location = "login.html";
+window.location="login.html";
 
-}
-
-
-function openMenu(){
-document.getElementById("sideMenu").style.right="0";
-document.getElementById("mainContent").classList.add("blur");
-}
-
-function closeMenu(){
-document.getElementById("sideMenu").style.right="-100%";
-document.getElementById("mainContent").classList.remove("blur");
-  }
 }
 </script>
 </body>
