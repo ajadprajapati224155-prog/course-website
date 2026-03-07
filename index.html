@@ -413,6 +413,7 @@ font-weight:bold;
 .blur{
 filter:blur(6px);
 pointer-events:none;
+user-select:none;
 }
 
 .overlay{
@@ -440,7 +441,10 @@ color:white;
 </head>
 
 <body>
+
 <div id="overlay" class="overlay"></div>
+
+<div id="mainContent">
 <script>
 
 let user = localStorage.getItem("student");
@@ -453,13 +457,13 @@ window.location="login.html";
 function openMenu(){
 document.getElementById("sideMenu").style.left="0";
 document.getElementById("overlay").style.display="block";
-document.body.classList.add("blur");
+document.getElementById("mainContent").classList.add("blur");
 }
 
 function closeMenu(){
 document.getElementById("sideMenu").style.left="-300px";
 document.getElementById("overlay").style.display="none";
-document.body.classList.remove("blur");
+document.getElementById("mainContent").classList.remove("blur");
 }
 function uploadPhoto(event){
 
@@ -758,6 +762,7 @@ container.innerHTML+=courseHTML;
 });
 
 </script>
+</div>
 <div id="sideMenu" class="sideMenu">
 
 <h3>👤 Student Profile</h3>
