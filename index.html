@@ -444,31 +444,33 @@ color:#aaa;
 }
 .profilePhotoBox{
 position:relative;
-width:90px;
+width:120px;
 margin:auto;
 }
 
-#profilePic{
-width:90px;
-height:90px;
+.profilePic{
+width:120px;
+height:120px;
 border-radius:50%;
-border:4px solid #4da3ff;
 object-fit:cover;
+border:3px solid #00c3ff;
 }
 
 .editPhoto{
 position:absolute;
 bottom:0;
 right:0;
-background:#4da3ff;
-width:28px;
-height:28px;
+background:#00c3ff;
+color:white;
 border-radius:50%;
+width:32px;
+height:32px;
 display:flex;
 align-items:center;
 justify-content:center;
 cursor:pointer;
-font-size:14px;
+font-size:16px;
+box-shadow:0 2px 6px rgba(0,0,0,0.3);
 }
 
 #displayName{
@@ -931,11 +933,11 @@ container.innerHTML+=courseHTML;
 
 <div class="profilePhotoBox">
 
-<img id="profilePic" src="" width="120" height="120" style="border-radius:50%;">
+<img id="profilePic" src="" class="profilePic">
 
-<br><br>
+<div class="editPhoto" onclick="document.getElementById('photoInput').click()">✏️</div>
 
-<input type="file" id="photoInput">
+<input type="file" id="photoInput" hidden>
 
 </div>
 
@@ -991,7 +993,20 @@ document.getElementById("displayName").innerText = user.name;
 
 });
 
+document.getElementById("photoInput").addEventListener("change", function(){
 
+let file = this.files[0];
+let reader = new FileReader();
+
+reader.onload = function(){
+document.getElementById("profilePic").src = reader.result;
+localStorage.setItem("profilePic", reader.result);
+}
+
+reader.readAsDataURL(file);
+
+});
+  
 // PHOTO UPLOAD
 document.getElementById("photoInput").addEventListener("change", function(){
 
