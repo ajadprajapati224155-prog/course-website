@@ -946,11 +946,6 @@ container.innerHTML+=courseHTML;
 <label>🎂 Date of Birth</label>
 <input type="date" id="dob">
 
-<div class="studyBox">
-⏱ Study Time  
-<p id="studyTime">0h 0m 0s</p>
-</div>
-
 <button onclick="saveProfile()">💾 Save Profile</button>
   
 <button onclick="logout()">🚪 Logout</button>
@@ -966,6 +961,7 @@ container.innerHTML+=courseHTML;
 <script>
 
 let savedTheme = localStorage.getItem("theme") || "dark";
+document.body.className = savedTheme;
 
 document.body.classList.remove("dark","light","blue");
 document.body.classList.add(savedTheme);
@@ -981,38 +977,23 @@ function toggleTheme(){
 
 let theme = localStorage.getItem("theme") || "dark";
 
-document.body.classList.remove("dark","light","blue");
-
 if(theme === "dark"){
-document.body.classList.add("light");
+document.body.className = "light";
 localStorage.setItem("theme","light");
 }
 
 else if(theme === "light"){
-document.body.classList.add("blue");
+document.body.className = "blue";
 localStorage.setItem("theme","blue");
 }
 
 else{
-document.body.classList.add("dark");
+document.body.className = "dark";
 localStorage.setItem("theme","dark");
 }
 
 }
-function updateClock(){
 
-let h = Math.floor(studySeconds / 3600);
-let m = Math.floor((studySeconds % 3600) / 60);
-let s = studySeconds % 60;
-
-document.getElementById("studyTime").innerText =
-h + "h " + m + "m " + s + "s";
-
-studySeconds++;
-
-localStorage.setItem("studySeconds", studySeconds);
-
-}
 window.onload = function(){
 
 let savedTheme = localStorage.getItem("theme") || "dark";
@@ -1033,8 +1014,6 @@ if(user){
 document.getElementById("displayName").innerText = user.name;
 }
 
-updateClock();
-setInterval(updateClock,1000);
 
 setTimeout(function(){
 document.getElementById("noticePopup").style.visibility="visible";
