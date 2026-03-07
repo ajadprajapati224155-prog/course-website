@@ -980,29 +980,28 @@ let studySeconds = Number(localStorage.getItem("studySeconds")) || 0;
 
 function toggleTheme(){
 
-let theme = localStorage.getItem("theme") || "dark";
+let theme = localStorage.getItem("theme");
 
-if(theme=="dark"){
-document.body.className="light";
+if(theme === "dark"){
+document.body.classList.remove("dark");
+document.body.classList.add("light");
 localStorage.setItem("theme","light");
 }
 
-else if(theme=="light"){
-document.body.className="blue";
+else if(theme === "light"){
+document.body.classList.remove("light");
+document.body.classList.add("blue");
 localStorage.setItem("theme","blue");
 }
 
 else{
-document.body.className="dark";
+document.body.classList.remove("blue");
+document.body.classList.add("dark");
 localStorage.setItem("theme","dark");
 }
-  
+
 }
 function updateClock(){
-
-studySeconds++;
-
-localStorage.setItem("studySeconds", studySeconds);
 
 let h = Math.floor(studySeconds / 3600);
 let m = Math.floor((studySeconds % 3600) / 60);
@@ -1010,6 +1009,10 @@ let s = studySeconds % 60;
 
 document.getElementById("studyTime").innerText =
 h + "h " + m + "m " + s + "s";
+
+studySeconds++;
+
+localStorage.setItem("studySeconds", studySeconds);
 
 }
 window.onload = function(){
@@ -1034,8 +1037,13 @@ if(user){
 document.getElementById("displayName").innerText = user.name;
 }
 
+window.onload = function(){
+
 updateClock();
+
 setInterval(updateClock,1000);
+
+}
 
 setTimeout(function(){
 document.getElementById("noticePopup").style.visibility="visible";
