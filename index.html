@@ -499,6 +499,14 @@ border:none;
 margin-bottom:10px;
 }
 
+.devText{
+font-weight:bold;
+font-size:16px;
+color:#4da6ff;
+letter-spacing:1px;
+text-shadow:0 0 5px #4da6ff;
+}
+
 .studyBox{
 background:#111;
 padding:10px;
@@ -951,6 +959,11 @@ container.innerHTML+=courseHTML;
 </div>
 
 <button onclick="saveProfile()">💾 Save Profile</button>
+  <h3>🎨 Theme</h3>
+
+<button onclick="setTheme('dark')">Dark</button>
+<button onclick="setTheme('light')">Light</button>
+<button onclick="setTheme('blue')">Blue</button>
 
 <button onclick="logout()">🚪 Logout</button>
 
@@ -960,7 +973,7 @@ container.innerHTML+=courseHTML;
 
 <div class="profileFooter">
 <p>©2026-27 SSC LIBRARY HUB</p>
-<p><b>Developer Ajad Prajapati</b></p>
+<p class="devText">Developer : Ajad Prajapati</p>
 </div>
 <script>
 
@@ -969,7 +982,26 @@ let user = JSON.parse(localStorage.getItem("student"));
 if(user){
 document.getElementById("displayName").innerText = user.name;
 }
+let startTime = Date.now();
 
+window.onbeforeunload = function(){
+
+let timeSpent = Date.now() - startTime;
+
+let oldTime = Number(localStorage.getItem("studyTime")) || 0;
+
+localStorage.setItem("studyTime", oldTime + timeSpent);
+
+}
+let total = localStorage.getItem("studyTime");
+
+if(total){
+
+let minutes = Math.floor(total / 60000);
+
+document.getElementById("studyTime").innerText = minutes + " Minutes";
+
+}
 </script>
 </body>
   
