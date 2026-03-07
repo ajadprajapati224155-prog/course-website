@@ -920,11 +920,11 @@ container.innerHTML+=courseHTML;
 });
 
 });
-let loginUser = localStorage.getItem("student");
+let user = JSON.parse(localStorage.getItem("student"));
 
-if(loginUser){
-document.getElementById("displayName").innerText = loginUser;
-    }
+if(user){
+document.getElementById("displayName").innerText = user.name;
+}
 </script>
 </div>
 <div id="sideMenu" class="sideMenu">
