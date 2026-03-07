@@ -529,12 +529,14 @@ margin-top:8px;
 <div id="mainContent">
 <script>
 
-let user = localStorage.getItem("student");
+let user = JSON.parse(localStorage.getItem("student"));
 
 if(!user){
-    
 window.location="login.html";
+}
 
+if(user){
+document.getElementById("displayName").innerText = user.name;
 }
 function openMenu(){
 document.getElementById("sideMenu").style.left="0";
