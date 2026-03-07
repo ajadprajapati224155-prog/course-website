@@ -942,13 +942,10 @@ container.innerHTML+=courseHTML;
 
   
 <textarea id="bio" placeholder="Write your bio..."></textarea>
-  
 
-<label>🎂 Date of Birth</label>
 <input type="date" id="dob">
 
-  
-<button type="button" onclick="saveProfile()">Save Profile</button>
+<button id="saveBtn">Save Profile</button>
   
 <button onclick="logout()">🚪 Logout</button>
 
@@ -965,7 +962,17 @@ container.innerHTML+=courseHTML;
 function saveProfile(){
 alert("SAVE BUTTON WORKING");
 }
+document.getElementById("saveBtn").addEventListener("click", function(){
 
+let bio = document.getElementById("bio").value;
+let dob = document.getElementById("dob").value;
+
+localStorage.setItem("bio", bio);
+localStorage.setItem("dob", dob);
+
+alert("Profile saved successfully ✅");
+
+});
 document.addEventListener("DOMContentLoaded", function(){
 
 let savedBio = localStorage.getItem("bio");
