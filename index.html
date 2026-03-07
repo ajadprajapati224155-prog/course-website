@@ -994,26 +994,24 @@ let user = JSON.parse(localStorage.getItem("student"));
 if(user){
 document.getElementById("displayName").innerText = user.name;
 }
-let startTime = Date.now();
+let studySeconds = Number(localStorage.getItem("studySeconds")) || 0;
 
-window.onbeforeunload = function(){
+function updateClock(){
 
-let timeSpent = Date.now() - startTime;
+studySeconds++;
 
-let oldTime = Number(localStorage.getItem("studyTime")) || 0;
+localStorage.setItem("studySeconds", studySeconds);
 
-localStorage.setItem("studyTime", oldTime + timeSpent);
+let h = Math.floor(studySeconds / 3600);
+let m = Math.floor((studySeconds % 3600) / 60);
+let s = studySeconds % 60;
 
-}
-let total = localStorage.getItem("studyTime");
-
-if(total){
-
-let minutes = Math.floor(total / 60000);
-
-document.getElementById("studyTime").innerText = minutes + " Minutes";
+document.getElementById("studyTime").innerText =
+h + "h " + m + "m " + s + "s";
 
 }
+
+setInterval(updateClock,1000);
 </script>
 </body>
   
