@@ -14,8 +14,11 @@ body{
 background:#0b1320;
 color:white;
 font-family:sans-serif;
-text-align:center;
-padding-top:80px;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
 }
 
 .authBox{
@@ -85,7 +88,11 @@ font-size:14px;
 
 <input type="text" id="username" placeholder="Username">
 
+<div style="position:relative;">
 <input type="password" id="password" placeholder="Password">
+<span onclick="togglePass()" 
+style="position:absolute;right:10px;top:10px;cursor:pointer;">👁</span>
+</div>
 
 <button onclick="signup()">Create Account</button>
 
@@ -97,7 +104,11 @@ font-size:14px;
 
 <input type="text" id="loginUser" placeholder="Username">
 
+<div style="position:relative;">
 <input type="password" id="loginPass" placeholder="Password">
+<span onclick="toggleLoginPass()" 
+style="position:absolute;right:10px;top:10px;cursor:pointer;">👁</span>
+</div>
 
 <button onclick="login()">Login</button>
 
@@ -149,26 +160,36 @@ alert("Password must be at least 5 characters");
 return;
 }
 
-db.collection("students").doc(username).get().then((doc)=>{
+db.collection("students")
+.where("phone","==",phone)
+.get()
+.then((query)=>{
 
-if(doc.exists){
-
-alert("Username already exists ❌");
-
-}else{
+if(!query.empty){
+alert("Phone number already registered ❌");
+return;
+}
 
 db.collection("students").doc(username).set({
-
 name:name,
 phone:phone,
 username:username,
-password:password
+password:password,
+created:Date.now()
 
-});
+}).then(()=>{
+
+localStorage.setItem("student",JSON.stringify({
+
+name:name,
+phone:phone,
+username:username
+
+}));
 
 alert("Signup successful ✅");
 
-}
+window.location="index.html";
 
 });
 
@@ -209,6 +230,29 @@ alert("User not found ❌");
 }
 
 });
+
+}
+function togglePass(){
+
+let p=document.getElementById("password");
+
+if(p.type==="password"){
+p.type="text";
+}else{
+p.type="password";
+}
+
+}
+
+function toggleLoginPass(){
+
+let p=document.getElementById("loginPass");
+
+if(p.type==="password"){
+p.type="text";
+}else{
+p.type="password";
+}
 
 }
 
