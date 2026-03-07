@@ -930,24 +930,29 @@ container.innerHTML+=courseHTML;
 </div>
 
 <div class="profilePhotoBox">
-<img id="profilePic">
 
-<div class="editPhoto" onclick="editPhoto()">✏️</div>
+<img id="profilePic" src="" width="120" height="120" style="border-radius:50%;">
 
-<input type="file" id="photoInput" onchange="uploadPhoto(event)" hidden>
+<br><br>
+
+<input type="file" id="photoInput">
+
 </div>
 
 <h2 id="displayName"></h2>
 
-
-  
 <textarea id="bio" placeholder="Write your bio..."></textarea>
 
+<br><br>
+
+<label>Date of Birth</label>
 <input type="date" id="dob">
 
+<br><br>
+
 <button id="saveBtn">Save Profile</button>
-  
-<button onclick="logout()">🚪 Logout</button>
+
+<button onclick="logout()">Logout</button>
 
 <button onclick="closeMenu()">Close</button>
 
@@ -958,10 +963,23 @@ container.innerHTML+=courseHTML;
 <p class="devText">Developer : Ajad Prajapati</p>
 </div>
 <script>
+// PHOTO UPLOAD
+document.getElementById("photoInput").addEventListener("change", function(){
 
-function saveProfile(){
-alert("SAVE BUTTON WORKING");
+let file = this.files[0];
+let reader = new FileReader();
+
+reader.onload = function(){
+document.getElementById("profilePic").src = reader.result;
+localStorage.setItem("profilePic", reader.result);
 }
+
+reader.readAsDataURL(file);
+
+});
+
+
+// SAVE PROFILE
 document.getElementById("saveBtn").addEventListener("click", function(){
 
 let bio = document.getElementById("bio").value;
@@ -973,11 +991,14 @@ localStorage.setItem("dob", dob);
 alert("Profile saved successfully ✅");
 
 });
-document.addEventListener("DOMContentLoaded", function(){
+
+
+// AUTO LOAD DATA
+window.onload = function(){
 
 let savedBio = localStorage.getItem("bio");
 let savedDob = localStorage.getItem("dob");
-let pic = localStorage.getItem("profilePic");
+let savedPic = localStorage.getItem("profilePic");
 
 if(savedBio){
 document.getElementById("bio").value = savedBio;
@@ -987,8 +1008,8 @@ if(savedDob){
 document.getElementById("dob").value = savedDob;
 }
 
-if(pic){
-document.getElementById("profilePic").src = pic;
+if(savedPic){
+document.getElementById("profilePic").src = savedPic;
 }
 
 let user = JSON.parse(localStorage.getItem("student"));
@@ -997,8 +1018,19 @@ if(user){
 document.getElementById("displayName").innerText = user.name;
 }
 
-});
+}
 
+
+// LOGOUT
+function logout(){
+
+localStorage.removeItem("student");
+
+alert("Logged out successfully");
+
+window.location = "login.html";
+
+}
 
 
 function openMenu(){
