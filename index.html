@@ -948,7 +948,7 @@ container.innerHTML+=courseHTML;
 <input type="date" id="dob">
 
   
-<button onclick="saveProfile()">Save Profile</button>
+<button type="button" onclick="saveProfile()">Save Profile</button>
   
 <button onclick="logout()">🚪 Logout</button>
 
@@ -970,7 +970,7 @@ let dob = document.getElementById("dob").value;
 localStorage.setItem("bio", bio);
 localStorage.setItem("dob", dob);
 
-alert("Profile saved successfully");
+alert("Profile saved successfully ✅");
 
 }
 
