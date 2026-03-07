@@ -535,13 +535,18 @@ if(!user){
 window.location="login.html";
 }
 
-if(user){
-document.getElementById("displayName").innerText = user.name;
-}
 function openMenu(){
+
 document.getElementById("sideMenu").style.left="0";
 document.getElementById("overlay").style.display="block";
 document.getElementById("mainContent").classList.add("blur");
+
+let user = JSON.parse(localStorage.getItem("student"));
+
+if(user){
+document.getElementById("displayName").innerText = user.name;
+}
+
 }
 
 function closeMenu(){
