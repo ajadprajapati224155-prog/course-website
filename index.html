@@ -977,18 +977,31 @@ alert("Profile saved ✅");
 let studySeconds = Number(localStorage.getItem("studySeconds")) || 0;
 
 
+document.addEventListener("DOMContentLoaded", function(){
+
 let savedBio = localStorage.getItem("bio");
 let savedDob = localStorage.getItem("dob");
 let pic = localStorage.getItem("profilePic");
 
-if(savedBio) document.getElementById("bio").value = savedBio;
-if(savedDob) document.getElementById("dob").value = savedDob;
-if(pic) document.getElementById("profilePic").src = pic;
+if(savedBio){
+document.getElementById("bio").value = savedBio;
+}
+
+if(savedDob){
+document.getElementById("dob").value = savedDob;
+}
+
+if(pic){
+document.getElementById("profilePic").src = pic;
+}
 
 let user = JSON.parse(localStorage.getItem("student"));
+
 if(user){
 document.getElementById("displayName").innerText = user.name;
 }
+
+});
 
 
 setTimeout(function(){
