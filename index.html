@@ -554,6 +554,20 @@ border-radius:50%;
 cursor:pointer;
 box-shadow:0 0 8px #4da3ff;
 }
+.profileHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.themeTop{
+font-size:22px;
+background:#1e3a8a;
+padding:6px 10px;
+border-radius:50%;
+cursor:pointer;
+box-shadow:0 0 10px #4da3ff;
+}
 </style>
 </head>
 
@@ -928,7 +942,10 @@ container.innerHTML+=courseHTML;
 </div>
 <div id="sideMenu" class="sideMenu">
 
+<div class="profileHeader">
 <h3>👤 Student Profile</h3>
+<span class="themeTop" onclick="toggleTheme()">✨</span>
+</div>
 
 <div class="profilePhotoBox">
 <img id="profilePic">
