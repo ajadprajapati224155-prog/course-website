@@ -432,7 +432,28 @@ font-size:30px;
 cursor:pointer;
 color:white;
 }
-    
+.progressBar{
+width:100%;
+height:10px;
+background:#111;
+border-radius:10px;
+margin-top:5px;
+margin-bottom:10px;
+}
+
+#progressFill{
+height:100%;
+width:0%;
+background:#4da3ff;
+border-radius:10px;
+}
+
+.profileFooter{
+margin-top:20px;
+text-align:center;
+font-size:12px;
+color:#aaa;
+}    
 </style>
 
 </head>
@@ -503,6 +524,50 @@ if(total){
 
 document.getElementById("studyTime").innerText =
 Math.floor(total/60000) + " Minutes";
+
+}
+function saveProfile(){
+
+let name=document.getElementById("studentName").value;
+let dob=document.getElementById("dob").value;
+
+localStorage.setItem("studentName",name);
+localStorage.setItem("dob",dob);
+
+updateProgress();
+
+alert("Profile Saved ✅");
+
+}
+
+function logout(){
+
+localStorage.removeItem("student");
+
+window.location="login.html";
+
+}
+
+function updateProgress(){
+
+let progress=0;
+
+if(localStorage.getItem("studentName")) progress+=50;
+if(localStorage.getItem("dob")) progress+=50;
+
+document.getElementById("progressFill").style.width=progress+"%";
+
+}
+
+window.onload=function(){
+
+let name=localStorage.getItem("studentName");
+let dob=localStorage.getItem("dob");
+
+if(name) document.getElementById("studentName").value=name;
+if(dob) document.getElementById("dob").value=dob;
+
+updateProgress();
 
 }
 </script>
@@ -769,6 +834,9 @@ container.innerHTML+=courseHTML;
 
 <input type="file" onchange="uploadPhoto(event)">
 
+<label>👤 Student Name</label>
+<input type="text" id="studentName" placeholder="Enter your name">
+
 <label>🎂 Date of Birth</label>
 <input type="date" id="dob">
 
@@ -780,11 +848,28 @@ container.innerHTML+=courseHTML;
 <button onclick="setTheme('blue')">Blue</button>
 </div>
 
+<label>🔥 Study Streak</label>
+<p id="streak">0 Days</p>
+
 <label>⏱ Study Time</label>
 <p id="studyTime">0 Minutes</p>
 
-<button onclick="closeMenu()">Close</button>
+<label>📊 Profile Progress</label>
+<div class="progressBar">
+<div id="progressFill"></div>
 </div>
+
+<button onclick="saveProfile()">💾 Save Profile</button>
+
+<button onclick="logout()">🚪 Logout</button>
+
+<button onclick="closeMenu()">Close</button>
+
+<div class="profileFooter">
+<p>© 2026-27 AJADSWEETHEART</p>
+<p><b>Developer: Ajad Prajapati</b></p>
+</div>
+
 </body>
   
 </html>
