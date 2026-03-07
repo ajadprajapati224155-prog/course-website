@@ -535,12 +535,15 @@ margin-top:8px;
 position:fixed;
 top:0;
 right:-100%;
-width:90%;
+width:85%;
 height:100%;
 background:#0b1320;
+border-left:2px solid #1e3a8a;
+box-shadow:-10px 0 30px rgba(0,0,0,0.7);
 overflow-y:auto;
 transition:0.4s;
 padding:20px;
+z-index:999;
 }
 .themeIcon{
 position:absolute;
@@ -742,7 +745,7 @@ I HAVE ALREADY JOINED
 
 </div>
 
-<div class="container">
+<div class="container" id="mainContent">
 
 <div class="course">
 
@@ -1035,7 +1038,15 @@ setTimeout(function(){
 document.getElementById("noticePopup").style.visibility="visible";
 document.getElementById("noticePopup").style.opacity="1";
 },500);
+function openMenu(){
+document.getElementById("sideMenu").style.right="0";
+document.getElementById("mainContent").classList.add("blur");
+}
 
+function closeMenu(){
+document.getElementById("sideMenu").style.right="-100%";
+document.getElementById("mainContent").classList.remove("blur");
+  }
 }
 </script>
 </body>
