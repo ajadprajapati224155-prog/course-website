@@ -920,16 +920,14 @@ container.innerHTML+=courseHTML;
 });
 
 });
+let loginUser = localStorage.getItem("student");
 
+if(loginUser){
+document.getElementById("displayName").innerText = loginUser;
+    }
 </script>
 </div>
 <div id="sideMenu" class="sideMenu">
-
-<h3>👤 Student Profile</h3>
-
-<img id="profilePic">
-
-<input type="file" onchange="uploadPhoto(event)">
 
 <h3>👤 Student Profile</h3>
 
