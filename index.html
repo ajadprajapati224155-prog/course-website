@@ -362,6 +362,11 @@ border:4px solid #4da3ff;
 margin-bottom:10px;
 object-fit:cover;
 }
+.profilePhotoBox{
+position:relative;
+width:120px;
+margin:auto;
+}
 .sideMenu input{
 width:100%;
 padding:8px;
@@ -540,9 +545,9 @@ padding:20px;
   
 .themeIcon{
 position:absolute;
-right:10px;
-top:10px;
-font-size:22px;
+right:-10px;
+top:-10px;
+font-size:20px;
 background:#1e3a8a;
 padding:6px;
 border-radius:50%;
@@ -979,7 +984,7 @@ container.innerHTML+=courseHTML;
 
 <div class="studyBox">
 ⏱ Study Time  
-<p id="studyTime">0 Minutes</p>
+<p id="studyTime">0h 0m 0s</p>
 </div>
 
 <button onclick="saveProfile()">💾 Save Profile</button>
@@ -995,6 +1000,12 @@ container.innerHTML+=courseHTML;
 <p class="devText">Developer : Ajad Prajapati</p>
 </div>
 <script>
+
+let savedTheme = localStorage.getItem("theme");
+
+if(savedTheme){
+document.body.className = savedTheme;
+}
 
 let user = JSON.parse(localStorage.getItem("student"));
 
@@ -1038,6 +1049,7 @@ h + "h " + m + "m " + s + "s";
 
 }
 
+updateClock();
 setInterval(updateClock,1000);
 </script>
 </body>
