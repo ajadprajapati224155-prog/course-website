@@ -986,7 +986,7 @@ document.getElementById("displayName").innerText = user.name;
 }
 let studySeconds = Number(localStorage.getItem("studySeconds")) || 0;
 
-function toggleTheme(){
+function changeTheme(){
 
 let theme = localStorage.getItem("theme");
 
@@ -1024,8 +1024,6 @@ document.body.style.background="#001f3f";
 if(theme === "dark"){
 document.body.style.background="#0b1320";
 }
-document.body.classList.remove("dark","light","blue");
-document.body.classList.add(savedTheme);
 
 let bio = localStorage.getItem("bio");
 let dob = localStorage.getItem("dob");
