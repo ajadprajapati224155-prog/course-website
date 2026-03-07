@@ -639,25 +639,6 @@ if(loginUser){
 document.getElementById("displayName").innerText = loginUser;
 }
 
-
-
-window.onload=function(){
-
-let bio=localStorage.getItem("bio");
-let dob=localStorage.getItem("dob");
-let pic=localStorage.getItem("profilePic");
-
-if(bio) document.getElementById("bio").value=bio;
-if(dob) document.getElementById("dob").value=dob;
-if(pic) document.getElementById("profilePic").src=pic;
-  
-let user = JSON.parse(localStorage.getItem("student"));
-
-if(user){
-document.getElementById("displayName").innerText = user.name;
-}
-
-}
 function saveProfile(){
 
 let name=document.getElementById("studentName").value;
@@ -691,17 +672,7 @@ document.getElementById("progressFill").style.width=progress+"%";
 
 }
 
-window.onload=function(){
 
-let name=localStorage.getItem("studentName");
-let dob=localStorage.getItem("dob");
-
-if(name) document.getElementById("studentName").value=name;
-if(dob) document.getElementById("dob").value=dob;
-
-updateProgress();
-
-}
 </script>
 <div id="noticePopup" class="popup">
 <div class="popup-box">
@@ -917,12 +888,6 @@ document.getElementById("noticePopup").style.visibility="hidden";
 document.getElementById("noticePopup").style.opacity="0";
 }
 
-window.onload = function(){
-setTimeout(function(){
-document.getElementById("noticePopup").style.visibility="visible";
-document.getElementById("noticePopup").style.opacity="1";
-},500);
-}
 </script>
 <script>
 
@@ -1030,7 +995,7 @@ else{
 document.body.className="dark";
 localStorage.setItem("theme","dark");
 }
-
+  
 }
 function updateClock(){
 
@@ -1046,11 +1011,38 @@ document.getElementById("studyTime").innerText =
 h + "h " + m + "m " + s + "s";
 
 }
-
 window.onload = function(){
+
+let savedTheme = localStorage.getItem("theme");
+if(savedTheme){
+document.body.className = savedTheme;
+}else{
+document.body.className = "dark";
+}
+
+let bio = localStorage.getItem("bio");
+let dob = localStorage.getItem("dob");
+let pic = localStorage.getItem("profilePic");
+
+if(bio) document.getElementById("bio").value=bio;
+if(dob) document.getElementById("dob").value=dob;
+if(pic) document.getElementById("profilePic").src=pic;
+
+let user = JSON.parse(localStorage.getItem("student"));
+if(user){
+document.getElementById("displayName").innerText = user.name;
+}
+
 updateClock();
 setInterval(updateClock,1000);
+
+setTimeout(function(){
+document.getElementById("noticePopup").style.visibility="visible";
+document.getElementById("noticePopup").style.opacity="1";
+},500);
+
   }
+
 </script>
 </body>
   
