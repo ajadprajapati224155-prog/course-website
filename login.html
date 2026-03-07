@@ -129,7 +129,7 @@ let data=doc.data();
 
 if(data.password===pass){
 
-localStorage.setItem("student", user);
+localStorage.setItem("student", JSON.stringify(data));
 
 alert("Login Success ✅");
 
