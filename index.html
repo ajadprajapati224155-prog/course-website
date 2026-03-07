@@ -537,7 +537,18 @@ overflow-y:auto;
 transition:0.4s;
 padding:20px;
 }
-
+  
+.themeIcon{
+position:absolute;
+right:10px;
+top:10px;
+font-size:22px;
+background:#1e3a8a;
+padding:6px;
+border-radius:50%;
+cursor:pointer;
+}
+  
 </style>
 
 </head>
@@ -952,6 +963,7 @@ container.innerHTML+=courseHTML;
 
 <div class="profilePhotoBox">
 <img id="profilePic">
+<div class="themeIcon" onclick="toggleTheme()">✨</div>
 
 <div class="editPhoto" onclick="editPhoto()">✏️</div>
 
@@ -971,12 +983,7 @@ container.innerHTML+=courseHTML;
 </div>
 
 <button onclick="saveProfile()">💾 Save Profile</button>
-  <h3>🎨 Theme</h3>
-
-<button onclick="setTheme('dark')">Dark</button>
-<button onclick="setTheme('light')">Light</button>
-<button onclick="setTheme('blue')">Blue</button>
-
+  
 <button onclick="logout()">🚪 Logout</button>
 
 <button onclick="closeMenu()">Close</button>
@@ -996,6 +1003,26 @@ document.getElementById("displayName").innerText = user.name;
 }
 let studySeconds = Number(localStorage.getItem("studySeconds")) || 0;
 
+function toggleTheme(){
+
+let theme = localStorage.getItem("theme") || "dark";
+
+if(theme=="dark"){
+document.body.className="light";
+localStorage.setItem("theme","light");
+}
+
+else if(theme=="light"){
+document.body.className="blue";
+localStorage.setItem("theme","blue");
+}
+
+else{
+document.body.className="dark";
+localStorage.setItem("theme","dark");
+}
+
+}
 function updateClock(){
 
 studySeconds++;
