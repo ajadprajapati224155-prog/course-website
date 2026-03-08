@@ -254,16 +254,19 @@ document.getElementById("courseList").appendChild(div);
 
 function editCourse(id,name,link,image){
 
-let newName=prompt("Edit Course Name",name);
-let newLink=prompt("Edit Course Link",link);
-let newImage=prompt("Edit Image URL",image);
+let newName = prompt("Edit Course Name", name);
+if(newName === null) return;
+
+let newLink = prompt("Edit Course Link", link);
+if(newLink === null) return;
+
+let newImage = prompt("Edit Image URL", image);
+if(newImage === null) return;
 
 db.collection("courses").doc(id).update({
-
 name:newName,
 link:newLink,
 image:newImage
-
 }).then(()=>{
 
 alert("Course Updated ✅");
