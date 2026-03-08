@@ -32,10 +32,33 @@ justify-content:center;
 z-index:1000;
 }
 
-.search{
+.searchBox{
 width:90%;
-margin-top:100px;
-display:block;
+margin:90px auto 20px auto;
+display:flex;
+justify-content:center;
+}
+
+.search{
+width:100%;
+padding:12px 18px;
+border-radius:30px;
+border:none;
+outline:none;
+font-size:16px;
+color:white;
+background:linear-gradient(145deg,#0f1f45,#08142b);
+box-shadow:0 0 12px rgba(0,170,255,0.6);
+transition:0.3s;
+}
+
+.search::placeholder{
+color:#9ecfff;
+}
+
+.search:focus{
+box-shadow:0 0 18px #1e88ff;
+transform:scale(1.02);
 }
 
 .header h1{
@@ -772,15 +795,14 @@ I HAVE ALREADY JOINED
 <span class="notifClose" onclick="toggleNotifications()">✖</span>
 </div>
 
-<ul id="notifList"></ul>
 
 </div>
 
 <ul id="notifList"></ul>
 </div>
 
-<input id="search" class="search" onkeyup="searchCourse()" placeholder="Search your course...">
-
+<div class="searchBox">
+<input id="search" class="search" onkeyup="searchCourse()" placeholder="🔍 Search your course...">
 </div>
 
 <div class="container" id="mainContent">
