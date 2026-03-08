@@ -191,10 +191,10 @@ font-size:14px;
 line-height:1.4;
 }
 
-notifHeader{
+.notifHeader{
 display:flex;
-justify-content:space-between;
 align-items:center;
+justify-content:space-between;
 background:#1f1f1f;
 padding:12px 15px;
 border-radius:12px;
@@ -207,7 +207,7 @@ font-weight:600;
 color:white;
 }
 
-.closeBtn{
+.notifClose{
 font-size:22px;
 cursor:pointer;
 color:white;
@@ -768,14 +768,9 @@ I HAVE ALREADY JOINED
 <span id="notifCount" class="notifCount">0</span>
 </div>
 
-<div class="notifPanel" id="notifPanel">
-
 <div class="notifHeader">
-
-<span class="notifTitle">🔔 Notifications</span>
-
-<span class="closeBtn" onclick="toggleNotifications()">✖</span>
-
+  <span class="notifTitle">🔔 Notifications</span>
+  <span class="notifClose" onclick="toggleNotifications()">✖</span>
 </div>
 
 <ul id="notifList"></ul>
