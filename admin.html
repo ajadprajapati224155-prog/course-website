@@ -56,6 +56,11 @@ text-align:left;
 box-shadow:0 0 5px #3b82f6;
 }
 
+#studentsSection{
+display:none;
+margin-top:30px;
+}
+
 </style>
 </head>
 
@@ -108,10 +113,19 @@ box-shadow:0 0 5px #3b82f6;
 </div>
 
 
+<br>
 
-<h3 style="margin-top:40px;">👨‍🎓 Students List</h3>
+<button onclick="toggleStudents()">📋 View Students</button>
+
+<div id="studentsSection">
+
+<h3>👨‍🎓 Students List</h3>
+
+<input type="text" id="searchStudent" placeholder="Search student..." onkeyup="searchStudent()">
 
 <div id="studentList"></div>
+
+</div>
 
 </div>
 
@@ -134,20 +148,18 @@ appId: "1:1062574277938:web:0e9427e75888816c07c32b"
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+let studentsData=[];
 
 
-// ADMIN LOGIN
 
 function checkLogin(){
 
-let pass = document.getElementById("adminPass").value;
+let pass=document.getElementById("adminPass").value;
 
-if(pass === "ssc123"){
+if(pass==="ssc123"){
 
 document.getElementById("loginBox").style.display="none";
 document.getElementById("adminPanel").style.display="block";
-
-loadStudents();
 
 }else{
 
@@ -158,8 +170,6 @@ alert("Wrong Password ❌");
 }
 
 
-
-// SEND NOTIFICATION
 
 function sendNotification(){
 
@@ -179,8 +189,6 @@ alert("Notification Sent ✅");
 }
 
 
-
-// ADD COURSE
 
 function addCourse(){
 
@@ -202,15 +210,48 @@ alert("Course Added Successfully ✅");
 
 
 
-// LOAD STUDENTS
+function toggleStudents(){
+
+let section=document.getElementById("studentsSection");
+
+if(section.style.display==="none"){
+
+section.style.display="block";
+loadStudents();
+
+}else{
+
+section.style.display="none";
+
+}
+
+}
+
+
 
 function loadStudents(){
 
 db.collection("students").get().then((snapshot)=>{
 
+studentsData=[];
+document.getElementById("studentList").innerHTML="";
+
 snapshot.forEach((doc)=>{
 
 let data=doc.data();
+studentsData.push(data);
+
+createCard(data);
+
+});
+
+});
+
+}
+
+
+
+function createCard(data){
 
 let div=document.createElement("div");
 
@@ -227,7 +268,23 @@ div.innerHTML=`
 
 document.getElementById("studentList").appendChild(div);
 
-});
+}
+
+
+
+function searchStudent(){
+
+let text=document.getElementById("searchStudent").value.toLowerCase();
+
+document.getElementById("studentList").innerHTML="";
+
+studentsData.forEach((data)=>{
+
+if(data.name.toLowerCase().includes(text) || data.username.toLowerCase().includes(text)){
+
+createCard(data);
+
+}
 
 });
 
