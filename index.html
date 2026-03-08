@@ -793,6 +793,43 @@ I HAVE ALREADY JOINED
 
 <script>
 
+function loadCourses(){
+
+db.collection("courses").get().then((data)=>{
+
+let container=document.getElementById("courseList");
+
+container.innerHTML="";
+
+data.forEach((doc)=>{
+
+let course=doc.data();
+
+container.innerHTML+=`
+
+<a href="${course.link}" class="course-card">
+
+<div class="course-icon">🎓</div>
+
+<div class="course-info">
+<h3>${course.name}</h3>
+<p>${course.teacher}</p>
+</div>
+
+<div class="course-arrow">➜</div>
+
+</a>
+
+`;
+
+});
+
+});
+
+}
+
+loadCourses();
+
 function searchCourse(){
 
 let input=document.getElementById("search").value.toLowerCase();
