@@ -1111,40 +1111,8 @@ window.location="login.html";
 }
 </script>
 
-<script>
-
-let courses = JSON.parse(localStorage.getItem("courses")) || [];
-
-function loadCourses(){
-
-let container=document.getElementById("courseList");
-
-container.innerHTML="";
-
-courses.forEach((course)=>{
-
-container.innerHTML+=`
-<a href="${course.file}" class="course-card">
-
-<div class="course-icon">🎓</div>
-
-<div class="course-info">
-<h3>${course.name}</h3>
-<p>${course.teacher}</p>
-</div>
-
-<div class="course-arrow">➜</div>
-
-</a>
-`;
-
-});
-
-}
-
-loadCourses();
-
 </script>
+  
 </body>
   
 </html>
