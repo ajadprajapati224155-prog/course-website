@@ -52,12 +52,13 @@ font-size:18px;
 
 <h1>📺 SSC Lecture Player</h1>
 
-<video id="player" controls>
-
-<source src="lecture720.mp4" type="video/mp4" size="720">
-<source src="lecture360.mp4" type="video/mp4" size="360">
-
-</video>
+<iframe id="player"
+width="100%"
+height="220"
+src="https://www.youtube.com/embed/axeNkCC4wLE"
+frameborder="0"
+allowfullscreen>
+</iframe>
 
 <div class="notes">
 
@@ -69,7 +70,7 @@ font-size:18px;
 
 <h2>Lecture Playlist</h2>
 
-<button onclick="changeVideo('lecture1.mp4')">Lecture 1</button>
+<button onclick="changeVideo('axeNkCC4wLE')">Lecture 1</button>
 <button onclick="changeVideo('lecture2.mp4')">Lecture 2</button>
 <button onclick="changeVideo('lecture3.mp4')">Lecture 3</button>
 
@@ -91,17 +92,10 @@ settings:['speed','quality'],
 speed:{selected:1,options:[0.5,1,1.5,2]}
 });
 
-function changeVideo(video){
+function changeVideo(id){
 
-player.source = {
-type:'video',
-sources:[
-{
-src:video,
-type:'video/mp4'
-}
-]
-};
+document.getElementById("player").src =
+"https://www.youtube.com/embed/" + id;
 
 }
 
