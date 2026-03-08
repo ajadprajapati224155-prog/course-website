@@ -39,6 +39,35 @@ color:white;
 font-size:16px;
 }
 
+.lecture-card{
+background:#0f172a;
+padding:20px;
+border-radius:15px;
+margin-top:25px;
+}
+
+.lecture-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.btn{
+display:block;
+text-align:center;
+padding:14px;
+border-radius:12px;
+color:white;
+font-weight:bold;
+text-decoration:none;
+}
+
+.video{background:#2563eb;}
+.eng{background:#6366f1;}
+.hindi{background:#7c3aed;}
+.quiz{background:#ec4899;}
+.ppt{background:#14b8a6; grid-column:span 2;}
+  
 .video-container{
 position: relative;
 padding-bottom: 56.25%;
@@ -84,13 +113,23 @@ allowfullscreen>
 
 </div>
 
-<div class="playlist">
+<div class="lecture-card">
 
-<h2>Lecture Playlist</h2>
+<h2>CELL - LEC 1</h2>
 
-<button onclick="changeVideo('axeNkCC4wLE')">Lecture 1</button>
-<button onclick="changeVideo('lecture2.mp4')">Lecture 2</button>
-<button onclick="changeVideo('lecture3.mp4')">Lecture 3</button>
+<div class="lecture-grid">
+
+<a href="video.html" class="btn video">VIDEO</a>
+
+<a href="engnotes.pdf" class="btn eng">ENG NOTES</a>
+
+<a href="hindinotes.pdf" class="btn hindi">HINDI NOTES</a>
+
+<a href="quiz.html" class="btn quiz">QUIZ</a>
+
+<a href="ppt.pdf" class="btn ppt">PPT/PDF</a>
+
+</div>
 
 </div>
 
