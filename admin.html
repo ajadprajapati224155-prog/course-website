@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>SSC Library Admin</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,12 +46,18 @@ button:hover{
 background:#1e56b8;
 }
 
+.listCard{
+background:#0f1f3d;
+padding:15px;
+margin:10px;
+border-radius:10px;
+}
+
 </style>
 
 </head>
 
 <body>
-
 
 <div id="loginBox">
 
@@ -102,25 +109,55 @@ background:#1e56b8;
 </div>
 
 
+
+<button onclick="toggleCourses()">📚 View Courses</button>
+
+<div id="coursesSection" style="display:none">
+
+<h3>📚 Courses List</h3>
+
+<input type="text" id="searchCourse" placeholder="Search batch..." onkeyup="searchCourse()">
+
+<div id="courseList"></div>
+
 </div>
 
 
 
-<!-- Firebase -->
+<button onclick="toggleStudents()">👨‍🎓 View Students</button>
+
+<div id="studentsSection" style="display:none">
+
+<h3>👨‍🎓 Students List</h3>
+
+<input type="text" id="searchStudent" placeholder="Search student..." onkeyup="searchStudent()">
+
+<div id="studentList"></div>
+
+</div>
+
+
+</div>
+
+
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
 
 
 <script>
 
 const firebaseConfig = {
+
 apiKey: "AIzaSyC-WBjodD1mPq5RRTknOICq4b0pCBRx-FGc",
 authDomain: "ssc-library.firebaseapp.com",
 projectId: "ssc-library",
 storageBucket: "ssc-library.firebasestorage.app",
 messagingSenderId: "1062574277938",
 appId: "1:1062574277938:web:0e9427e75888816c07c32b"
+
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -198,10 +235,128 @@ document.getElementById("courseName").value="";
 document.getElementById("teacherName").value="";
 document.getElementById("courseLink").value="";
 
+loadCourses();
+
 })
 .catch(function(error){
 
 alert("Error: "+error.message);
+
+});
+
+}
+
+
+
+function toggleCourses(){
+
+let sec=document.getElementById("coursesSection");
+
+sec.style.display = sec.style.display=="none" ? "block":"none";
+
+loadCourses();
+
+}
+
+
+
+function loadCourses(){
+
+db.collection("courses").get().then((snapshot)=>{
+
+let container=document.getElementById("courseList");
+
+container.innerHTML="";
+
+snapshot.forEach((doc)=>{
+
+let course=doc.data();
+
+container.innerHTML+=`
+
+<div class="listCard">
+
+<b>${course.name}</b><br>
+
+👨‍🏫 ${course.teacher}<br>
+
+🔗 ${course.link}
+
+</div>
+
+`;
+
+});
+
+});
+
+}
+
+
+
+function toggleStudents(){
+
+let sec=document.getElementById("studentsSection");
+
+sec.style.display = sec.style.display=="none" ? "block":"none";
+
+loadStudents();
+
+}
+
+
+
+function loadStudents(){
+
+db.collection("students").get().then((snapshot)=>{
+
+let container=document.getElementById("studentList");
+
+container.innerHTML="";
+
+snapshot.forEach((doc)=>{
+
+let student=doc.data();
+
+container.innerHTML+=`
+
+<div class="listCard">
+
+👤 ${student.name}<br>
+
+📱 ${student.mobile}<br>
+
+📅 ${student.dob}
+
+</div>
+
+`;
+
+});
+
+});
+
+}
+
+
+
+function searchStudent(){
+
+let input=document.getElementById("searchStudent").value.toLowerCase();
+
+let cards=document.querySelectorAll("#studentList .listCard");
+
+cards.forEach(card=>{
+
+if(card.innerText.toLowerCase().includes(input)){
+
+card.style.display="block";
+
+}else{
+
+card.style.display="none";
+
+}
 
 });
 
