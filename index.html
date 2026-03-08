@@ -196,14 +196,22 @@ line-height:1.4;
 display:flex;
 justify-content:space-between;
 align-items:center;
+background:#1f1f1f;
+padding:12px 15px;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+.notifTitle{
 font-size:18px;
-font-weight:bold;
-margin-bottom:10px;
+font-weight:600;
+color:white;
 }
 
 .closeBtn{
-cursor:pointer;
 font-size:22px;
+cursor:pointer;
+color:white;
 }
   
 .notificationBox li{
@@ -761,9 +769,15 @@ I HAVE ALREADY JOINED
 <span id="notifCount" class="notifCount">0</span>
 </div>
 
+<div id="notifPanel" class="notifPanel">
+
 <div class="notif-header">
 <span>🔔 Notifications</span>
-<button onclick="closeNotifications()" class="notif-close">✖</button>
+<button onclick="toggleNotifications()" class="notif-close">✖</button>
+</div>
+
+<ul id="notifList"></ul>
+
 </div>
 
 <ul id="notifList"></ul>
