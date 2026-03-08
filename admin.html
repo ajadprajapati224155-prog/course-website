@@ -206,7 +206,7 @@ alert("Notification Sent ✅");
 function addCourse(){
 
 let name=document.getElementById("courseName").value;
-let teacher=document.getElementById("teacherName").value;
+let teacher=document.getElementById("teacherName").value || "Teacher";
 let link=document.getElementById("courseLink").value;
 
 db.collection("courses").add({
