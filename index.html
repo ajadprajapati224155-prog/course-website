@@ -23,8 +23,13 @@ padding:0;
 display:flex;
 align-items:center;
 justify-content:center;
-position:relative;
+position:fixed;
+top:0;
+left:0;
+width:100%;
 padding:20px;
+background:#08142b;
+z-index:1000;
 }
 
 .header h1{
@@ -62,7 +67,8 @@ margin-top:15px;
 }
 
 .container{
-padding-bottom:40px;
+margin-top: 80px;
+padding-bottom: 120px;
 }
 
 .course{
@@ -229,12 +235,16 @@ gap:10px;
 padding:15px;
 }
 .social-icons{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:18px;
-margin-top:20px;
-margin-bottom:30px;
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+display: flex;
+justify-content: center;
+gap: 20px;
+padding: 15px;
+background: #08142b;
+z-index: 999;
 }
 .social-icons a{
 display:flex;
