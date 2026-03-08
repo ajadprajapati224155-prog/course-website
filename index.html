@@ -793,42 +793,6 @@ I HAVE ALREADY JOINED
 
 <script>
 
-function loadCourses(){
-
-db.collection("courses").get().then((snapshot)=>{
-
-let container=document.getElementById("courseList");
-
-container.innerHTML="";
-
-snapshot.forEach((doc)=>{
-  
-let course=doc.data();
-
-container.innerHTML+=`
-
-<a href="${course.link}" class="course-card">
-
-<div class="course-icon">🎓</div>
-
-<div class="course-info">
-<h3>${course.name}</h3>
-<p>${course.teacher}</p>
-</div>
-
-<div class="course-arrow">➜</div>
-
-</a>
-
-`;
-
-});
-
-});
-
-}
-
-loadCourses();
 
 function searchCourse(){
 
@@ -879,6 +843,41 @@ appId: "1:1062574277938:web:0e9427e75888816c07c32b"
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
+function loadCourses(){
+
+db.collection("courses").get().then((snapshot)=>{
+
+let container=document.getElementById("courseList");
+
+container.innerHTML="";
+
+snapshot.forEach((doc)=>{
+
+let course=doc.data();
+
+container.innerHTML+=`
+<a href="${course.link}" class="course-card">
+
+<div class="course-icon">🎓</div>
+
+<div class="course-info">
+<h3>${course.name}</h3>
+<p>${course.teacher}</p>
+</div>
+
+<div class="course-arrow">➜</div>
+
+</a>
+`;
+
+});
+
+});
+
+}
+
+loadCourses();
 
 const notifList = document.getElementById("notifList");
 const notifCount = document.getElementById("notifCount");
