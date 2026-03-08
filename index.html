@@ -193,6 +193,7 @@ line-height:1.4;
 }
 
 .notifHeader{
+position:relative;
 display:flex;
 align-items:center;
 background:#1f1f1f;
@@ -208,10 +209,15 @@ color:white;
 }
 
 .closeBtn{
-margin-left:auto;
+position:absolute;
+right:15px;
+top:50%;
+transform:translateY(-50%);
 font-size:22px;
 cursor:pointer;
 color:white;
+background:none;
+border:none;
 }
   
 .notificationBox li{
