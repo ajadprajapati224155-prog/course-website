@@ -1016,6 +1016,21 @@ document.getElementById("saveBtn").addEventListener("click", function(){
 let bio = document.getElementById("bio").value;
 let dob = document.getElementById("dob").value;
 
+let user = JSON.parse(localStorage.getItem("student"));
+
+if(!user){
+alert("User not found");
+return;
+}
+
+// Firestore update
+db.collection("students").doc(user.username).update({
+
+bio: bio,
+dob: dob
+
+});
+
 localStorage.setItem("bio", bio);
 localStorage.setItem("dob", dob);
 
