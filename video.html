@@ -39,6 +39,22 @@ color:white;
 font-size:16px;
 }
 
+.video-container{
+position: relative;
+padding-bottom: 56.25%;
+height:0;
+overflow:hidden;
+}
+
+.video-container iframe{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+border-radius:10px;
+}
+  
 .notes{
 margin-top:20px;
 font-size:18px;
@@ -52,13 +68,15 @@ font-size:18px;
 
 <h1>📺 SSC Lecture Player</h1>
 
+<div class="video-container">
+
 <iframe id="player"
-width="100%"
-height="220"
 src="https://www.youtube.com/embed/axeNkCC4wLE"
 frameborder="0"
 allowfullscreen>
 </iframe>
+
+</div>
 
 <div class="notes">
 
