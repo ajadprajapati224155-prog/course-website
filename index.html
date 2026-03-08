@@ -148,14 +148,9 @@ border-radius:50%;
 .notifPanel{
 display:none;
 position:fixed;
-top:80px;
+top:70px;
 left:0;
-right:0;
-max-width:600px;
-margin:auto;
-background:#0b1b34;
-padding:15px;
-border-radius:12px;
+width:100%;
 z-index:999;
 }
 
@@ -972,7 +967,6 @@ let count = document.getElementById("notifCount");
 if(panel.style.display === "block"){
 panel.style.display = "none";
 }else{
-
 panel.style.display = "block";
 
 let read = localStorage.getItem("notifRead");
@@ -983,7 +977,6 @@ localStorage.setItem("notifReadTime", Date.now());
 }
 
 count.innerText = "0";
-
 }
 
 }
