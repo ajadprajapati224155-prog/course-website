@@ -365,11 +365,13 @@ container.innerHTML+=`
 
 <div class="listCard">
 
-👤 ${student.name}<br>
+👤 Name : ${student.name || "N/A"}<br>
 
-📱 ${student.mobile}<br>
+🆔 Username : ${student.username || "N/A"}<br>
 
-📅 ${student.dob}
+📱 Mobile : ${student.phone || student.mobile || "N/A"}<br>
+
+📅 DOB : ${student.dob || student.date || "N/A"}
 
 </div>
 
