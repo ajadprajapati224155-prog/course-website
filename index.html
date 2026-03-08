@@ -795,14 +795,14 @@ I HAVE ALREADY JOINED
 
 function loadCourses(){
 
-db.collection("courses").get().then((data)=>{
+db.collection("courses").get().then((snapshot)=>{
 
 let container=document.getElementById("courseList");
 
 container.innerHTML="";
 
-data.forEach((doc)=>{
-
+snapshot.forEach((doc)=>{
+  
 let course=doc.data();
 
 container.innerHTML+=`
