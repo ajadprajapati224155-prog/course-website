@@ -935,9 +935,11 @@ li.innerHTML = `
 
 notifList.appendChild(li);
 
-localStorage.removeItem("notifRead");
+let read = localStorage.getItem("notifRead");
 
+if(read !== "true"){
 unread++;
+}
 
 });
 
