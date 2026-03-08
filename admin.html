@@ -257,10 +257,10 @@ function editCourse(id,name,link,image){
 let newName = prompt("Edit Course Name", name);
 if(newName === null) return;
 
-let newLink = prompt("Edit Course Link", link);
+let newLink = prompt("Edit Course Page Link", link);
 if(newLink === null) return;
 
-let newImage = prompt("Edit Image URL", image);
+let newImage = prompt("Edit Course Image URL", image);
 if(newImage === null) return;
 
 db.collection("courses").doc(id).update({
