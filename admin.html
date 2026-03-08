@@ -46,6 +46,8 @@ margin-top:20px;
 box-shadow:0 0 10px #3b82f6;
 }
 
+
+ 
 .studentCard{
 background:#111827;
 padding:15px;
@@ -97,14 +99,13 @@ margin-top:30px;
 <hr>
 
 <h3>➕ Add New Course</h3>
+<input id="courseName" placeholder="Batch Name"><br><br>
 
-<input id="courseName" placeholder="Course Name">
+<input id="teacherName" placeholder="Teacher Name"><br><br>
 
-<input id="teacherName" placeholder="Teacher Name">
- 
-<input id="courseLink" placeholder="Course Page Link (example: maths.html)">
+<input id="courseLink" placeholder="HTML File Name (example: gk.html)"><br><br>
 
-<button onclick="addCourse()">Add Course</button>
+<button onclick="addCourse()">Add Batch</button>
 
 </div>
 
@@ -205,48 +206,57 @@ alert("Notification Sent ✅");
 function addCourse(){
 
 let name=document.getElementById("courseName").value;
-let teacher="Teacher";
+let teacher=document.getElementById("teacherName").value;
 let link=document.getElementById("courseLink").value;
 
-
 db.collection("courses").add({
-
 name:name,
 teacher:teacher,
-link:link,
-
+link:link
 });
 
-alert("Course Added Successfully ✅");
+alert("Batch Added Successfully ✅");
 
 loadCourses();
 
 }
 
 
-
 function loadCourses(){
 
-db.collection("courses").get().then((snapshot)=>{
+db.collection("courses").get().then((data)=>{
 
-coursesData = [];
-document.getElementById("courseList").innerHTML="";
+let container=document.getElementById("courseList");
 
-snapshot.forEach((doc)=>{
+container.innerHTML="";
 
-let data = doc.data();
+data.forEach((doc)=>{
 
-data.id = doc.id;
+let course=doc.data();
 
-coursesData.push(data);
+container.innerHTML+=`
 
-createCourseCard(data);
+<a href="${course.link}" class="course-card">
+
+<div class="course-icon">🎓</div>
+
+<div class="course-info">
+<h3>${course.name}</h3>
+<p>${course.teacher}</p>
+</div>
+
+<div class="course-arrow">➜</div>
+
+</a>
+
+`;
 
 });
 
 });
 
 }
+
 function createCourseCard(data){
 
 let div = document.createElement("div");
