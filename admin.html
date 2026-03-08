@@ -247,11 +247,17 @@ loadCourses();
 
 function toggleCourses(){
 
-let sec=document.getElementById("coursesSection");
+let courseSec = document.getElementById("coursesSection");
+let studentSec = document.getElementById("studentsSection");
 
-sec.style.display = sec.style.display=="none" ? "block":"none";
+studentSec.style.display="none";
 
+if(courseSec.style.display=="none"){
+courseSec.style.display="block";
 loadCourses();
+}else{
+courseSec.style.display="none";
+}
 
 }
 
@@ -339,11 +345,17 @@ loadCourses();
 
 function toggleStudents(){
 
-let sec=document.getElementById("studentsSection");
+let courseSec = document.getElementById("coursesSection");
+let studentSec = document.getElementById("studentsSection");
 
-sec.style.display = sec.style.display=="none" ? "block":"none";
+courseSec.style.display="none";
 
+if(studentSec.style.display=="none"){
+studentSec.style.display="block";
 loadStudents();
+}else{
+studentSec.style.display="none";
+}
 
 }
 
