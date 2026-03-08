@@ -100,9 +100,9 @@ margin-top:30px;
 
 <input id="courseName" placeholder="Course Name">
 
+<input id="teacherName" placeholder="Teacher Name">
+ 
 <input id="courseLink" placeholder="Course Page Link (example: maths.html)">
-
-<input id="courseImage" placeholder="Course Thumbnail Image URL">
 
 <button onclick="addCourse()">Add Course</button>
 
@@ -205,14 +205,15 @@ alert("Notification Sent ✅");
 function addCourse(){
 
 let name=document.getElementById("courseName").value;
+let teacher="Teacher";
 let link=document.getElementById("courseLink").value;
-let image=document.getElementById("courseImage").value;
+
 
 db.collection("courses").add({
 
 name:name,
+teacher:teacher,
 link:link,
-image:image
 
 });
 
