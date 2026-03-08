@@ -33,13 +33,14 @@ font-size:16px;
 }
 
 button{
-padding:12px 25px;
+padding:10px 20px;
 background:#2f6edb;
 border:none;
 border-radius:8px;
 color:white;
 font-size:16px;
 cursor:pointer;
+margin:5px;
 }
 
 button:hover{
@@ -59,6 +60,7 @@ border-radius:10px;
 
 <body>
 
+
 <div id="loginBox">
 
 <h2>🔐 Admin Login</h2>
@@ -76,6 +78,7 @@ border-radius:10px;
 <div id="adminPanel" style="display:none">
 
 <h2>⚙ SSC Library Admin Panel</h2>
+
 
 
 <div class="card">
@@ -142,7 +145,6 @@ border-radius:10px;
 
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
 
@@ -237,11 +239,6 @@ document.getElementById("courseLink").value="";
 
 loadCourses();
 
-})
-.catch(function(error){
-
-alert("Error: "+error.message);
-
 });
 
 }
@@ -282,6 +279,12 @@ container.innerHTML+=`
 
 🔗 ${course.link}
 
+<br><br>
+
+<button onclick="editCourse('${doc.id}','${course.name}','${course.teacher}','${course.link}')">✏ Edit</button>
+
+<button onclick="deleteCourse('${doc.id}')">❌ Delete</button>
+
 </div>
 
 `;
@@ -289,6 +292,46 @@ container.innerHTML+=`
 });
 
 });
+
+}
+
+
+
+function deleteCourse(id){
+
+if(confirm("Delete this course?")){
+
+db.collection("courses").doc(id).delete();
+
+alert("Course Deleted ❌");
+
+loadCourses();
+
+}
+
+}
+
+
+
+function editCourse(id,name,teacher,link){
+
+let newName=prompt("Edit Batch Name",name);
+
+let newTeacher=prompt("Edit Teacher Name",teacher);
+
+let newLink=prompt("Edit HTML File",link);
+
+db.collection("courses").doc(id).update({
+
+name:newName,
+teacher:newTeacher,
+link:newLink
+
+});
+
+alert("Course Updated ✏");
+
+loadCourses();
 
 }
 
