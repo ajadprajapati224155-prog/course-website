@@ -1,74 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SSC Library Admin</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 
 body{
+background:#07142c;
 font-family:sans-serif;
-background:#0b1320;
 color:white;
 text-align:center;
-padding:20px;
+}
+
+.card{
+background:#0f1f3d;
+padding:25px;
+border-radius:15px;
+margin:20px;
+box-shadow:0 0 15px #0b5ed7;
 }
 
 input,textarea{
 width:90%;
 padding:12px;
 margin:10px;
-border-radius:10px;
+border-radius:8px;
 border:none;
+font-size:16px;
 }
 
 button{
-padding:12px 20px;
-background:#3b82f6;
-color:white;
+padding:12px 25px;
+background:#2f6edb;
 border:none;
-border-radius:10px;
+border-radius:8px;
+color:white;
 font-size:16px;
 cursor:pointer;
 }
 
 button:hover{
-background:#2563eb;
-}
-
-.card{
-background:#111827;
-padding:20px;
-border-radius:15px;
-max-width:420px;
-margin:auto;
-margin-top:20px;
-box-shadow:0 0 10px #3b82f6;
-}
-
-
- 
-.studentCard{
-background:#111827;
-padding:15px;
-border-radius:12px;
-margin:10px auto;
-max-width:420px;
-text-align:left;
-box-shadow:0 0 5px #3b82f6;
-}
-
-#studentsSection{
-display:none;
-margin-top:30px;
+background:#1e56b8;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div id="loginBox" style="margin-top:120px;">
+
+<div id="loginBox">
 
 <h2>🔐 Admin Login</h2>
 
@@ -82,9 +66,10 @@ margin-top:30px;
 
 
 
-<div id="adminPanel" style="display:none;">
+<div id="adminPanel" style="display:none">
 
-<h2>⚙️ SSC Library Admin Panel</h2>
+<h2>⚙ SSC Library Admin Panel</h2>
+
 
 <div class="card">
 
@@ -96,55 +81,36 @@ margin-top:30px;
 
 <button onclick="sendNotification()">Send Notification</button>
 
-<hr>
+</div>
+
+
+
+<div class="card">
 
 <h3>➕ Add New Course</h3>
-<input id="courseName" placeholder="Batch Name"><br><br>
 
-<input id="teacher" placeholder="Teacher Name">
+<input id="courseName" placeholder="Batch Name">
 
-<input id="courseLink" placeholder="HTML File Name (example: gk.html)"><br><br>
+<input id="teacherName" placeholder="Teacher Name">
 
-<button type="button" onclick="testClick()">Add Batch</button>
-
-</div>
-
+<input id="courseLink" placeholder="HTML File Name (example: gk.html)">
 
 <br>
 
-<button onclick="toggleCourses()">📚 View Courses</button>
-
-<div id="coursesSection" style="display:none; margin-top:20px;">
-
-<h3>📚 Courses List</h3>
-
-<input type="text" id="searchCourse" placeholder="Search batch..." onkeyup="searchCourse()">
-
-<div id="courseList"></div>
+<button type="button" onclick="addCourse()">Add Batch</button>
 
 </div>
 
 
-<br>
-
-<button onclick="toggleStudents()" style="margin-top:15px;">📋 View Students</button>
-
-<div id="studentsSection">
-
-<h3>👨‍🎓 Students List</h3>
-
-<input type="text" id="searchStudent" placeholder="Search student..." onkeyup="searchStudent()">
-
-<div id="studentList"></div>
-
-</div>
-
 </div>
 
 
+
+<!-- Firebase -->
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
 
 <script>
 
@@ -158,24 +124,23 @@ appId: "1:1062574277938:web:0e9427e75888816c07c32b"
 };
 
 firebase.initializeApp(firebaseConfig);
+
 const db = firebase.firestore();
 
-let studentsData=[];
-let coursesData=[];
 
 
 function checkLogin(){
 
 let pass=document.getElementById("adminPass").value;
 
-if(pass==="ssc123"){
+if(pass=="12345"){
 
 document.getElementById("loginBox").style.display="none";
 document.getElementById("adminPanel").style.display="block";
 
-loadCourses();
+}
 
-}else{
+else{
 
 alert("Wrong Password ❌");
 
@@ -199,26 +164,42 @@ time:new Date().toLocaleString()
 });
 
 alert("Notification Sent ✅");
+
 }
+
 
 
 function addCourse(){
 
-alert("Function Running");
+let name=document.getElementById("courseName").value;
+let teacher=document.getElementById("teacherName").value;
+let link=document.getElementById("courseLink").value;
 
-let name = document.getElementById("courseName").value;
-let teacher = document.getElementById("teacherName").value;
-let link = document.getElementById("courseLink").value;
+if(name=="" || teacher=="" || link==""){
+
+alert("Please fill all fields ❗");
+
+return;
+
+}
 
 db.collection("courses").add({
-name: name,
-teacher: teacher,
-link: link
-}).then(function(){
+
+name:name,
+teacher:teacher,
+link:link
+
+})
+.then(function(){
 
 alert("Batch Added Successfully ✅");
 
-}).catch(function(error){
+document.getElementById("courseName").value="";
+document.getElementById("teacherName").value="";
+document.getElementById("courseLink").value="";
+
+})
+.catch(function(error){
 
 alert("Error: "+error.message);
 
@@ -226,225 +207,8 @@ alert("Error: "+error.message);
 
 }
 
-function loadCourses(){
-
-db.collection("courses").get().then((data)=>{
-
-let container=document.getElementById("courseList");
-
-container.innerHTML="";
-
-data.forEach((doc)=>{
-
-let course=doc.data();
-
-container.innerHTML+=`
-
-<a href="${course.link}" class="course-card">
-
-<div class="course-icon">🎓</div>
-
-<div class="course-info">
-<h3>${course.name}</h3>
-<p>${course.teacher}</p>
-</div>
-
-<div class="course-arrow">➜</div>
-
-</a>
-
-`;
-
-});
-
-});
-
-}
-
-function createCourseCard(data){
-
-let div = document.createElement("div");
-
-div.className="studentCard";
-
-div.innerHTML=`
-
-📚 <b>${data.name}</b><br>
-🔗 ${data.link}<br>
-
-<img src="${data.image}" width="100%">
-
-<br><br>
-
-<button onclick="editCourse('${data.id}','${data.name}','${data.link}','${data.image}')">✏️ Edit</button>
-
-<button onclick="deleteCourse('${data.id}')">❌ Delete</button>
-
-`;
-
-document.getElementById("courseList").appendChild(div);
-
-}
- 
-  
-function editCourse(id,name,link,image){
-
-let newName = prompt("Edit Course Name", name);
-if(newName === null) return;
-
-let newLink = prompt("Edit Course Page Link", link);
-if(newLink === null) return;
-
-let newImage = prompt("Edit Course Image URL", image);
-if(newImage === null) return;
-
-db.collection("courses").doc(id).update({
-name:newName,
-link:newLink,
-image:newImage
-}).then(()=>{
-
-alert("Course Updated ✅");
-loadCourses();
-
-});
-
-}
-
-function deleteCourse(id){
-
-if(confirm("Delete this course?")){
-
-db.collection("courses").doc(id).delete();
-
-alert("Course Deleted ❌");
-
-loadCourses();
-
-}
-
-}
-
-function toggleCourses(){
-
-let courseSection = document.getElementById("coursesSection");
-let studentSection = document.getElementById("studentsSection");
-
-studentSection.style.display = "none";
-
-if(courseSection.style.display==="none"){
-
-courseSection.style.display="block";
-loadCourses();
-
-}else{
-
-courseSection.style.display="none";
-
-}
-
-}
- 
-function toggleStudents(){
-
-let studentSection = document.getElementById("studentsSection");
-let courseSection = document.getElementById("coursesSection");
-
-courseSection.style.display = "none";
-
-if(studentSection.style.display==="none"){
-
-studentSection.style.display="block";
-loadStudents();
-
-}else{
-
-studentSection.style.display="none";
-
-}
-
-}
-
-
-
-function loadStudents(){
-
-db.collection("students").get().then((snapshot)=>{
-
-studentsData=[];
-document.getElementById("studentList").innerHTML="";
-
-snapshot.forEach((doc)=>{
-
-let data=doc.data();
-studentsData.push(data);
-
-createCard(data);
-
-});
-
-});
-
-}
-
-
-
-function createCard(data){
-
-let div=document.createElement("div");
-
-div.className="studentCard";
-
-div.innerHTML=`
-
-👤 <b>${data.name}</b><br>
-📱 ${data.phone}<br>
-🆔 ${data.username}<br>
-🎂 ${data.dob || "Not set"}
-
-`;
-
-document.getElementById("studentList").appendChild(div);
-
-}
-
-function searchCourse(){
-
-let text = document.getElementById("searchCourse").value.toLowerCase();
-
-document.getElementById("courseList").innerHTML="";
-
-coursesData.forEach((data)=>{
-
-if(data.name.toLowerCase().includes(text)){
-
-createCourseCard(data);
-
-}
-
-});
-
-}
-
-function searchStudent(){
-
-let text=document.getElementById("searchStudent").value.toLowerCase();
-
-document.getElementById("studentList").innerHTML="";
-
-studentsData.forEach((data)=>{
-
-if(data.name.toLowerCase().includes(text) || data.username.toLowerCase().includes(text)){
-
-createCard(data);
-
-}
-
-});
-
-}
-
 </script>
+
 
 </body>
 </html>
