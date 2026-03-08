@@ -202,12 +202,11 @@ alert("Notification Sent ✅");
 }
 
 
-
 function addCourse(){
 
-let name=document.getElementById("courseName").value;
-let teacher=document.getElementById("teacherName").value || "Teacher";
-let link=document.getElementById("courseLink").value;
+let name=document.getElementById("courseName").value.trim();
+let teacher=document.getElementById("teacherName").value.trim();
+let link=document.getElementById("courseLink").value.trim();
 
 db.collection("courses").add({
 name:name,
