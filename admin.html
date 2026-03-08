@@ -66,8 +66,6 @@ margin-top:30px;
 
 <body>
 
-<!-- ADMIN LOGIN -->
-
 <div id="loginBox" style="margin-top:120px;">
 
 <h2>🔐 Admin Login</h2>
@@ -81,8 +79,6 @@ margin-top:30px;
 </div>
 
 
-
-<!-- ADMIN PANEL -->
 
 <div id="adminPanel" style="display:none;">
 
@@ -111,6 +107,11 @@ margin-top:30px;
 <button onclick="addCourse()">Add Course</button>
 
 </div>
+
+
+<h3 style="margin-top:30px;">📚 Courses List</h3>
+
+<div id="courseList"></div>
 
 
 <br>
@@ -161,6 +162,8 @@ if(pass==="ssc123"){
 document.getElementById("loginBox").style.display="none";
 document.getElementById("adminPanel").style.display="block";
 
+loadCourses();
+
 }else{
 
 alert("Wrong Password ❌");
@@ -185,7 +188,6 @@ time:new Date().toLocaleString()
 });
 
 alert("Notification Sent ✅");
-
 }
 
 
@@ -205,6 +207,60 @@ image:image
 });
 
 alert("Course Added Successfully ✅");
+
+loadCourses();
+
+}
+
+
+
+function loadCourses(){
+
+db.collection("courses").get().then((snapshot)=>{
+
+document.getElementById("courseList").innerHTML="";
+
+snapshot.forEach((doc)=>{
+
+let data=doc.data();
+
+let div=document.createElement("div");
+
+div.className="studentCard";
+
+div.innerHTML=`
+
+📚 <b>${data.name}</b><br>
+
+<a href="${data.link}" target="_blank">${data.link}</a>
+
+<br><br>
+
+<button onclick="deleteCourse('${doc.id}')">❌ Delete</button>
+
+`;
+
+document.getElementById("courseList").appendChild(div);
+
+});
+
+});
+
+}
+
+
+
+function deleteCourse(id){
+
+if(confirm("Delete this course?")){
+
+db.collection("courses").doc(id).delete();
+
+alert("Course Deleted ❌");
+
+loadCourses();
+
+}
 
 }
 
