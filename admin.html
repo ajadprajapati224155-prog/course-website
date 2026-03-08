@@ -109,9 +109,19 @@ margin-top:30px;
 </div>
 
 
-<h3 style="margin-top:30px;">📚 Courses List</h3>
+<br>
+
+<button onclick="toggleCourses()">📚 View Courses</button>
+
+<div id="coursesSection" style="display:none; margin-top:20px;">
+
+<h3>📚 Courses List</h3>
+
+<input type="text" id="searchCourse" placeholder="Search batch..." onkeyup="searchCourse()">
 
 <div id="courseList"></div>
+
+</div>
 
 
 <br>
@@ -150,7 +160,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 let studentsData=[];
-
+let coursesData=[];
 
 
 function checkLogin(){
@@ -218,40 +228,50 @@ function loadCourses(){
 
 db.collection("courses").get().then((snapshot)=>{
 
+coursesData = [];
 document.getElementById("courseList").innerHTML="";
 
 snapshot.forEach((doc)=>{
 
-let data=doc.data();
+let data = doc.data();
 
-let div=document.createElement("div");
+data.id = doc.id;
 
-div.className="studentCard";
+coursesData.push(data);
 
-div.innerHTML=`
-
-📚 <b>${data.name}</b><br>
-
-🔗 ${data.link}<br>
-
-<img src="${data.image}" width="100%">
-
-<br><br>
-
-<button onclick="editCourse('${doc.id}','${data.name}','${data.link}','${data.image}')">✏️ Edit</button>
-
-<button onclick="deleteCourse('${doc.id}')">❌ Delete</button>
-
-`;
-
-document.getElementById("courseList").appendChild(div);
+createCourseCard(data);
 
 });
 
 });
 
 }
+function createCourseCard(data){
 
+let div = document.createElement("div");
+
+div.className="studentCard";
+
+div.innerHTML=`
+
+📚 <b>${data.name}</b><br>
+🔗 ${data.link}<br>
+
+<img src="${data.image}" width="100%">
+
+<br><br>
+
+<button onclick="editCourse('${data.id}','${data.name}','${data.link}','${data.image}')">✏️ Edit</button>
+
+<button onclick="deleteCourse('${data.id}')">❌ Delete</button>
+
+`;
+
+document.getElementById("courseList").appendChild(div);
+
+}
+ 
+  
 function editCourse(id,name,link,image){
 
 let newName = prompt("Edit Course Name", name);
@@ -290,7 +310,23 @@ loadCourses();
 
 }
 
+function toggleCourses(){
 
+let section = document.getElementById("coursesSection");
+
+if(section.style.display==="none"){
+
+section.style.display="block";
+
+loadCourses();
+
+}else{
+
+section.style.display="none";
+
+}
+
+}
 
 function toggleStudents(){
 
@@ -352,7 +388,23 @@ document.getElementById("studentList").appendChild(div);
 
 }
 
+function searchCourse(){
 
+let text = document.getElementById("searchCourse").value.toLowerCase();
+
+document.getElementById("courseList").innerHTML="";
+
+coursesData.forEach((data)=>{
+
+if(data.name.toLowerCase().includes(text)){
+
+createCourseCard(data);
+
+}
+
+});
+
+}
 
 function searchStudent(){
 
