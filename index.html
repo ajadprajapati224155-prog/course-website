@@ -151,11 +151,12 @@ position:fixed;
 top:70px;
 left:0;
 width:100%;
-max-height:70vh;
-overflow-y:auto;
+height:70vh;
 background:#08142b;
-z-index:999;
+overflow-y:auto;
+z-index:9999;
 padding:10px;
+box-shadow:0 10px 20px rgba(0,0,0,0.5);
 }
 
 .notifPanel ul{
@@ -787,19 +788,17 @@ I HAVE ALREADY JOINED
 
 </div>
 
-<div id="notifPanel" class="notifPanel" style="display:none;">
+
+<div id="notifPanel" class="notifPanel">
 
 <div class="notifHeader">
-<span class="notifTitle">🔔 Notifications</span>
-<span class="notifClose" onclick="toggleNotifications()">✖</span>
-</div>
-
-
+<span>🔔 Notifications</span>
+<span onclick="toggleNotifications()">✖</span>
 </div>
 
 <ul id="notifList"></ul>
-</div>
 
+</div>
 <div class="searchBox">
 <input id="search" class="search" onkeyup="searchCourse()" placeholder="🔍 Search your course...">
 </div>
@@ -966,28 +965,18 @@ notifCount.innerText=unread;
 function toggleNotifications(){
 
 let panel = document.getElementById("notifPanel");
-let count = document.getElementById("notifCount");
 
 if(panel.style.display === "block"){
 panel.style.display = "none";
 }else{
 panel.style.display = "block";
-
-let read = localStorage.getItem("notifRead");
-
-if(read !== "true"){
-localStorage.setItem("notifRead","true");
-localStorage.setItem("notifReadTime", Date.now());
-}
-
-count.innerText = "0";
 }
 
 }
 
 window.onload = function(){
-
 document.getElementById("notifPanel").style.display = "none";
+}
 
 let read = localStorage.getItem("notifRead");
 let readTime = localStorage.getItem("notifReadTime");
