@@ -957,11 +957,18 @@ let count = document.getElementById("notifCount");
 if(panel.style.display === "block"){
 panel.style.display = "none";
 }else{
+
 panel.style.display = "block";
 
-localStorage.setItem("notifRead","true"); // user read
+let read = localStorage.getItem("notifRead");
+
+if(read !== "true"){
+localStorage.setItem("notifRead","true");
+localStorage.setItem("notifReadTime", Date.now());
+}
 
 count.innerText = "0";
+
 }
 
 }
@@ -971,9 +978,27 @@ window.onload = function(){
 document.getElementById("notifPanel").style.display = "none";
 
 let read = localStorage.getItem("notifRead");
+let readTime = localStorage.getItem("notifReadTime");
 
-if(read === "true"){
+if(read === "true" && readTime){
+
+let now = Date.now();
+
+let diff = now - parseInt(readTime);
+
+let oneDay = 24 * 60 * 60 * 1000;
+
+if(diff > oneDay){
+
+document.getElementById("notifList").innerHTML = "";
+
+localStorage.removeItem("notifRead");
+localStorage.removeItem("notifReadTime");
+
 document.getElementById("notifCount").innerText = "0";
+
+}
+
 }
 
 }
