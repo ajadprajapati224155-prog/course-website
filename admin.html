@@ -204,29 +204,24 @@ alert("Notification Sent ✅");
 
 function addCourse(){
 
+alert("Function Running");
+
 let name = document.getElementById("courseName").value;
 let teacher = document.getElementById("teacherName").value;
 let link = document.getElementById("courseLink").value;
-
-if(name=="" || teacher=="" || link==""){
-alert("Please fill all fields ❗");
-return;
-}
 
 db.collection("courses").add({
 name: name,
 teacher: teacher,
 link: link
-})
-.then(function(){
+}).then(function(){
+
 alert("Batch Added Successfully ✅");
 
-document.getElementById("courseName").value="";
-document.getElementById("teacherName").value="";
-document.getElementById("courseLink").value="";
-})
-.catch(function(error){
+}).catch(function(error){
+
 alert("Error: "+error.message);
+
 });
 
 }
