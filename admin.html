@@ -5,6 +5,7 @@
 <title>SSC Library Admin</title>
 
 <style>
+
 body{
 font-family:sans-serif;
 background:#0b1320;
@@ -28,22 +29,42 @@ color:white;
 border:none;
 border-radius:10px;
 font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2563eb;
 }
 
 .card{
 background:#111827;
 padding:20px;
 border-radius:15px;
-max-width:400px;
+max-width:420px;
 margin:auto;
+margin-top:20px;
 box-shadow:0 0 10px #3b82f6;
 }
+
+.studentCard{
+background:#111827;
+padding:15px;
+border-radius:12px;
+margin:10px auto;
+max-width:420px;
+text-align:left;
+box-shadow:0 0 5px #3b82f6;
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="loginBox" style="text-align:center;margin-top:100px;">
+<!-- ADMIN LOGIN -->
+
+<div id="loginBox" style="margin-top:120px;">
+
 <h2>🔐 Admin Login</h2>
 
 <input type="password" id="adminPass" placeholder="Enter Admin Password">
@@ -54,31 +75,48 @@ box-shadow:0 0 10px #3b82f6;
 
 </div>
 
+
+
+<!-- ADMIN PANEL -->
+
 <div id="adminPanel" style="display:none;">
 
 <h2>⚙️ SSC Library Admin Panel</h2>
 
 <div class="card">
 
+<h3>📢 Send Notification</h3>
+
 <input id="title" placeholder="Notification Title">
 
 <textarea id="message" placeholder="Notification Message"></textarea>
 
 <button onclick="sendNotification()">Send Notification</button>
- <h3>➕ Add New Course</h3>
+
+<hr>
+
+<h3>➕ Add New Course</h3>
 
 <input id="courseName" placeholder="Course Name">
 
 <input id="courseLink" placeholder="Course Page Link (example: maths.html)">
+
 <input id="courseImage" placeholder="Course Thumbnail Image URL">
+
 <button onclick="addCourse()">Add Course</button>
-</div> 
+
 </div>
 
- <h3>👨‍🎓 Students List</h3>
+
+
+<h3 style="margin-top:40px;">👨‍🎓 Students List</h3>
 
 <div id="studentList"></div>
- 
+
+</div>
+
+
+
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
@@ -96,20 +134,55 @@ appId: "1:1062574277938:web:0e9427e75888816c07c32b"
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+
+
+// ADMIN LOGIN
+
+function checkLogin(){
+
+let pass = document.getElementById("adminPass").value;
+
+if(pass === "ssc123"){
+
+document.getElementById("loginBox").style.display="none";
+document.getElementById("adminPanel").style.display="block";
+
+loadStudents();
+
+}else{
+
+alert("Wrong Password ❌");
+
+}
+
+}
+
+
+
+// SEND NOTIFICATION
+
 function sendNotification(){
 
 let title=document.getElementById("title").value;
 let message=document.getElementById("message").value;
 
 db.collection("notifications").add({
+
 title:title,
 message:message,
 time:new Date().toLocaleString()
+
 });
 
 alert("Notification Sent ✅");
- }
- function addCourse(){
+
+}
+
+
+
+// ADD COURSE
+
+function addCourse(){
 
 let name=document.getElementById("courseName").value;
 let link=document.getElementById("courseLink").value;
@@ -127,6 +200,12 @@ alert("Course Added Successfully ✅");
 
 }
 
+
+
+// LOAD STUDENTS
+
+function loadStudents(){
+
 db.collection("students").get().then((snapshot)=>{
 
 snapshot.forEach((doc)=>{
@@ -135,14 +214,14 @@ let data=doc.data();
 
 let div=document.createElement("div");
 
+div.className="studentCard";
+
 div.innerHTML=`
 
-<p>
-👤 ${data.name}  
-📱 ${data.phone}  
-🆔 ${data.username}
+👤 <b>${data.name}</b><br>
+📱 ${data.phone}<br>
+🆔 ${data.username}<br>
 🎂 ${data.dob || "Not set"}
-</p>
 
 `;
 
@@ -151,22 +230,9 @@ document.getElementById("studentList").appendChild(div);
 });
 
 });
-function checkLogin(){
- 
-let pass = document.getElementById("adminPass").value;
-
-if(pass === "ssc123"){
-
-document.getElementById("loginBox").style.display="none";
-document.getElementById("adminPanel").style.display="block";
-
-}else{
-
-alert("Wrong Password ❌");
 
 }
 
-}
 </script>
 
 </body>
