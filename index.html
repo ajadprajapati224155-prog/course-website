@@ -935,6 +935,8 @@ li.innerHTML = `
 
 notifList.appendChild(li);
 
+localStorage.removeItem("notifRead");
+
 unread++;
 
 });
@@ -955,13 +957,23 @@ panel.style.display = "none";
 }else{
 panel.style.display = "block";
 
-count.innerText = "0";   // red number reset
+localStorage.setItem("notifRead","true"); // user read
+
+count.innerText = "0";
 }
 
 }
 
 window.onload = function(){
+
 document.getElementById("notifPanel").style.display = "none";
+
+let read = localStorage.getItem("notifRead");
+
+if(read === "true"){
+document.getElementById("notifCount").innerText = "0";
+}
+
 }
 
 </script>
