@@ -946,13 +946,13 @@ loadCourses();
 const notifList = document.getElementById("notifList");
 const notifCount = document.getElementById("notifCount");
 
-db.collection("notifications").onSnapshot((snapshot)=>{
+db.collection("notifications").orderBy("timestamp")
+.onSnapshot((snapshot)=>{
 
 notifList.innerHTML="";
 
 let unread = 0;
 
-// last read notification id
 let lastRead = localStorage.getItem("lastReadNotif") || "";
 
 snapshot.forEach((doc)=>{
@@ -961,7 +961,7 @@ let data = doc.data();
 
 let li=document.createElement("li");
 
-li.innerHTML = `
+li.innerHTML=`
 <div class="notifCard">
 <div class="notifTop">
 <span class="notifTag">${data.title}</span>
@@ -973,8 +973,11 @@ li.innerHTML = `
 
 notifList.appendChild(li);
 
-// unread check
-if(doc.id !== lastRead){
+// unread logic
+if(lastRead && doc.id === lastRead){
+unread = 0;
+}
+else{
 unread++;
 }
 
@@ -998,8 +1001,10 @@ else{
 
 panel.style.display="block";
 
-// mark all read
-db.collection("notifications").orderBy("timestamp","desc").limit(1).get()
+db.collection("notifications")
+.orderBy("timestamp","desc")
+.limit(1)
+.get()
 .then((snap)=>{
 snap.forEach((doc)=>{
 localStorage.setItem("lastReadNotif", doc.id);
