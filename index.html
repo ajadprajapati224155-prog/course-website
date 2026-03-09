@@ -980,7 +980,7 @@ notifList.appendChild(li);
 // unread check
 let readTime = Number(localStorage.getItem("notifReadTime")) || 0;
 
-if(!data.timestamp || data.timestamp > readTime){
+if(data.timestamp > readTime){
 unread++;
 }
 
@@ -1004,6 +1004,7 @@ else{
 
 panel.style.display="block";
 
+// save last read time
 localStorage.setItem("notifReadTime", Date.now());
 
 notifCount.innerText="0";
