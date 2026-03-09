@@ -198,7 +198,8 @@ db.collection("notifications").add({
 
 title:title,
 message:message,
-time:new Date().toLocaleString()
+time:new Date().toLocaleString(),
+timestamp: Date.now()
 
 });
 
