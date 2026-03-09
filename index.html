@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SSC Library</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>SSC LIBRARY</title>
 
 <style>
 
 body{
 margin:0;
 font-family:Arial;
-background:#020b1f;
+background:#030d22;
 color:white;
 }
 
@@ -21,7 +22,7 @@ position:fixed;
 top:0;
 left:0;
 width:100%;
-height:65px;
+height:70px;
 background:#08142b;
 display:flex;
 align-items:center;
@@ -29,120 +30,97 @@ justify-content:center;
 z-index:1000;
 }
 
-.logo{
-font-size:24px;
-font-weight:bold;
-letter-spacing:2px;
-}
-
 .menu{
 position:absolute;
-left:15px;
-font-size:25px;
+left:20px;
+font-size:28px;
 cursor:pointer;
 }
 
 .bell{
 position:absolute;
-right:15px;
-font-size:22px;
+right:20px;
+font-size:26px;
 cursor:pointer;
 }
 
 #notifCount{
-position:absolute;
-top:-6px;
-right:-8px;
 background:red;
+padding:3px 7px;
+border-radius:20px;
 font-size:12px;
-padding:3px 6px;
-border-radius:50%;
+position:absolute;
+top:-8px;
+right:-10px;
 }
 
 /* SEARCH */
 
-.searchBox{
+.search{
 margin-top:90px;
-padding:15px;
+display:flex;
+justify-content:center;
 }
 
-.searchBox input{
-width:100%;
+.search input{
+width:85%;
 padding:12px;
 border-radius:30px;
 border:none;
-background:#08142b;
+background:#0a1b3c;
 color:white;
-outline:none;
 }
 
-/* COURSE */
+/* COURSE CARD */
 
 #courseList{
-padding:15px;
+margin-top:40px;
+display:flex;
+justify-content:center;
 }
 
 .course-card{
+width:85%;
+background:#081a3a;
+padding:20px;
+border-radius:18px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-background:#08142b;
-padding:15px;
-border-radius:15px;
-margin-top:15px;
+box-shadow:0 0 20px rgba(0,0,0,0.6);
 text-decoration:none;
 color:white;
 }
 
-.course-icon{
-font-size:25px;
-background:#1a3d8f;
-padding:10px;
-border-radius:10px;
-}
+/* SOCIAL */
 
-.course-info{
-flex:1;
-margin-left:15px;
-}
-
-.course-arrow{
-font-size:20px;
-color:#4da3ff;
-}
-
-/* NOTIFICATION PANEL */
-
-#notifPanel{
+.social{
 position:fixed;
-top:65px;
-right:10px;
-width:90%;
-max-width:350px;
-background:#08142b;
-border-radius:10px;
-display:none;
-max-height:400px;
-overflow-y:auto;
-padding:10px;
-}
-
-.notifCard{
-background:#020b1f;
-padding:10px;
-border-radius:10px;
-margin-top:10px;
-}
-
-.notifTop{
+bottom:20px;
+width:100%;
 display:flex;
-justify-content:space-between;
-font-size:12px;
-color:#4da3ff;
+justify-content:center;
+gap:20px;
 }
 
-.notifMsg{
-margin-top:5px;
+.social a{
+background:#0b7dd3;
+padding:15px;
+border-radius:15px;
+box-shadow:0 0 20px #0b7dd3;
+}
+
+/* SIDE MENU */
+
+#sideMenu{
+position:fixed;
+top:0;
+left:-300px;
+width:300px;
+height:100%;
+background:#08142b;
+transition:0.4s;
+padding:20px;
 }
 
 </style>
@@ -154,9 +132,9 @@ margin-top:5px;
 
 <div class="header">
 
-<div class="menuIcon" onclick="toggleMenu()">☰</div>
+<div class="menu" onclick="toggleMenu()">☰</div>
 
-<div class="logo">SSC LIBRARY</div>
+<h2>SSC LIBRARY</h2>
 
 <div class="bell" onclick="toggleNotifications()">
 🔔
@@ -167,160 +145,87 @@ margin-top:5px;
 
 <!-- SEARCH -->
 
-<div class="searchBox">
-<input type="text" id="search" placeholder="🔎 Search your course..." onkeyup="searchCourse()">
+<div class="search">
+<input placeholder="🔎 Search your course...">
 </div>
 
 <!-- COURSES -->
 
-<div id="courseList"></div>
+<div id="courseList">
 
-<!-- NOTIFICATIONS -->
+<a href="#" class="course-card">
 
-
-<!-- FIREBASE -->
-
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
-<script>
-
-const firebaseConfig = {
-apiKey: "AIzaSyC-WBjodD1mPq5RRTknOICq4b0pCBRx-FGc",
-authDomain: "ssc-library.firebaseapp.com",
-projectId: "ssc-library",
-storageBucket: "ssc-library.firebasestorage.app",
-messagingSenderId: "1062574277938",
-appId: "1:1062574277938:web:0e9427e75888816c07c32b"
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const db = firebase.firestore();
-
-/* LOAD COURSES */
-
-function loadCourses(){
-
-db.collection("courses").get().then((snapshot)=>{
-
-let container=document.getElementById("courseList");
-
-container.innerHTML="";
-
-snapshot.forEach((doc)=>{
-
-let data=doc.data();
-
-container.innerHTML+=`
-
-<a href="${data.link}" class="course-card">
-
-<div class="course-icon">🎓</div>
-
-<div class="course-info">
-<h3>${data.name}</h3>
-<p>${data.teacher}</p>
+<div>
+<h3>Hindi Eng</h3>
+<p>Teacher</p>
 </div>
 
-<div class="course-arrow">➜</div>
+<div>➡</div>
 
 </a>
 
-`;
+</div>
 
-});
+<!-- SOCIAL -->
 
-});
+<div class="social">
 
-}
-
-loadCourses();
-
-/* SEARCH */
-
-function searchCourse(){
-
-let input=document.getElementById("search").value.toLowerCase();
-
-let courses=document.querySelectorAll(".course-card");
-
-courses.forEach(course=>{
-
-let text=course.innerText.toLowerCase();
-
-course.style.display=text.includes(input)?"flex":"none";
-
-});
-
-}
-
-/* NOTIFICATION */
-
-const notifList=document.getElementById("notifList");
-const notifCount=document.getElementById("notifCount");
-
-db.collection("notifications")
-.orderBy("timestamp","desc")
-.onSnapshot((snapshot)=>{
-
-notifList.innerHTML="";
-
-let count=0;
-
-snapshot.forEach((doc)=>{
-
-let data=doc.data();
-
-let div=document.createElement("div");
-
-div.className="notifCard";
-
-div.innerHTML=`
-
-<div class="notifTop">
-
-<span>${data.title}</span>
-
-<span>${data.time}</span>
+<a href="#">📞</a>
+<a href="#">✈</a>
+<a href="#">📷</a>
+<a href="#">▶</a>
 
 </div>
 
-<div class="notifMsg">${data.message}</div>
+<!-- SIDE MENU -->
 
-`;
+<div id="sideMenu">
 
-notifList.appendChild(div);
+<h2>Student Profile</h2>
 
-count++;
+<input placeholder="Write your bio"><br><br>
 
-});
+<input type="date"><br><br>
 
-notifCount.innerText=count;
+<button>Save Profile</button><br><br>
 
-});
+<button>Logout</button>
 
-/* TOGGLE */
+</div>
+
+<!-- NOTIFICATION PANEL -->
+
+<div id="notifPanel" style="display:none;position:fixed;top:70px;width:100%;background:#0a1b3c;padding:20px">
+
+<h3>Notifications</h3>
+
+<div id="notifList"></div>
+
+</div>
+
+<script>
+
+function toggleMenu(){
+
+let menu=document.getElementById("sideMenu");
+
+if(menu.style.left==="0px"){
+menu.style.left="-300px";
+}else{
+menu.style.left="0px";
+}
+
+}
 
 function toggleNotifications(){
 
 let panel=document.getElementById("notifPanel");
 
-panel.style.display=panel.style.display=="block"?"none":"block";
-
-notifCount.innerText="0";
+panel.style.display=panel.style.display==="block"?"none":"block";
 
 }
 
-function toggleMenu(){
-let menu = document.getElementById("sideMenu");
-
-if(menu.style.left === "0px"){
-menu.style.left = "-300px";
-}else{
-menu.style.left = "0px";
-}
-}
 </script>
+
 </body>
 </html>
