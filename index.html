@@ -332,7 +332,7 @@ window.location.href="login.html";
 
 <input type="date" class="dob">
   
-<button class="profileBtn">Save Profile</button>
+<button onclick="saveProfile()">Save Profile</button>
 <button class="profileBtn" onclick="logout()">Logout</button>
 <button class="profileBtn" onclick="closeProfile()">Close</button>
 
@@ -411,6 +411,16 @@ localStorage.removeItem("login");
 window.location.href="login.html";
 }
 
+function saveProfile(){
+
+let bio = document.querySelector("textarea").value;
+
+localStorage.setItem("bio", bio);
+
+alert("Profile Saved ✅");
+
+}
+
 document.getElementById("uploadPic").onchange = function(e){
 
 let file = e.target.files[0];
@@ -433,8 +443,13 @@ if(savedPic){
 document.getElementById("profilePic").src = savedPic;
 }
 
+let bio = localStorage.getItem("bio");
+
+if(bio){
+document.querySelector("textarea").value = bio;
 }
 
+}
   </script>
 </body>
 </html>
