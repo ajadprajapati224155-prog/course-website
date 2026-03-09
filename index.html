@@ -63,17 +63,17 @@ transform:scale(1.02);
 }
 
 .header h1{
-color:#4da3ff;
-font-size:36px;
-font-weight:900;
-letter-spacing:3px;
-white-space:nowrap;
+position:absolute;
+left:50%;
+transform:translateX(-50%);
 margin:0;
+font-size:28px;
 }
 
 .notify{
 position:relative;
-} 
+z-index:2;
+}
   
 .course-img{
 width:100%;
@@ -438,11 +438,9 @@ display:none;
 }
 
 .menuBtn{
-position:absolute;
-left:15px;
 font-size:28px;
 cursor:pointer;
-color:white;
+z-index:2;
 }
 
 .progressBar{
