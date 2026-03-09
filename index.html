@@ -143,6 +143,30 @@ transform:scale(1.1);
 box-shadow:0 0 25px #00b4ff;
 }
 
+.sideMenu{
+position:fixed;
+top:0;
+left:-260px;
+width:260px;
+height:100%;
+background:#08142b;
+padding:20px;
+transition:0.3s;
+z-index:2000;
+}
+
+.sideMenu h3{
+margin-top:40px;
+}
+
+.sideMenu a{
+display:block;
+color:white;
+text-decoration:none;
+margin:15px 0;
+font-size:18px;
+}
+
 </style>
 
 </head>
@@ -153,7 +177,7 @@ box-shadow:0 0 25px #00b4ff;
 
 <div class="header">
 
-<div class="menuIcon">☰</div>
+<div class="menuIcon" onclick="toggleMenu()">☰</div>
 
 <h2>SSC LIBRARY</h2>
 
@@ -163,9 +187,19 @@ box-shadow:0 0 25px #00b4ff;
 🔔
 <span id="notifCount">0</span>
 </div>
-
 </div>
 
+<div id="sideMenu" class="sideMenu">
+
+<h3>Student Dashboard</h3>
+
+<a href="#">📚 My Courses</a>
+<a href="#">📄 Notes</a>
+<a href="#">🧪 Mock Tests</a>
+<a href="#">👤 Profile</a>
+
+</div>
+  
 <!-- SEARCH -->
 
 <div class="searchBox">
@@ -216,6 +250,20 @@ box-shadow:0 0 25px #00b4ff;
 </a>
 
 </div>
+<script>
 
+function toggleMenu(){
+
+let menu = document.getElementById("sideMenu");
+
+if(menu.style.left === "0px"){
+menu.style.left = "-260px";
+}else{
+menu.style.left = "0px";
+}
+
+}
+
+</script>
 </body>
 </html>
