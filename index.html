@@ -309,13 +309,21 @@ function toggleNotifications(){
 
 let panel=document.getElementById("notifPanel");
 
-panel.style.display=panel.style.display==="block"?"none":"block";
+panel.style.display=panel.style.display=="block"?"none":"block";
 
 notifCount.innerText="0";
 
 }
 
-</script>
+function toggleMenu(){
+let menu = document.getElementById("sideMenu");
 
+if(menu.style.left === "0px"){
+menu.style.left = "-300px";
+}else{
+menu.style.left = "0px";
+}
+}
+</script>
 </body>
 </html>
