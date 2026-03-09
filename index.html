@@ -946,7 +946,9 @@ loadCourses();
 const notifList = document.getElementById("notifList");
 const notifCount = document.getElementById("notifCount");
 
-db.collection("notifications").onSnapshot((snapshot)=>{
+db.collection("notifications")
+.orderBy("timestamp","desc")
+.onSnapshot((snapshot)=>{
 
 notifList.innerHTML="";
 
