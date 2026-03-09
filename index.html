@@ -123,14 +123,24 @@ justify-content:center;
 gap:25px;
 }
 
-.social a{
-background:#0b7dd3;
-padding:15px;
+.socialBtn{
+width:60px;
+height:60px;
+display:flex;
+align-items:center;
+justify-content:center;
 border-radius:18px;
-box-shadow:0 0 20px #0b7dd3;
-font-size:20px;
-text-decoration:none;
+background:linear-gradient(135deg,#00b4ff,#007bff);
+box-shadow:0 0 20px rgba(0,150,255,0.6);
+font-size:24px;
 color:white;
+text-decoration:none;
+transition:0.3s;
+}
+
+.socialBtn:hover{
+transform:scale(1.1);
+box-shadow:0 0 25px #00b4ff;
 }
 
 </style>
@@ -146,6 +156,8 @@ color:white;
 <div class="menuIcon">☰</div>
 
 <h2>SSC LIBRARY</h2>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <div class="bellIcon">
 🔔
@@ -187,10 +199,21 @@ color:white;
 
 <div class="social">
 
-<a href="#">📞</a>
-<a href="#">✈</a>
-<a href="#">📷</a>
-<a href="#">▶</a>
+<a href="https://wa.me/" target="_blank" class="socialBtn">
+<i class="fab fa-whatsapp"></i>
+</a>
+
+<a href="https://t.me/" target="_blank" class="socialBtn">
+<i class="fab fa-telegram"></i>
+</a>
+
+<a href="https://instagram.com/" target="_blank" class="socialBtn">
+<i class="fab fa-instagram"></i>
+</a>
+
+<a href="https://youtube.com/" target="_blank" class="socialBtn">
+<i class="fab fa-youtube"></i>
+</a>
 
 </div>
 
