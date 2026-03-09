@@ -198,8 +198,7 @@ db.collection("notifications").add({
 title:title,
 message:message,
 time:new Date().toLocaleString(),
-timestamp: Date.now(),
-expire: Date.now() + (24*60*60*1000)
+timestamp: Date.now()
 });
 
   alert("Notification Sent ✅");
