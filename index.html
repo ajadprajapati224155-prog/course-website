@@ -318,7 +318,7 @@ window.location.href="login.html";
 <input type="date" class="dob">
   
 <button class="profileBtn">Save Profile</button>
-<button class="profileBtn">Logout</button>
+<button class="profileBtn" onclick="logout()">Logout</button>
 <button class="profileBtn" onclick="closeProfile()">Close</button>
 
 <div class="footer">
@@ -390,6 +390,11 @@ document.getElementById("profilePanel").style.transform="translateX(0)";
 
 function closeProfile(){
 document.getElementById("profilePanel").style.transform="translateX(-100%)";
+}
+
+function logout(){
+localStorage.removeItem("login");
+window.location.href="login.html";
 }
 
 document.getElementById("uploadPic").onchange = function(e){
