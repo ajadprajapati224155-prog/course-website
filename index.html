@@ -955,9 +955,6 @@ snapshot.forEach((doc)=>{
 let data = doc.data();
 
 // old notification hide
-if(data.timestamp < joinTime){
-return;
-}
 
 let li=document.createElement("li");
 li.innerHTML = `
