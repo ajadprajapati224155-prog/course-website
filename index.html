@@ -957,12 +957,20 @@ notifCount.innerText=unread;
 <script>
 
 function toggleNotifications(){
-alert("Bell Click Working");
+
+let panel = document.getElementById("notifPanel");
+
+if(panel.style.display === "block"){
+panel.style.display = "none";
+}else{
+panel.style.display = "block";
+}
+
 }
 
 window.onload = function(){
+
 document.getElementById("notifPanel").style.display = "none";
-}
 
 let read = localStorage.getItem("notifRead");
 let readTime = localStorage.getItem("notifReadTime");
@@ -970,7 +978,6 @@ let readTime = localStorage.getItem("notifReadTime");
 if(read === "true" && readTime){
 
 let now = Date.now();
-
 let diff = now - parseInt(readTime);
 
 let oneDay = 24 * 60 * 60 * 1000;
