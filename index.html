@@ -926,11 +926,23 @@ const notifCount = document.getElementById("notifCount");
 db.collection("notifications").onSnapshot((snapshot)=>{
 
 notifList.innerHTML="";
+
 let unread = 0;
+
+// First time visit check
+if(!localStorage.getItem("userJoinedTime")){
+localStorage.setItem("userJoinedTime", Date.now());
+}  
+let joinTime = localStorage.getItem("userJoinedTime");
 
 snapshot.forEach((doc)=>{
 
 let data = doc.data();
+
+// old notification hide
+if(data.timestamp < joinTime){
+return;
+}
 
 let li=document.createElement("li");
 li.innerHTML = `
