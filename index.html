@@ -337,7 +337,7 @@ window.location.href="login.html";
 
 </div>
 
-<h2 class="studentName">Your Name</h2>
+<h2 id="studentName">Your Name</h2>
 
 <textarea placeholder="Write your bio..."></textarea>
 
@@ -466,6 +466,12 @@ document.querySelector("textarea").value = bio;
 let dob = localStorage.getItem("dob");
 if(dob){
 document.getElementById("dob").value = dob;
+}
+
+// name
+let name = localStorage.getItem("studentName");
+if(name){
+document.getElementById("studentName").innerText = name;
 }
 
 }
