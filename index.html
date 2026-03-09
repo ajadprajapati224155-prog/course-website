@@ -918,6 +918,12 @@ container.innerHTML="";
 
 snapshot.forEach((doc)=>{
 
+// auto delete after 24h
+if(data.expire && Date.now() > data.expire){
+doc.ref.delete();
+return;
+}
+
 let course=doc.data();
 
 container.innerHTML+=`
