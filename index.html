@@ -970,7 +970,11 @@ li.innerHTML = `
 
 notifList.appendChild(li);
 
+let readTime = Number(localStorage.getItem("notifReadTime")) || 0;
+
+if(data.timestamp > readTime){
 unread++;
+}
 
 });
 
@@ -991,6 +995,9 @@ panel.style.display="none";
 else{
 
 panel.style.display="block";
+
+// save last read time
+localStorage.setItem("notifReadTime", Date.now());
 
 notifCount.innerText="0";
 
