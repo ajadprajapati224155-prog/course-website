@@ -952,8 +952,6 @@ notifList.innerHTML="";
 
 let unread = 0;
 
-let read = localStorage.getItem("notifRead");
-
 // First time visit check
 if(!localStorage.getItem("userJoinedTime")){
 localStorage.setItem("userJoinedTime", Date.now());
@@ -966,6 +964,9 @@ snapshot.forEach((doc)=>{
 let data = doc.data();
 
 // old notification hide
+if(data.timestamp < joinTime){
+return;
+}
 
 let li=document.createElement("li");
 li.innerHTML = `
@@ -979,6 +980,9 @@ li.innerHTML = `
 `;
 
 notifList.appendChild(li);
+
+// unread count
+let read = localStorage.getItem("notifRead");
 
 if(read !== "true"){
 unread++;
