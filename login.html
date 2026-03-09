@@ -224,13 +224,17 @@ if(doc.exists){
 
 let data=doc.data();
 
-if(data.password===pass){
+if(data.password==pass){
 
 localStorage.setItem("student", JSON.stringify(data));
+
+localStorage.setItem("login","true");
 
 alert("Login Success ✅");
 
 window.location="index.html";
+
+}
 
 }else{
 
