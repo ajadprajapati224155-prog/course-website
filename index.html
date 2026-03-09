@@ -952,6 +952,9 @@ notifList.innerHTML="";
 
 let unread = 0;
 
+// last read notification id
+let lastRead = localStorage.getItem("lastReadNotif") || "";
+
 snapshot.forEach((doc)=>{
 
 let data = doc.data();
@@ -970,9 +973,8 @@ li.innerHTML = `
 
 notifList.appendChild(li);
 
-let readTime = Number(localStorage.getItem("notifReadTime")) || 0;
-
-if(data.timestamp > readTime){
+// unread check
+if(doc.id !== lastRead){
 unread++;
 }
 
@@ -996,8 +998,13 @@ else{
 
 panel.style.display="block";
 
-// save last read time
-localStorage.setItem("notifReadTime", Date.now());
+// mark all read
+db.collection("notifications").orderBy("timestamp","desc").limit(1).get()
+.then((snap)=>{
+snap.forEach((doc)=>{
+localStorage.setItem("lastReadNotif", doc.id);
+});
+});
 
 notifCount.innerText="0";
 
