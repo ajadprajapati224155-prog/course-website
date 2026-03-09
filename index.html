@@ -420,6 +420,9 @@ window.location.href="login.html";
 
 </div>
 <script>
+
+let student = JSON.parse(localStorage.getItem("student"));
+let user = student.username;
   
 function openProfile(){
 document.getElementById("profilePanel").style.transform="translateX(0)";
