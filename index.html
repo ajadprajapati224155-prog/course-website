@@ -435,8 +435,8 @@ function saveProfile(){
 let bio = document.querySelector("textarea").value;
 let dob = document.getElementById("dob").value;
 
-localStorage.setItem("bio", bio);
-localStorage.setItem("dob", dob);
+localStorage.setItem(user+"_bio", bio);
+localStorage.setItem(user+"_dob", dob);
 
 alert("Profile Saved ✅");
 
@@ -449,7 +449,7 @@ let reader = new FileReader();
 
 reader.onload = function(){
 document.getElementById("profilePic").src = reader.result;
-localStorage.setItem("profilePic",reader.result);
+localStorage.setItem(user+"_profilePic", reader.result);
 }
 
 reader.readAsDataURL(file);
@@ -458,20 +458,23 @@ reader.readAsDataURL(file);
 
 window.onload = function(){
 
+let student = JSON.parse(localStorage.getItem("student"));
+let user = student.username;
+
 // profile photo
-let savedPic = localStorage.getItem("profilePic");
+let savedPic = localStorage.getItem(user+"_profilePic");
 if(savedPic){
 document.getElementById("profilePic").src = savedPic;
 }
 
 // bio
-let bio = localStorage.getItem("bio");
+let bio = localStorage.getItem(user+"_bio");
 if(bio){
 document.querySelector("textarea").value = bio;
 }
 
 // DOB
-let dob = localStorage.getItem("dob");
+let dob = localStorage.getItem(user+"_dob");
 if(dob){
 document.getElementById("dob").value = dob;
 }
