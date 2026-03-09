@@ -948,51 +948,40 @@ const notifCount = document.getElementById("notifCount");
 
 db.collection("notifications").onSnapshot((snapshot)=>{
 
-notifList.innerHTML="";
+  notifList.innerHTML = "";
 
-let unread = 0;
+  let unread = 0;
 
-// last read time
-let readTime = Number(localStorage.getItem("notifReadTime")) || 0;
+  // last read time
+  let readTime = Number(localStorage.getItem("notifReadTime") || 0);
 
-// first visit
-if(!localStorage.getItem("userJoinedTime")){
-localStorage.setItem("userJoinedTime", Date.now());
-}
+  snapshot.forEach((doc)=>{
 
-let joinTime = Number(localStorage.getItem("userJoinedTime"));
+    let data = doc.data();
 
-snapshot.forEach((doc)=>{
+    // card create
+    let li = document.createElement("li");
 
-let data = doc.data();
+    li.innerHTML = `
+    <div class="notifCard">
+      <div class="notifTop">
+        <span class="notifTag">${data.title}</span>
+        <span class="notifTime">${data.time || ""}</span>
+      </div>
+      <div class="notifMsg">${data.message}</div>
+    </div>
+    `;
 
-// old notification hide for new users
-if(data.timestamp && data.timestamp < joinTime){
-return;
-}
+    notifList.appendChild(li);
 
-let li = document.createElement("li");
+    // unread check
+    if(data.timestamp && data.timestamp > readTime){
+      unread++;
+    }
 
-li.innerHTML = `
-<div class="notifCard">
-<div class="notifTop">
-<span class="notifTag">${data.title}</span>
-<span class="notifTime">${data.time || ""}</span>
-</div>
-<div class="notifMsg">${data.message}</div>
-</div>
-`;
+  });
 
-notifList.appendChild(li);
-
-// unread count
-if(data.timestamp && data.timestamp > readTime){
-unread++;
-}
-
-});
-
-notifCount.innerText = unread;
+  notifCount.innerText = unread;
 
 });
   
@@ -1001,20 +990,19 @@ notifCount.innerText = unread;
 
 function toggleNotifications(){
 
-let panel = document.getElementById("notifPanel");
+  let panel = document.getElementById("notifPanel");
 
-if(panel.style.display === "block"){
-panel.style.display="none";
-}else{
+  if(panel.style.display === "block"){
+    panel.style.display = "none";
+  }
+  else{
+    panel.style.display = "block";
 
-panel.style.display="block";
+    // mark all as read
+    localStorage.setItem("notifReadTime", Date.now());
 
-// mark all read
-localStorage.setItem("notifReadTime", Date.now());
-
-notifCount.innerText="0";
-
-}
+    notifCount.innerText = "0";
+  }
 
 }
 
