@@ -167,6 +167,60 @@ margin:15px 0;
 font-size:18px;
 }
 
+.profilePanel{
+position:fixed;
+top:0;
+right:-100%;
+width:100%;
+height:100%;
+background:#061a36;
+padding:25px;
+transition:0.4s;
+z-index:3000;
+overflow:auto;
+}
+
+.profilePic{
+width:120px;
+height:120px;
+border-radius:50%;
+border:4px solid #4aa8ff;
+margin:30px auto;
+}
+
+.studentName{
+text-align:center;
+color:#7fb6ff;
+}
+
+.profilePanel textarea,
+.profilePanel select{
+width:100%;
+padding:14px;
+margin:12px 0;
+border:none;
+border-radius:12px;
+background:#0c234b;
+color:white;
+}
+
+.profileBtn{
+width:100%;
+padding:16px;
+margin:10px 0;
+border:none;
+border-radius:12px;
+background:linear-gradient(45deg,#4aa8ff,#1f6fff);
+color:white;
+font-size:16px;
+}
+
+.dev{
+text-align:center;
+color:#6bb3ff;
+margin-top:20px;
+}
+
 </style>
 
 </head>
@@ -177,7 +231,7 @@ font-size:18px;
 
 <div class="header">
 
-<div class="menuIcon" onclick="toggleMenu()">☰</div>
+<div class="menuIcon" onclick="openProfile()">☰</div>
 
 <h2>SSC LIBRARY</h2>
 
@@ -189,15 +243,31 @@ font-size:18px;
 </div>
 </div>
 
-<div id="sideMenu" class="sideMenu">
+<div id="profilePanel" class="profilePanel">
 
-<h3>Student Dashboard</h3>
+<h2>👤 Student Profile</h2>
 
-<a href="#">📚 My Courses</a>
-<a href="#">📄 Notes</a>
-<a href="#">🧪 Mock Tests</a>
-<a href="#">👤 Profile</a>
+<div class="profilePic"></div>
 
+<h2 class="studentName">Your Name</h2>
+
+<textarea placeholder="Write your bio..."></textarea>
+
+<select>
+<option>Date of Birth</option>
+<option>01 Jan</option>
+<option>02 Jan</option>
+<option>03 Jan</option>
+</select>
+
+<button class="profileBtn">Save Profile</button>
+<button class="profileBtn">Logout</button>
+<button class="profileBtn" onclick="closeProfile()">Close</button>
+
+<p class="dev">©2026-27 SSC LIBRARY HUB</p>
+<p class="dev">Developer : Ajad Prajapati</p>
+
+</div>
 </div>
   
 <!-- SEARCH -->
@@ -252,16 +322,12 @@ font-size:18px;
 </div>
 <script>
 
-function toggleMenu(){
-
-let menu = document.getElementById("sideMenu");
-
-if(menu.style.left === "0px"){
-menu.style.left = "-260px";
-}else{
-menu.style.left = "0px";
+function openProfile(){
+document.getElementById("profilePanel").style.right="0";
 }
 
+function closeProfile(){
+document.getElementById("profilePanel").style.right="-100%";
 }
 
 </script>
