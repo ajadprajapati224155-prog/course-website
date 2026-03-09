@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>SSC LIBRARY</title>
 
@@ -11,7 +10,7 @@
 body{
 margin:0;
 font-family:Arial;
-background:#030d22;
+background:#020d22;
 color:white;
 }
 
@@ -30,25 +29,26 @@ justify-content:center;
 z-index:1000;
 }
 
-.menu{
+.menuIcon{
 position:absolute;
 left:20px;
 font-size:28px;
 cursor:pointer;
 }
 
-.bell{
+.bellIcon{
 position:absolute;
 right:20px;
-font-size:26px;
+font-size:24px;
 cursor:pointer;
 }
 
 #notifCount{
 background:red;
-padding:3px 7px;
-border-radius:20px;
+color:white;
 font-size:12px;
+padding:2px 6px;
+border-radius:20px;
 position:absolute;
 top:-8px;
 right:-10px;
@@ -56,22 +56,24 @@ right:-10px;
 
 /* SEARCH */
 
-.search{
+.searchBox{
 margin-top:90px;
 display:flex;
 justify-content:center;
 }
 
-.search input{
+.searchBox input{
 width:85%;
-padding:12px;
-border-radius:30px;
+padding:14px;
 border:none;
-background:#0a1b3c;
+border-radius:30px;
+background:#081a3c;
 color:white;
+outline:none;
+box-shadow:0 0 10px #0b7dd3;
 }
 
-/* COURSE CARD */
+/* COURSE */
 
 #courseList{
 margin-top:40px;
@@ -87,43 +89,52 @@ border-radius:18px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-box-shadow:0 0 20px rgba(0,0,0,0.6);
+box-shadow:0 0 25px rgba(0,0,0,0.7);
 text-decoration:none;
 color:white;
 }
 
-/* SOCIAL */
+.course-icon{
+font-size:26px;
+margin-right:15px;
+}
+
+.course-info h3{
+margin:0;
+}
+
+.course-info p{
+margin:3px 0;
+color:#9db4ff;
+}
+
+.course-arrow{
+font-size:24px;
+}
+
+/* SOCIAL ICONS */
 
 .social{
 position:fixed;
-bottom:20px;
+bottom:25px;
 width:100%;
 display:flex;
 justify-content:center;
-gap:20px;
+gap:25px;
 }
 
 .social a{
 background:#0b7dd3;
 padding:15px;
-border-radius:15px;
+border-radius:18px;
 box-shadow:0 0 20px #0b7dd3;
-}
-
-/* SIDE MENU */
-
-#sideMenu{
-position:fixed;
-top:0;
-left:-300px;
-width:300px;
-height:100%;
-background:#08142b;
-transition:0.4s;
-padding:20px;
+font-size:20px;
+text-decoration:none;
+color:white;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -132,11 +143,11 @@ padding:20px;
 
 <div class="header">
 
-<div class="menu" onclick="toggleMenu()">☰</div>
+<div class="menuIcon">☰</div>
 
 <h2>SSC LIBRARY</h2>
 
-<div class="bell" onclick="toggleNotifications()">
+<div class="bellIcon">
 🔔
 <span id="notifCount">0</span>
 </div>
@@ -145,7 +156,7 @@ padding:20px;
 
 <!-- SEARCH -->
 
-<div class="search">
+<div class="searchBox">
 <input placeholder="🔎 Search your course...">
 </div>
 
@@ -155,12 +166,18 @@ padding:20px;
 
 <a href="#" class="course-card">
 
-<div>
+<div style="display:flex;align-items:center">
+
+<div class="course-icon">🎓</div>
+
+<div class="course-info">
 <h3>Hindi Eng</h3>
 <p>Teacher</p>
 </div>
 
-<div>➡</div>
+</div>
+
+<div class="course-arrow">➡</div>
 
 </a>
 
@@ -176,56 +193,6 @@ padding:20px;
 <a href="#">▶</a>
 
 </div>
-
-<!-- SIDE MENU -->
-
-<div id="sideMenu">
-
-<h2>Student Profile</h2>
-
-<input placeholder="Write your bio"><br><br>
-
-<input type="date"><br><br>
-
-<button>Save Profile</button><br><br>
-
-<button>Logout</button>
-
-</div>
-
-<!-- NOTIFICATION PANEL -->
-
-<div id="notifPanel" style="display:none;position:fixed;top:70px;width:100%;background:#0a1b3c;padding:20px">
-
-<h3>Notifications</h3>
-
-<div id="notifList"></div>
-
-</div>
-
-<script>
-
-function toggleMenu(){
-
-let menu=document.getElementById("sideMenu");
-
-if(menu.style.left==="0px"){
-menu.style.left="-300px";
-}else{
-menu.style.left="0px";
-}
-
-}
-
-function toggleNotifications(){
-
-let panel=document.getElementById("notifPanel");
-
-panel.style.display=panel.style.display==="block"?"none":"block";
-
-}
-
-</script>
 
 </body>
 </html>
