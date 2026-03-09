@@ -194,12 +194,13 @@ function sendNotification(){
   let title = document.getElementById("title").value;
   let message = document.getElementById("message").value;
 
-  db.collection("notifications").add({
-    title: title,
-    message: message,
-    time: new Date().toLocaleString(),
-    timestamp: Date.now()
-  });
+db.collection("notifications").add({
+title:title,
+message:message,
+time:new Date().toLocaleString(),
+timestamp: Date.now(),
+expire: Date.now() + (24*60*60*1000)
+});
 
   alert("Notification Sent ✅");
 
