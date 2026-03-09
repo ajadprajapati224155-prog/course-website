@@ -177,12 +177,17 @@ background:#061a36;
 padding:25px;
 transition:0.4s;
 z-index:3000;
-overflow:auto;
+overflow-x:hidden;
+overflow-y:auto;
 
 /* PANEL BY DEFAULT HIDE */
 transform:translateX(-100%);
 }
 
+body{
+overflow-x:hidden;
+}
+  
 .profilePic{
 width:120px;
 height:120px;
@@ -232,8 +237,8 @@ margin-top:20px;
 
 .editPic{
 position:absolute;
-bottom:10px;
-right:38%;
+bottom:30px;
+right:35%;
 background:#4aa8ff;
 width:35px;
 height:35px;
