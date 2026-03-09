@@ -797,6 +797,9 @@ I HAVE ALREADY JOINED
 </div>
 
 <div class="searchBox">
+
+<button onclick="sendNotification()">Send Test Notification</button>
+  
 <input id="search" class="search" onkeyup="searchCourse()" placeholder="🔍 Search your course...">
 </div>
 
@@ -884,6 +887,17 @@ appId: "1:1062574277938:web:0e9427e75888816c07c32b"
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
+function sendNotification(){
+
+db.collection("notifications").add({
+title:"UPDATE",
+message:"New Maths class uploaded",
+time:new Date().toLocaleString(),
+timestamp: Date.now()
+});
+
+}
 
 function loadCourses(){
 
