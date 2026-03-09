@@ -476,11 +476,12 @@ if(dob){
 document.getElementById("dob").value = dob;
 }
 
-// name
-let name = localStorage.getItem("studentName");
-if(name){
-document.getElementById("studentName").innerText = name;
-}
+// student name
+let student = JSON.parse(localStorage.getItem("student"));
+
+if(student){
+document.getElementById("studentName").innerText = student.name;
+  }
 
 }
   </script>
