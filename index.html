@@ -978,7 +978,9 @@ li.innerHTML=`
 notifList.appendChild(li);
 
 // unread check
-if(data.timestamp > readTime){
+let readTime = Number(localStorage.getItem("notifReadTime")) || 0;
+
+if(!data.timestamp || data.timestamp > readTime){
 unread++;
 }
 
