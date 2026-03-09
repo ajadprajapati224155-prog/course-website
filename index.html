@@ -916,18 +916,18 @@ db.collection("courses").get().then((snapshot)=>{
 
 let container=document.getElementById("courseList");
 
-container.innerHTML="";
-
-snapshot.forEach((doc)=>{
-
-let data = doc.data();
-
 container.innerHTML+=`
 <a href="${data.link}" class="course-card">
+
+<div class="course-icon">🎓</div>
+
 <div class="course-info">
 <h3>${data.name}</h3>
 <p>${data.teacher}</p>
 </div>
+
+<div class="course-arrow">➜</div>
+
 </a>
 `;
 
