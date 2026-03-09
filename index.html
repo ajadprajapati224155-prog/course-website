@@ -982,9 +982,9 @@ li.innerHTML = `
 notifList.appendChild(li);
 
 // unread count
-let read = localStorage.getItem("notifRead");
+let readTime = localStorage.getItem("notifReadTime") || 0;
 
-if(read !== "true"){
+if(data.timestamp > readTime){
 unread++;
 }
 
