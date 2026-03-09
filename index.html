@@ -894,7 +894,7 @@ message:"New Maths class uploaded",
 time:new Date().toLocaleString(),
 timestamp: Date.now()
 });
-
+localStorage.removeItem("notifRead");
 }
 
 function loadCourses(){
