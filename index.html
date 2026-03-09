@@ -170,7 +170,7 @@ font-size:18px;
 .profilePanel{
 position:fixed;
 top:0;
-right:-100%;
+left:-100%;
 width:100%;
 height:100%;
 background:#061a36;
@@ -323,11 +323,11 @@ margin-top:20px;
 <script>
 
 function openProfile(){
-document.getElementById("profilePanel").style.right="0";
+document.getElementById("profilePanel").style.left="0";
 }
 
 function closeProfile(){
-document.getElementById("profilePanel").style.right="-100%";
+document.getElementById("profilePanel").style.left="-100%";
 }
 
 </script>
