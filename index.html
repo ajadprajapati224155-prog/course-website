@@ -952,24 +952,20 @@ notifList.innerHTML="";
 
 let unread = 0;
 
-// First time visit check
-if(!localStorage.getItem("userJoinedTime")){
-localStorage.setItem("userJoinedTime", Date.now());
+// first visit
+if(!localStorage.getItem("notifReadTime")){
+localStorage.setItem("notifReadTime",0);
 }
 
-let joinTime = localStorage.getItem("userJoinedTime");
+let readTime = Number(localStorage.getItem("notifReadTime"));
 
 snapshot.forEach((doc)=>{
 
 let data = doc.data();
 
-// old notification hide
-if(data.timestamp < joinTime){
-return;
-}
-
 let li=document.createElement("li");
-li.innerHTML = `
+
+li.innerHTML=`
 <div class="notifCard">
 <div class="notifTop">
 <span class="notifTag">${data.title}</span>
@@ -981,9 +977,7 @@ li.innerHTML = `
 
 notifList.appendChild(li);
 
-// unread count
-let readTime = localStorage.getItem("notifReadTime") || 0;
-
+// unread check
 if(data.timestamp > readTime){
 unread++;
 }
@@ -993,23 +987,25 @@ unread++;
 notifCount.innerText = unread;
 
 });
+  
 </script>
 <script>
 
 function toggleNotifications(){
 
 let panel = document.getElementById("notifPanel");
-let count = document.getElementById("notifCount");
 
 if(panel.style.display === "block"){
-panel.style.display = "none";
-}else{
-panel.style.display = "block";
+panel.style.display="none";
+}
+else{
 
-localStorage.setItem("notifRead","true");
+panel.style.display="block";
+
 localStorage.setItem("notifReadTime", Date.now());
 
-count.innerText = "0";
+notifCount.innerText="0";
+
 }
 
 }
