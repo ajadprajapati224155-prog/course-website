@@ -1,890 +1,194 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SSC Library</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
 body{
-background:#0b0f1f;
-font-family:sans-serif;
-color:white;
 margin:0;
-padding:0;
+font-family:Arial;
+background:#020b1f;
+color:white;
 }
+
+/* HEADER */
 
 .header{
 position:fixed;
 top:0;
 left:0;
 width:100%;
-height:70px;
+height:65px;
 background:#08142b;
 display:flex;
 align-items:center;
 justify-content:center;
 z-index:1000;
 }
-.searchBox{
-width:90%;
-margin:90px auto 20px auto;
-display:flex;
-justify-content:center;
+
+.logo{
+font-size:24px;
+font-weight:bold;
+letter-spacing:2px;
 }
 
-.search{
-width:100%;
-padding:12px 18px;
-border-radius:30px;
-border:none;
-outline:none;
-font-size:16px;
-color:white;
-background:linear-gradient(145deg,#0f1f45,#08142b);
-box-shadow:0 0 12px rgba(0,170,255,0.6);
-transition:0.3s;
-}
-
-.search::placeholder{
-color:#9ecfff;
-}
-
-.search:focus{
-box-shadow:0 0 18px #1e88ff;
-transform:scale(1.02);
-}
-
-.header h1{
+.menu{
 position:absolute;
-left:50%;
-transform:translateX(-50%);
-margin:0;
-font-size:28px;
+left:15px;
+font-size:25px;
+cursor:pointer;
 }
 
-.notify{
+.bell{
 position:absolute;
-right:20px;
-top:50%;
-transform:translateY(-50%);
+right:15px;
 font-size:22px;
 cursor:pointer;
 }
-  
-.course-img{
-width:100%;
-border-radius:10px;
-margin-bottom:10px;
-}
 
-
-.container{
-margin-top: 80px;
-padding-bottom: 120px;
-}
-
-.course{
-background:linear-gradient(45deg,#1a1a1a,#222);
-margin:20px;
-padding:20px;
-border-radius:20px;
-box-shadow:0 0 15px #000;
-}
-
-.course h2{
-margin-top:0;
-}
-
-.btn{
-display:block;
-margin-top:15px;
-padding:15px;
-text-decoration:none;
-background:#1e88ff;
-border-radius:10px;
-color:white;
-text-align:center;
-}
-
-.social{
-display:flex;
-justify-content:center;
-gap:20px;
-padding:30px;
-}
-
-.social a{
-font-size:28px;
-color:white;
-background:linear-gradient(45deg,#0072ff,#00c6ff);
-padding:14px;
-border-radius:15px;
-box-shadow:0 0 15px #0072ff;
-transition:0.3s;
-}
-
-.social a:hover{
-transform:scale(1.2);
-}
-
-.notifPanel{
-display:none;
-position:fixed;
-top:70px;
-left:0;
-width:100%;
-height:80vh;
-background:#08142b;
-z-index:9999;
-overflow-y:auto;
-padding-bottom:20px;
-}
-
-.notifCount{
+#notifCount{
 position:absolute;
 top:-6px;
 right:-8px;
 background:red;
-color:white;
-font-size:11px;
+font-size:12px;
 padding:3px 6px;
 border-radius:50%;
 }
 
-.notifPanel{
-display:none;
-position:fixed;
-top:70px;
-left:0;
-width:100%;
-background:#08142b;
-z-index:9999;
-}
+/* SEARCH */
 
-#notifList{
-list-style:none;
-padding:0;
-margin:0;
-}
-
-.notifPanel li{
-padding:10px;
-border-bottom:1px solid #333;
-}
-
-.notifCard{
-background:#0f1a2b;
-border:1px solid #3b82f6;
-border-radius:18px;
+.searchBox{
+margin-top:90px;
 padding:15px;
-margin:12px 12px;
-box-shadow:0 0 10px rgba(59,130,246,0.3);
-width:calc(100% - 24px);
-box-sizing:border-box;
 }
 
-.notifTop{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:8px;
-}
-
-.notifTag{
-background:#1e3a8a;
-color:#8ab4ff;
-padding:4px 10px;
-border-radius:8px;
-font-size:12px;
-font-weight:bold;
-letter-spacing:1px;
-}
-
-.notifTime{
-font-size:12px;
-color:#aaa;
-}
-
-.notifMsg{
-color:#e5e7eb;
-font-size:14px;
-line-height:1.4;
-}
-
-.notifHeader{
-display:flex;
-align-items:center;
-justify-content:space-between;
-background:#1f1f1f;
-padding:12px 15px;
-border-radius:12px;
-margin-bottom:15px;
-}
-
-.notifTitle{
-font-size:18px;
-font-weight:600;
-color:white;
-}
-
-.notifClose{
-font-size:22px;
-cursor:pointer;
-color:white;
-}
-  
-.notificationBox li{
-padding:10px;
-border-bottom:1px solid #333;
-}
-#notifList{
-max-width:600px;
-margin:auto;
-}
-
-
-.social-icons{
-position: fixed;
-bottom: 0;
-left: 0;
-width: 100%;
-display: flex;
-justify-content: center;
-gap: 20px;
-padding: 15px;
-background: #08142b;
-z-index: 999;
-}
-.social-icons a{
-display:flex;
-align-items:center;
-justify-content:center;
-width:60px;
-height:60px;
-font-size:26px;
-border-radius:15px;
-color:white;
-text-decoration:none;
-
-background:linear-gradient(270deg,#007bff,#00c6ff,#4da3ff,#007bff);
-background-size:400% 400%;
-
-animation:blueMove 6s ease infinite;
-
-box-shadow:0 0 10px #00c6ff,
-0 0 20px #007bff,
-0 0 40px #4da3ff;
-
-transition:0.3s;
-}
-.social-icons a:hover{
-transform:scale(1.15);
-box-shadow:0 0 15px #00c6ff,
-0 0 35px #7928ca,
-0 0 60px #ff0080;
-}
-
-@keyframes rgbGlow{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-@keyframes blueMove{
-0%{
-background-position:0% 50%;
-}
-50%{
-background-position:100% 50%;
-}
-100%{
-background-position:0% 50%;
-}
-}
-.popup{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100vh;
-background:rgba(0,0,0,0.85);
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999999;
-}
-.popup-box{
-background:#0b1320;
-padding:25px;
-border-radius:15px;
-max-width:350px;
-width:90%;
-color:white;
-text-align:center;
-border:2px solid #3b82f6;
-box-shadow:0 0 20px #3b82f6;
-}
-
-.joinBtn{
+.searchBox input{
 width:100%;
 padding:12px;
-margin-top:15px;
-background:#3b82f6;
+border-radius:30px;
 border:none;
-border-radius:10px;
+background:#08142b;
 color:white;
-font-weight:bold;
-}
-.whatsappBtn{
-width:100%;
-padding:12px;
-margin-top:10px;
-background:#25D366;
-border:none;
-border-radius:10px;
-color:white;
-font-weight:bold;
-box-shadow:0 0 10px #25D366;
-}
-.closeBtn{
-width:100%;
-padding:12px;
-margin-top:10px;
-background:#222;
-border:none;
-border-radius:10px;
-color:white;
+outline:none;
 }
 
-.red{
-color:#ff4d4d;
-font-weight:bold;
-}
-/* Sidebar Professional Design */
+/* COURSE */
 
-.sideMenu{
-position:fixed;
-left:-100%;
-top:0;
-width:280px;
-height:100%;
-background:linear-gradient(180deg,#001f3f,#0b1320);
-padding:25px;
-transition:0.4s;
-z-index:999;
-}
-.sideMenu h3{
-font-size:22px;
-margin-bottom:20px;
-color:#4da3ff;
-}
-
-.sideMenu img{
-width:80px;
-height:80px;
-border-radius:50%;
-border:3px solid #4da3ff;
-margin-bottom:10px;
-}
-
-.sideMenu input{
-width:100%;
-padding:8px;
-margin-top:8px;
-margin-bottom:12px;
-border:none;
-border-radius:6px;
-background:#111;
-color:white;
-}
-
-.sideMenu button{
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:12px;
-background:linear-gradient(45deg,#4da3ff,#1e88ff);
-color:white;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
-}
-
-.sideMenu button:hover{
-transform:scale(1.05);
-}
-
-.blur{
-filter:blur(6px);
-pointer-events:none;
-user-select:none;
-}
-
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(5px);
-z-index:998;
-display:none;
-}
-
-.menuBtn{
-position:absolute;
-left:15px;
-font-size:26px;
-cursor:pointer;
-}
-
-.progressBar{
-width:100%;
-height:10px;
-background:#111;
-border-radius:10px;
-margin-top:5px;
-margin-bottom:10px;
-}
-
-#progressFill{
-height:100%;
-width:0%;
-background:#4da3ff;
-border-radius:10px;
-}
-
-.profileFooter{
-margin-top:20px;
-text-align:center;
-font-size:12px;
-color:#aaa;
-}
-
-.profilePhotoBox{
-position:relative;
-width:90px;
-margin:auto;
-}
-
-.profilePic{
-width:90px;
-height:90px;
-border-radius:50%;
-border:4px solid #4da3ff;
-object-fit:cover;
-}
-
-.editPhoto{
-position:absolute;
-bottom:0px;
-right:0px;
-background:#4da3ff;
-width:34px;
-height:34px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-font-size:16px;
-}
-
-#displayName{
-text-align:center;
-margin-top:10px;
-color:#4da3ff;
-}
-
-#bio{
-width:100%;
-padding:8px;
-border-radius:8px;
-background:#111;
-color:white;
-border:none;
-margin-bottom:10px;
-}
-
-.devText{
-font-weight:bold;
-font-size:16px;
-color:#4da6ff;
-letter-spacing:1px;
-text-shadow:0 0 5px #4da6ff;
-}
-
-.studyBox{
-background:#111;
-padding:10px;
-border-radius:10px;
-text-align:center;
-margin-bottom:10px;
-}
-
-.footerLine{
-margin-top:15px;
-border:0.5px solid #333;
-}
-
-.profileFooter{
-text-align:center;
-font-size:12px;
-color:#aaa;
-margin-top:8px;
-}
-#sideMenu{
-position:fixed;
-top:0;
-right:-100%;
-width:65%;
-height:100%;
-background:#0b1320;
-overflow-y:auto;
-transition:0.4s;
-padding:20px;
-}
-.themeIcon{
-position:absolute;
-top:0;
-right:0;
-transform:translate(30%,-30%);
-font-size:18px;
-background:#1e3a8a;
-padding:6px 8px;
-border-radius:50%;
-cursor:pointer;
-box-shadow:0 0 8px #4da3ff;
-}
-.profileHeader{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.themeTop{
-font-size:22px;
-background:#1e3a8a;
-padding:6px 10px;
-border-radius:50%;
-cursor:pointer;
-box-shadow:0 0 10px #4da3ff;
+#courseList{
+padding:15px;
 }
 
 .course-card{
 display:flex;
 align-items:center;
 justify-content:space-between;
-background:linear-gradient(145deg,#0f172a,#020617);
-padding:18px;
-border-radius:16px;
+background:#08142b;
+padding:15px;
+border-radius:15px;
 margin-top:15px;
-box-shadow:0 0 15px rgba(0,0,0,0.4);
-}
-
-#notifPanel{
-display:none;
-}
-
-.course-icon{
-width:50px;
-height:50px;
-background:#1e3a8a;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:12px;
-font-size:22px;
-}
-
-.course-info{
-display:flex;
-flex-direction:column;
-align-items:flex-start;
-text-align:left;
-margin-left:10px;
-flex:1;
-}
-
-.course-info h3{
-margin:0;
-color:white;
-font-size:16px;
-}
-
-.course-info p{
-margin:3px 0 0;
-font-size:12px;
-color:#9ca3af;
-}
-
-.course-arrow{
-color:#60a5fa;
-font-size:20px;
-}
-
-a.course-card{
 text-decoration:none;
 color:white;
 }
-  
+
+.course-icon{
+font-size:25px;
+background:#1a3d8f;
+padding:10px;
+border-radius:10px;
+}
+
+.course-info{
+flex:1;
+margin-left:15px;
+}
+
+.course-arrow{
+font-size:20px;
+color:#4da3ff;
+}
+
+/* NOTIFICATION PANEL */
+
+#notifPanel{
+position:fixed;
+top:65px;
+right:10px;
+width:90%;
+max-width:350px;
+background:#08142b;
+border-radius:10px;
+display:none;
+max-height:400px;
+overflow-y:auto;
+padding:10px;
+}
+
+.notifCard{
+background:#020b1f;
+padding:10px;
+border-radius:10px;
+margin-top:10px;
+}
+
+.notifTop{
+display:flex;
+justify-content:space-between;
+font-size:12px;
+color:#4da3ff;
+}
+
+.notifMsg{
+margin-top:5px;
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="overlay" class="overlay"></div>
+<!-- HEADER -->
 
-<div id="mainContent">
-<script>
-
-let user = JSON.parse(localStorage.getItem("student"));
-
-if(!user){
-window.location="login.html";
-}
-
-function openMenu(){
-
-document.getElementById("sideMenu").style.left="0";
-document.getElementById("overlay").style.display="block";
-document.getElementById("mainContent").classList.add("blur");
-
-let user = JSON.parse(localStorage.getItem("student"));
-
-if(user){
-document.getElementById("displayName").innerText = user.name;
-}
-
-}
-
-function closeMenu(){
-document.getElementById("sideMenu").style.left="-100%";
-document.getElementById("overlay").style.display="none";
-document.getElementById("mainContent").classList.remove("blur");
-}
-document.getElementById("overlay").onclick = closeMenu;
-function uploadPhoto(event){
-
-let reader = new FileReader();
-
-reader.onload=function(){
-
-localStorage.setItem("profilePic",reader.result);
-
-document.getElementById("profilePic").src=reader.result;
-
-}
-
-reader.readAsDataURL(event.target.files[0]);
-
-}
-function setTheme(theme){
-
-document.body.className=theme;
-
-localStorage.setItem("theme",theme);
-
-}
-let start = Date.now();
-
-window.onbeforeunload=function(){
-
-let time = Date.now() - start;
-
-let total = Number(localStorage.getItem("studyTime")||0);
-
-localStorage.setItem("studyTime", total + time);
-
-}
-
-let total = localStorage.getItem("studyTime");
-
-if(total){
-
-document.getElementById("studyTime").innerText =
-Math.floor(total/60000) + " Minutes";
-
-}
-function editPhoto(){
-document.getElementById("photoInput").click();
-}
-
-let loginUser = localStorage.getItem("student");
-
-if(loginUser){
-document.getElementById("displayName").innerText = loginUser;
-}
-
-function saveProfile(){
-
-let name=document.getElementById("studentName").value;
-let dob=document.getElementById("dob").value;
-
-localStorage.setItem("studentName",name);
-localStorage.setItem("dob",dob);
-
-updateProgress();
-
-alert("Profile Saved ✅");
-
-}
-
-function logout(){
-
-localStorage.removeItem("student");
-
-window.location="login.html";
-
-}
-
-function updateProgress(){
-
-let progress=0;
-
-if(localStorage.getItem("studentName")) progress+=50;
-if(localStorage.getItem("dob")) progress+=50;
-
-document.getElementById("progressFill").style.width=progress+"%";
-
-}
-
-
-</script>
-<div id="noticePopup" class="popup">
-<div class="popup-box">
-
-<h2>📢 IMPORTANT NOTICE</h2>
-
-<p>
-All courses and materials on this website are provided
-<b>completely free of cost</b>.
-If anyone asks for money, <span class="red">DO NOT PAY.</span>
-</p>
-
-<button class="joinBtn" onclick="window.open('https://t.me/ssc_exam_helper')">
-🔔 JOIN OFFICIAL CHANNEL
-</button>
-
-<button class="whatsappBtn" onclick="window.open('https://whatsapp.com/channel/0029Vb7aw0SHgZWffpYiLf3K')">
-💬 JOIN WHATSAPP CHANNEL
-</button>
-  
-<button class="closeBtn" onclick="closePopup()">
-I HAVE ALREADY JOINED
-</button>
-
-</div>
-</div>
 <div class="header">
 
-<div class="menuBtn" onclick="openMenu()">☰</div>
+<div class="menu">☰</div>
 
-<h1>SSC LIBRARY</h1>
+<div class="logo">SSC LIBRARY</div>
 
-<div class="notify" onclick="toggleNotifications()">
+<div class="bell" onclick="toggleNotifications()">
 🔔
-<span id="notifCount" class="notifCount">0</span>
+<span id="notifCount">0</span>
 </div>
 
 </div>
 
-
-<div id="notifPanel" class="notifPanel">
-<div class="notifHeader">
-<span>🔔 Notifications</span>
-<span onclick="toggleNotifications()">✖</span>
-</div>
-
-<ul id="notifList"></ul>
-</div>
+<!-- SEARCH -->
 
 <div class="searchBox">
-  
-<input id="search" class="search" onkeyup="searchCourse()" placeholder="🔍 Search your course...">
+<input type="text" id="search" placeholder="🔎 Search your course..." onkeyup="searchCourse()">
 </div>
 
-<div class="container" id="mainContent">
+<!-- COURSES -->
 
-<div class="course">
 <div id="courseList"></div>
 
+<!-- NOTIFICATIONS -->
 
+<div id="notifPanel">
+<div id="notifList"></div>
 </div>
 
-</div>
-
-</div>
-
-<div class="social-icons">
-
-<a href="https://whatsapp.com/channel/0029Vb7aw0SHgZWffpYiLf3K" target="_blank">
-<i class="fab fa-whatsapp"></i>
-</a>
-
-<a href="https://t.me/ssc_exam_helper" target="_blank">
-<i class="fab fa-telegram"></i>
-</a>
-
-<a href="https://www.instagram.com/creator_ajad?igsh=MW5rYjB4dm5jNmx6OA==" target="_blank">
-<i class="fab fa-instagram"></i>
-</a>
-
-<a href="https://youtube.com/@ssc_library-1m?si=7v6kWAlr3jjDd4zS" target="_blank">
-<i class="fab fa-youtube"></i>
-</a>
-
-</div>
-
-<script>
-
-
-function searchCourse(){
-
-let input=document.getElementById("search").value.toLowerCase();
-
-let courses=document.querySelectorAll(".course");
-
-courses.forEach(course=>{
-
-let text=course.innerText.toLowerCase();
-
-course.style.display=text.includes(input)?"block":"none";
-
-});
-
-}
-
-function enableNotification(){
-
-Notification.requestPermission().then(function(permission){
-
-if(permission==="granted"){
-
-new Notification("SSC Library",{body:"Notifications Enabled 🔔"});
-
-}
-
-});
-
-}
-
-</script>
-
-<!-- Firebase Notification Code -->
+<!-- FIREBASE -->
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
 <script>
+
+const firebaseConfig = {
 const firebaseConfig = {
 apiKey: "AIzaSyC-WBjodD1mPq5RRTknOICq4b0pCBRx-FGc",
 authDomain: "ssc-library.firebaseapp.com",
@@ -895,20 +199,10 @@ appId: "1:1062574277938:web:0e9427e75888816c07c32b"
 };
 
 firebase.initializeApp(firebaseConfig);
+
 const db = firebase.firestore();
 
-loadCourses();
-
-function sendNotification(){
-
-db.collection("notifications").add({
-title:"UPDATE",
-message:"New Maths class uploaded",
-time:new Date().toLocaleString(),
-timestamp: Date.now()
-});
-localStorage.removeItem("notifRead");
-}
+/* LOAD COURSES */
 
 function loadCourses(){
 
@@ -916,7 +210,14 @@ db.collection("courses").get().then((snapshot)=>{
 
 let container=document.getElementById("courseList");
 
+container.innerHTML="";
+
+snapshot.forEach((doc)=>{
+
+let data=doc.data();
+
 container.innerHTML+=`
+
 <a href="${data.link}" class="course-card">
 
 <div class="course-icon">🎓</div>
@@ -929,6 +230,7 @@ container.innerHTML+=`
 <div class="course-arrow">➜</div>
 
 </a>
+
 `;
 
 });
@@ -939,254 +241,82 @@ container.innerHTML+=`
 
 loadCourses();
 
-const notifList = document.getElementById("notifList");
-const notifCount = document.getElementById("notifCount");
+/* SEARCH */
 
-db.collection("notifications").onSnapshot((snapshot)=>{
+function searchCourse(){
+
+let input=document.getElementById("search").value.toLowerCase();
+
+let courses=document.querySelectorAll(".course-card");
+
+courses.forEach(course=>{
+
+let text=course.innerText.toLowerCase();
+
+course.style.display=text.includes(input)?"flex":"none";
+
+});
+
+}
+
+/* NOTIFICATION */
+
+const notifList=document.getElementById("notifList");
+const notifCount=document.getElementById("notifCount");
+
+db.collection("notifications")
+.orderBy("timestamp","desc")
+.onSnapshot((snapshot)=>{
 
 notifList.innerHTML="";
 
-let unread = 0;
-
-// last read notification id
-let lastRead = localStorage.getItem("lastReadNotif") || "";
+let count=0;
 
 snapshot.forEach((doc)=>{
 
-let data = doc.data();
+let data=doc.data();
 
-let li=document.createElement("li");
+let div=document.createElement("div");
 
-li.innerHTML = `
-<div class="notifCard">
+div.className="notifCard";
+
+div.innerHTML=`
+
 <div class="notifTop">
-<span class="notifTag">${data.title}</span>
-<span class="notifTime">${data.time || ""}</span>
+
+<span>${data.title}</span>
+
+<span>${data.time}</span>
+
 </div>
+
 <div class="notifMsg">${data.message}</div>
-</div>
+
 `;
 
-notifList.appendChild(li);
+notifList.appendChild(div);
 
-// unread check
-if(doc.id !== lastRead){
-unread++;
-}
+count++;
 
 });
 
-notifCount.innerText = unread;
+notifCount.innerText=count;
 
 });
-  
-</script>
-<script>
+
+/* TOGGLE */
 
 function toggleNotifications(){
 
-let panel = document.getElementById("notifPanel");
+let panel=document.getElementById("notifPanel");
 
-if(panel.style.display === "block"){
-panel.style.display="none";
-}
-else{
-
-panel.style.display="block";
-
-// mark all read
-db.collection("notifications").orderBy("timestamp","desc").limit(1).get()
-.then((snap)=>{
-snap.forEach((doc)=>{
-localStorage.setItem("lastReadNotif", doc.id);
-});
-});
+panel.style.display=panel.style.display==="block"?"none":"block";
 
 notifCount.innerText="0";
 
 }
 
-}
-
-window.onload = function(){
-
-document.getElementById("notifPanel").style.display = "none";
-
-let read = localStorage.getItem("notifRead");
-let readTime = localStorage.getItem("notifReadTime");
-
-if(read === "true" && readTime){
-
-let now = Date.now();
-let diff = now - parseInt(readTime);
-
-let oneDay = 24 * 60 * 60 * 1000;
-
-if(diff > oneDay){
-
-document.getElementById("notifList").innerHTML = "";
-
-localStorage.removeItem("notifRead");
-localStorage.removeItem("notifReadTime");
-
-document.getElementById("notifCount").innerText = "0";
-
-}
-
-}
-
-}
-
-</script>
-<script>
-function closePopup(){
-document.getElementById("noticePopup").style.visibility="hidden";
-document.getElementById("noticePopup").style.opacity="0";
-}
-
-</script>
-</div>
-<div id="sideMenu" class="sideMenu">
-
-<div class="profileHeader">
-<h3>👤 Student Profile</h3>
-</div>
-
-<div class="profilePhotoBox">
-
-<img id="profilePic" src="" class="profilePic">
-
-<div class="editPhoto" onclick="document.getElementById('photoInput').click()">✏️</div>
-
-<input type="file" id="photoInput" hidden>
-
-</div>
-
-<h2 id="displayName"></h2>
-
-<textarea id="bio" placeholder="Write your bio..."></textarea>
-
-<br><br>
-
-<label>Date of Birth</label>
-<input type="date" id="dob">
-
-<br><br>
-
-<button id="saveBtn">Save Profile</button>
-
-<button onclick="logout()">Logout</button>
-
-<button onclick="closeMenu()">Close</button>
-
-<hr class="footerLine">
-
-<div class="profileFooter">
-<p>©2026-27 SSC LIBRARY HUB</p>
-<p class="devText">Developer : Ajad Prajapati</p>
-</div>
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-
-// PHOTO LOAD
-let savedPic = localStorage.getItem("profilePic");
-if(savedPic){
-document.getElementById("profilePic").src = savedPic;
-}
-
-// BIO LOAD
-let savedBio = localStorage.getItem("bio");
-if(savedBio){
-document.getElementById("bio").value = savedBio;
-}
-
-// DOB LOAD
-let savedDob = localStorage.getItem("dob");
-if(savedDob){
-document.getElementById("dob").value = savedDob;
-}
-
-// USER NAME LOAD
-let user = JSON.parse(localStorage.getItem("student"));
-if(user){
-document.getElementById("displayName").innerText = user.name;
-}
-
-});
-
-document.getElementById("photoInput").addEventListener("change", function(){
-
-let file = this.files[0];
-let reader = new FileReader();
-
-reader.onload = function(){
-document.getElementById("profilePic").src = reader.result;
-localStorage.setItem("profilePic", reader.result);
-}
-
-reader.readAsDataURL(file);
-
-});
-  
-// PHOTO UPLOAD
-document.getElementById("photoInput").addEventListener("change", function(){
-
-let file = this.files[0];
-let reader = new FileReader();
-
-reader.onload = function(){
-document.getElementById("profilePic").src = reader.result;
-localStorage.setItem("profilePic", reader.result);
-}
-
-reader.readAsDataURL(file);
-
-});
-
-
-// SAVE PROFILE
-document.getElementById("saveBtn").addEventListener("click", function(){
-
-let bio = document.getElementById("bio").value;
-let dob = document.getElementById("dob").value;
-
-let user = JSON.parse(localStorage.getItem("student"));
-
-if(!user){
-alert("User not found");
-return;
-}
-
-// Firestore update
-db.collection("students").doc(user.username).update({
-
-bio: bio,
-dob: dob
-
-});
-
-localStorage.setItem("bio", bio);
-localStorage.setItem("dob", dob);
-
-alert("Profile saved successfully ✅");
-
-});
-
-
-// LOGOUT
-function logout(){
-
-localStorage.removeItem("student");
-
-alert("Logged out successfully");
-
-window.location="login.html";
-
-}
 </script>
 
-</script>
-  
 </body>
-  
 </html>
