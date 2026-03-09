@@ -952,9 +952,7 @@ loadCourses();
 const notifList = document.getElementById("notifList");
 const notifCount = document.getElementById("notifCount");
 
-db.collection("notifications")
-.orderBy("timestamp","desc")
-.onSnapshot((snapshot)=>{
+db.collection("notifications").onSnapshot((snapshot)=>{
 
 notifList.innerHTML="";
 
@@ -1019,7 +1017,6 @@ notifCount.innerText="0";
 }
 
 }
-
 
 window.onload = function(){
 
