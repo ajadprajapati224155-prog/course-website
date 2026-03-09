@@ -414,8 +414,10 @@ window.location.href="login.html";
 function saveProfile(){
 
 let bio = document.querySelector("textarea").value;
+let dob = document.getElementById("dob").value;
 
 localStorage.setItem("bio", bio);
+localStorage.setItem("dob", dob);
 
 alert("Profile Saved ✅");
 
@@ -437,16 +439,22 @@ reader.readAsDataURL(file);
 
 window.onload = function(){
 
+// profile photo
 let savedPic = localStorage.getItem("profilePic");
-
 if(savedPic){
 document.getElementById("profilePic").src = savedPic;
 }
 
+// bio
 let bio = localStorage.getItem("bio");
-
 if(bio){
 document.querySelector("textarea").value = bio;
+}
+
+// DOB
+let dob = localStorage.getItem("dob");
+if(dob){
+document.getElementById("dob").value = dob;
 }
 
 }
