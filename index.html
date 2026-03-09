@@ -230,6 +230,41 @@ color:#6bb3ff;
 margin-top:20px;
 }
 
+.editPic{
+position:absolute;
+bottom:10px;
+right:38%;
+background:#4aa8ff;
+width:35px;
+height:35px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+font-size:18px;
+}
+
+.dob{
+width:90%;
+padding:14px;
+border-radius:12px;
+border:none;
+background:#0c234b;
+color:white;
+margin:12px auto;
+display:block;
+}
+
+.footer{
+position:absolute;
+bottom:20px;
+width:100%;
+text-align:center;
+color:#6bb3ff;
+font-size:14px;
+}
+  
 </style>
 
 </head>
@@ -256,25 +291,32 @@ margin-top:20px;
 
 <h2>👤 Student Profile</h2>
 
-<div class="profilePic"></div>
+<div style="position:relative;text-align:center;">
+
+<img id="profilePic" class="profilePic" src="https://cdn-icons-png.flaticon.com/512/847/847969.png">
+
+<label for="uploadPic" class="editPic">✏️</label>
+<input type="file" id="uploadPic" accept="image/*" style="display:none">
+
+</div>
 
 <h2 class="studentName">Your Name</h2>
 
 <textarea placeholder="Write your bio..."></textarea>
 
-<select>
-<option>Date of Birth</option>
-<option>01 Jan</option>
-<option>02 Jan</option>
-<option>03 Jan</option>
-</select>
-
+<input type="date" class="dob">
+  
 <button class="profileBtn">Save Profile</button>
 <button class="profileBtn">Logout</button>
 <button class="profileBtn" onclick="closeProfile()">Close</button>
 
-<p class="dev">©2026-27 SSC LIBRARY HUB</p>
-<p class="dev">Developer : Ajad Prajapati</p>
+<div class="footer">
+
+<p>©2026-27 SSC LIBRARY HUB</p>
+
+<p>Developer : Ajad Prajapati</p>
+
+</div>
 
 </div>
 </div>
@@ -339,6 +381,30 @@ function closeProfile(){
 document.getElementById("profilePanel").style.transform="translateX(-100%)";
 }
 
-</script>
+document.getElementById("uploadPic").onchange = function(e){
+
+let file = e.target.files[0];
+let reader = new FileReader();
+
+reader.onload = function(){
+document.getElementById("profilePic").src = reader.result;
+localStorage.setItem("profilePic",reader.result);
+}
+
+reader.readAsDataURL(file);
+
+}
+
+window.onload = function(){
+
+let savedPic = localStorage.getItem("profilePic");
+
+if(savedPic){
+document.getElementById("profilePic").src = savedPic;
+}
+
+}
+
+  </script>
 </body>
 </html>
