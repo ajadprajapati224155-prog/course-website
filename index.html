@@ -988,11 +988,17 @@ notifCount.innerText=unread;
 function toggleNotifications(){
 
 let panel = document.getElementById("notifPanel");
+let count = document.getElementById("notifCount");
 
 if(panel.style.display === "block"){
 panel.style.display = "none";
 }else{
 panel.style.display = "block";
+
+localStorage.setItem("notifRead","true");
+localStorage.setItem("notifReadTime", Date.now());
+
+count.innerText = "0";
 }
 
 }
