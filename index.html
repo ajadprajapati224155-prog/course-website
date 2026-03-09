@@ -941,10 +941,13 @@ notifList.innerHTML="";
 
 let unread = 0;
 
+let read = localStorage.getItem("notifRead");
+
 // First time visit check
 if(!localStorage.getItem("userJoinedTime")){
 localStorage.setItem("userJoinedTime", Date.now());
-}  
+}
+
 let joinTime = localStorage.getItem("userJoinedTime");
 
 snapshot.forEach((doc)=>{
@@ -969,15 +972,13 @@ li.innerHTML = `
 
 notifList.appendChild(li);
 
-let read = localStorage.getItem("notifRead");
-
 if(read !== "true"){
 unread++;
 }
 
 });
 
-notifCount.innerText=unread;
+notifCount.innerText = unread;
 
 });
 </script>
