@@ -378,8 +378,24 @@ window.location.href="login.html";
 <!-- COURSES -->
 
 <div id="courseList">
+  
+<a href="video.html" class="course-card">
 
+<div style="display:flex;align-items:center">
 
+<div class="course-icon">🎓</div>
+
+<div class="course-info">
+<h3>Hindi Eng</h3>
+<p>Teacher</p>
+</div>
+
+</div>
+
+<div class="course-arrow">➜</div>
+
+</a>
+  
 </div>
 
 <!-- SOCIAL -->
@@ -405,48 +421,6 @@ window.location.href="login.html";
 </div>
 <script>
   
-let student = JSON.parse(localStorage.getItem("student"));
-let user = student.username;
-
-function loadCourses(){
-
-let container = document.getElementById("courseList");
-
-container.innerHTML="";
-
-db.collection("courses").get().then((snapshot)=>{
-
-snapshot.forEach((doc)=>{
-
-let course = doc.data();
-
-container.innerHTML += `
-<a href="${course.link}" class="course-card">
-
-<div style="display:flex;align-items:center">
-
-<div class="course-icon">🎓</div>
-
-<div class="course-info">
-<h3>${course.name}</h3>
-<p>${course.teacher}</p>
-</div>
-
-</div>
-
-<div class="course-arrow">➜</div>
-
-</a>
-`;
-
-});
-
-});
-
-}
-
-loadCourses();
-
 function openProfile(){
 document.getElementById("profilePanel").style.transform="translateX(0)";
 }
