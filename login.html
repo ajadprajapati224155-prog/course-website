@@ -229,13 +229,7 @@ if(data.password == pass){
 
 localStorage.setItem("login","true");
 
-localStorage.setItem("student", JSON.stringify({
-name:data.name,
-phone:data.phone,
-username:data.username
-}));
-
-window.location.href="index.html";
+window.location.href = "index.html";
 
 }
 
