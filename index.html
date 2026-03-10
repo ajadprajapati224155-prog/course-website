@@ -679,7 +679,11 @@ loadNotifications();
 
 function closeNotice(){
 document.getElementById("noticePopup").style.display="none";
-localStorage.setItem("noticeSeen","yes");
+localStorage.setItem("noticeSeen", "yes");
+}
+
+if(localStorage.getItem("noticeSeen")=="yes"){
+document.getElementById("noticePopup").style.display="none";
 }
 
 function joinChannel(){
@@ -709,8 +713,8 @@ document.getElementById("notificationPanel").style.display="none";
 }
 
 
-let student = JSON.parse(localStorage.getItem("student"));
-let user = student.username;
+let student = JSON.parse(localStorage.getItem("student")) || {};
+let user = student.username || "guest";
   
 function openProfile(){
 
@@ -794,8 +798,8 @@ reader.readAsDataURL(file);
 
 window.onload = function(){
 
-let student = JSON.parse(localStorage.getItem("student"));
-let user = student.username;
+let student = JSON.parse(localStorage.getItem("student")) || {};
+let user = student.username || "guest";
 
 // profile photo
 let savedPic = localStorage.getItem(user+"_profilePic");
@@ -818,7 +822,7 @@ document.getElementById("dob").value = dob;
 // student name
 let student = JSON.parse(localStorage.getItem("student"));
 
-if(student){
+if(student && student.name){
 document.getElementById("studentName").innerText = student.name;
 }
 
