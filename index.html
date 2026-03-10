@@ -596,6 +596,7 @@ let list = document.getElementById("notificationList");
 let count = document.getElementById("notifCount");
 
 let joinTime = Number(localStorage.getItem("userJoinTime") || Date.now());
+let lastRead = Number(localStorage.getItem("lastRead") || 0);
 
 list.innerHTML="";
 count.innerText = 0;
