@@ -595,7 +595,7 @@ function loadNotifications(){
 let list = document.getElementById("notificationList");
 let count = document.getElementById("notifCount");
 
-let loginTime = localStorage.getItem("loginTime");
+let loginTime = Number(localStorage.getItem("loginTime"));
 
 list.innerHTML="";
 count.innerText = 0;
