@@ -619,7 +619,10 @@ db.collection("notifications").doc(doc.id).delete();
 return;
 }
 
+// unread count logic
+if(n.time > lastRead){
 unread++;
+}
 
 list.innerHTML += `
 <div class="notificationCard">
