@@ -611,6 +611,14 @@ snapshot.forEach((doc)=>{
 
 let n = doc.data();
 
+let oneDay = 24 * 60 * 60 * 1000;
+
+// ⏳ 24 घंटे बाद delete
+if(Date.now() - n.time > oneDay){
+db.collection("notifications").doc(doc.id).delete();
+return;
+}
+
 unread++;
 
 list.innerHTML += `
@@ -649,16 +657,13 @@ window.open("https://whatsapp.com/channel/YOURCHANNEL","_blank");
 // 🔔 NOTIFICATION FUNCTIONS
 function openNotifications(){
 
+function openNotifications(){
+
 document.getElementById("notificationPanel").style.display="block";
 
 document.getElementById("notifCount").innerText = 0;
 
-// 🔥 delete all notifications (temporary test)
-db.collection("notifications").get().then((snapshot)=>{
-snapshot.forEach((doc)=>{
-db.collection("notifications").doc(doc.id).delete();
-});
-});
+localStorage.setItem("lastRead", Date.now());
 
 }
 
