@@ -619,9 +619,11 @@ db.collection("notifications").doc(doc.id).delete();
 return;
 }
 
-if(n.time > joinTime && n.time > lastRead){
+if(n.time > joinTime){
 
+if(n.time > lastRead){
 unread++;
+}
 
 list.innerHTML += `
 <div class="notificationCard">
