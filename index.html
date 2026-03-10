@@ -672,6 +672,9 @@ window.open("https://whatsapp.com/channel/YOURCHANNEL","_blank");
 // 🔔 NOTIFICATION FUNCTIONS
 function openNotifications(){
 
+// profile panel close
+document.getElementById("profilePanel").style.transform="translateX(-100%)";
+
 document.getElementById("notificationPanel").style.display="block";
 
 document.getElementById("notifCount").innerText = 0;
