@@ -408,7 +408,9 @@ color:#aaa;
 </style>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
 
 </head>
 
@@ -443,16 +445,16 @@ window.location.href="login.html";
 
 <div style="position:relative;text-align:center;">
 
-<img id="profilePic" class="profilePic" src="https://cdn-icons-png.flaticon.com/512/847/847969.png">
+<img id="profileImg" class="profilePic" src="default.png" width="120">
 
 <label for="uploadPic" class="editPic">✏️</label>
-<input type="file" id="uploadPic" accept="image/*" style="display:none">
+<input type="file" id="photo" accept="image/*" style="display:none">
 
 </div>
 
 <h2 id="studentName">Your Name</h2>
 
-<textarea placeholder="Write your bio..."></textarea>
+<textarea id="bio" placeholder="Write your bio..."></textarea>
 
 <input type="date" id="dob" class="profileInput">
   
@@ -731,28 +733,48 @@ window.location.href="login.html";
 
 function saveProfile(){
 
-let bio = document.querySelector("textarea").value;
+let user = firebase.auth().currentUser;
+
+let bio = document.getElementById("bio").value;
 let dob = document.getElementById("dob").value;
+let file = document.getElementById("photo").files[0];
 
-localStorage.setItem(user+"_bio", bio);
-localStorage.setItem(user+"_dob", dob);
+if(!file){
+alert("Please select photo");
+return;
+}
 
-// 🔥 Firebase update
-db.collection("students").doc(user).update({
-dob: dob
+let storageRef = firebase.storage().ref("profiles/"+user.uid);
+
+storageRef.put(file).then(()=>{
+
+storageRef.getDownloadURL().then((url)=>{
+
+db.collection("students").doc(user.uid).set({
+
+bio: bio,
+dob: dob,
+photo: url
+
 });
+
+document.getElementById("profileImg").src=url;
 
 alert("Profile Saved ✅");
 
+});
+
+});
+
 }
 
-document.getElementById("uploadPic").onchange = function(e){
+document.getElementById("photo").onchange = function(e){
 
 let file = e.target.files[0];
 let reader = new FileReader();
 
 reader.onload = function(){
-document.getElementById("profilePic").src = reader.result;
+document.getElementById("profileImg").src = reader.result;
 localStorage.setItem(user+"_profilePic", reader.result);
 }
 
@@ -765,7 +787,7 @@ window.onload = function(){
 // profile photo
 let savedPic = localStorage.getItem(user+"_profilePic");
 if(savedPic){
-document.getElementById("profilePic").src = savedPic;
+document.getElementById("profileImg").src = savedPic;
 }
 
 // bio
@@ -785,8 +807,32 @@ let student = JSON.parse(localStorage.getItem("student"));
 
 if(student){
 document.getElementById("studentName").innerText = student.name;
-  }
+}
 
+firebase.auth().onAuthStateChanged((user)=>{
+
+if(user){
+
+db.collection("students").doc(user.uid).get()
+.then((doc)=>{
+
+if(doc.exists){
+
+let data = doc.data();
+
+document.getElementById("bio").value = data.bio || "";
+document.getElementById("dob").value = data.dob || "";
+
+document.getElementById("profileImg").src = data.photo;
+
+}
+
+});
+
+}
+
+});
+  
 }
   </script>
 </body>
