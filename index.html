@@ -621,9 +621,6 @@ list.innerHTML += `
 </div>
 `;
 
-// 🔥 delete notification after read (test)
-db.collection("notifications").doc(doc.id).delete();
-
 });
 
 count.innerText = unread;
