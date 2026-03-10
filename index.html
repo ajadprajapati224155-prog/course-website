@@ -611,9 +611,7 @@ snapshot.forEach((doc)=>{
 
 let n = doc.data();
 
-if(n.time > lastRead){
 unread++;
-}
 
 list.innerHTML += `
 <div class="notificationCard">
@@ -622,6 +620,9 @@ list.innerHTML += `
 <p>${n.message}</p>
 </div>
 `;
+
+// 🔥 delete notification after read (test)
+db.collection("notifications").doc(doc.id).delete();
 
 });
 
@@ -655,7 +656,12 @@ document.getElementById("notificationPanel").style.display="block";
 
 document.getElementById("notifCount").innerText = 0;
 
-localStorage.setItem("lastRead", Date.now());
+// 🔥 delete all notifications (temporary test)
+db.collection("notifications").get().then((snapshot)=>{
+snapshot.forEach((doc)=>{
+db.collection("notifications").doc(doc.id).delete();
+});
+});
 
 }
 
