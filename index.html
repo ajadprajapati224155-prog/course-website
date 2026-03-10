@@ -672,7 +672,7 @@ window.open("https://whatsapp.com/channel/YOURCHANNEL","_blank");
 // 🔔 NOTIFICATION FUNCTIONS
 function openNotifications(){
 
-// profile panel close
+// profile close
 document.getElementById("profilePanel").style.transform="translateX(-100%)";
 
 document.getElementById("notificationPanel").style.display="block";
@@ -692,7 +692,13 @@ let student = JSON.parse(localStorage.getItem("student"));
 let user = student.username;
   
 function openProfile(){
+
+// notification panel close
+document.getElementById("notificationPanel").style.display="none";
+
+// profile panel open
 document.getElementById("profilePanel").style.transform="translateX(0)";
+
 }
 
 function closeProfile(){
