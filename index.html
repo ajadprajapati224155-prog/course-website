@@ -306,6 +306,41 @@ color:#3fa7ff;
 font-size:14px;
 font-weight:500;
 }
+
+.noticePopup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.noticeBox{
+background:#0b1b35;
+padding:25px;
+border-radius:15px;
+width:85%;
+max-width:400px;
+text-align:center;
+color:white;
+border:2px solid #3a7bff;
+}
+
+.noticeBox button{
+margin-top:15px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+background:#3a7bff;
+color:white;
+font-size:15px;
+}
   
 </style>
 
@@ -370,6 +405,27 @@ window.location.href="login.html";
 </div>
 
 </div>
+</div>
+
+<!-- 🔔 NOTICE POPUP -->
+
+<div id="noticePopup" class="noticePopup">
+
+<div class="noticeBox">
+
+<h2>📢 IMPORTANT NOTICE</h2>
+
+<p>
+All courses and materials on this website are provided completely free.
+If anyone asks for money claiming to represent us, <b style="color:red;">PLEASE DO NOT PAY</b>.
+</p>
+
+<button onclick="joinChannel()">🔔 JOIN OFFICIAL CHANNEL</button>
+
+<button onclick="closeNotice()">I HAVE ALREADY JOINED</button>
+
+</div>
+
 </div>
   
 <!-- SEARCH -->
@@ -458,6 +514,25 @@ container.innerHTML += `
 }
 
 loadCourses();
+
+// 🔔 NOTICE POPUP SCRIPT
+
+function closeNotice(){
+document.getElementById("noticePopup").style.display="none";
+localStorage.setItem("noticeSeen","yes");
+}
+
+function joinChannel(){
+window.open("https://t.me/YOURCHANNEL","_blank");
+}
+
+window.onload=function(){
+
+if(localStorage.getItem("noticeSeen")=="yes"){
+document.getElementById("noticePopup").style.display="none";
+}
+
+}
 
 let student = JSON.parse(localStorage.getItem("student"));
 let user = student.username;
