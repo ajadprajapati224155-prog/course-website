@@ -351,6 +351,33 @@ color:#9aa4b2 !important;
 border:1px solid #2c3b55;
 box-shadow:none !important;
 }
+
+.notificationPanel{
+position:fixed;
+top:0;
+right:-100%;
+width:85%;
+height:100%;
+background:#0b1b35;
+z-index:9999;
+transition:0.3s;
+padding:20px;
+color:white;
+}
+
+.notificationPanel h3{
+margin-top:40px;
+}
+
+.notificationPanel button{
+margin-top:20px;
+padding:10px;
+width:100%;
+background:#3a7bff;
+border:none;
+border-radius:8px;
+color:white;
+}
   
 </style>
 
@@ -378,7 +405,7 @@ window.location.href="login.html";
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<div class="bellIcon">
+<div class="bellIcon" onclick="openNotifications()">
 🔔
 <span id="notifCount">0</span>
 </div>
@@ -439,7 +466,21 @@ If anyone asks for money claiming to represent us, <b style="color:red;">PLEASE 
 </div>
 
 </div>
-  
+
+<!-- 🔔 NOTIFICATION PANEL -->
+
+<div id="notificationPanel" class="notificationPanel">
+
+<h3>🔔 Notifications</h3>
+
+<div id="notificationList">
+No new notifications
+</div>
+
+<button onclick="closeNotifications()">Close</button>
+
+</div>
+
 <!-- SEARCH -->
 
 <div class="searchBox">
@@ -540,6 +581,15 @@ window.open("https://t.me/YOURCHANNEL","_blank");
 
 function joinWhatsApp(){
 window.open("https://whatsapp.com/channel/YOURCHANNEL","_blank");
+}
+
+// 🔔 NOTIFICATION FUNCTIONS
+function openNotifications(){
+document.getElementById("notificationPanel").style.right="0";
+}
+
+function closeNotifications(){
+document.getElementById("notificationPanel").style.right="-100%";
 }
 
 window.onload=function(){
