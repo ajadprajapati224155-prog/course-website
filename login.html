@@ -237,8 +237,10 @@ phone:data.phone,
 username:data.username
 }));
 
-// user join time
+// join time sirf first signup/login par set hoga
+if(!localStorage.getItem("userJoinTime")){
 localStorage.setItem("userJoinTime", Date.now());
+}
 
 window.location.href="index.html";
 
