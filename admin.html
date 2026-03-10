@@ -155,7 +155,7 @@ const firebaseConfig = {
 apiKey: "AIzaSyC-WBjodD1mPq5RRTknOICq4b0pCBRx-FGc",
 authDomain: "ssc-library.firebaseapp.com",
 projectId: "ssc-library",
-storageBucket: "ssc-library.firebasestorage.app",
+storageBucket: "ssc-library.appspot.com",
 messagingSenderId: "1062574277938",
 appId: "1:1062574277938:web:0e9427e75888816c07c32b"
 
@@ -181,9 +181,9 @@ document.getElementById("adminPanel").style.display="block";
 
 })
 
-.catch(()=>{
+.catch((error)=>{
 
-alert("Login Failed ❌");
+alert(error.message);
 
 });
 
