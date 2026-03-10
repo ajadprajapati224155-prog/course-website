@@ -191,20 +191,18 @@ alert("Wrong Password ❌");
 
 function sendNotification(){
 
-  let title = document.getElementById("title").value;
-  let message = document.getElementById("message").value;
+let title = document.getElementById("title").value;
+let message = document.getElementById("message").value;
 
 db.collection("notifications").add({
-title:title,
-message:message,
-time:new Date().toLocaleString(),
-timestamp: Date.now()
+title: title,
+message: message,
+time: Date.now()   // ✅ only this
 });
 
-  alert("Notification Sent ✅");
+alert("Notification Sent ✅");
 
 }
-
 
 
 function addCourse(){
