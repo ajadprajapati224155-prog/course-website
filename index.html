@@ -354,29 +354,47 @@ box-shadow:none !important;
 
 .notificationPanel{
 position:fixed;
-top:0;
-right:-100%;
-width:85%;
-height:100%;
-background:#0b1b35;
-z-index:9999;
-transition:0.3s;
-padding:20px;
-color:white;
-}
-
-.notificationPanel h3{
-margin-top:40px;
-}
-
-.notificationPanel button{
-margin-top:20px;
-padding:10px;
+top:70px;
+left:0;
 width:100%;
-background:#3a7bff;
-border:none;
-border-radius:8px;
+background:#111;
+padding:15px;
+z-index:9999;
+display:none;
+}
+
+.notificationHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
 color:white;
+font-size:18px;
+margin-bottom:10px;
+}
+
+.notificationCard{
+background:#0b1b35;
+border:1px solid #3a7bff;
+border-radius:12px;
+padding:15px;
+margin-bottom:12px;
+color:white;
+box-shadow:0 0 10px #1e3cff40;
+}
+
+.notificationTag{
+background:#294bff;
+padding:3px 10px;
+border-radius:8px;
+font-size:12px;
+margin-bottom:6px;
+display:inline-block;
+}
+
+.notificationTime{
+float:right;
+font-size:12px;
+color:#aaa;
 }
   
 </style>
@@ -471,16 +489,23 @@ If anyone asks for money claiming to represent us, <b style="color:red;">PLEASE 
 
 <div id="notificationPanel" class="notificationPanel">
 
-<h3>🔔 Notifications</h3>
+<div class="notificationHeader">
+<span>🔔 Notifications</span>
+<span onclick="closeNotifications()" style="cursor:pointer">✖</span>
+</div>
 
 <div id="notificationList">
-No new notifications
+
+<div class="notificationCard">
+<div class="notificationTag">UPDATE</div>
+<span class="notificationTime">09/03/2026</span>
+<p>New Maths class uploaded</p>
+  
 </div>
 
-<button onclick="closeNotifications()">Close</button>
-
 </div>
 
+</div>
 <!-- SEARCH -->
 
 <div class="searchBox">
@@ -585,11 +610,11 @@ window.open("https://whatsapp.com/channel/YOURCHANNEL","_blank");
 
 // 🔔 NOTIFICATION FUNCTIONS
 function openNotifications(){
-document.getElementById("notificationPanel").style.right="0";
+document.getElementById("notificationPanel").style.display="block";
 }
 
 function closeNotifications(){
-document.getElementById("notificationPanel").style.right="-100%";
+document.getElementById("notificationPanel").style.display="none";
 }
 
 window.onload=function(){
