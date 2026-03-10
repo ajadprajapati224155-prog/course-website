@@ -733,7 +733,8 @@ window.location.href="login.html";
 
 function saveProfile(){
 
-let user = firebase.auth().currentUser;
+let student = JSON.parse(localStorage.getItem("student"));
+let user = student.username;
 
 let bio = document.getElementById("bio").value;
 let dob = document.getElementById("dob").value;
@@ -741,13 +742,13 @@ let file = document.getElementById("photo").files[0];
 
 if(file){
 
-let storageRef = firebase.storage().ref("profiles/"+user.uid);
+let storageRef = firebase.storage().ref("profiles/"+user);
 
 storageRef.put(file).then(()=>{
 
 storageRef.getDownloadURL().then((url)=>{
 
-db.collection("students").doc(user.uid).set({
+db.collection("students").doc(user).set({
 bio: bio,
 dob: dob,
 photo: url
@@ -763,10 +764,10 @@ alert("Profile Saved ✅");
 
 }else{
 
-db.collection("students").doc(user.uid).set({
+db.collection("students").doc(user).set({
 bio: bio,
-dob: dob,
-}, { merge: true });
+dob: dob
+},{merge:true});
 
 alert("Profile Saved ✅");
 
