@@ -512,7 +512,7 @@ If anyone asks for money claiming to represent us, <b style="color:red;">PLEASE 
 <!-- SEARCH -->
 
 <div class="searchBox">
-<input placeholder="🔎 Search your course...">
+<input id="searchInput" placeholder="🔎 Search your course..." onkeyup="searchCourse()">
 </div>
 
 <!-- COURSES -->
@@ -595,6 +595,26 @@ container.innerHTML += `
 }
 
 loadCourses();
+
+function searchCourse(){
+
+let input = document.getElementById("searchInput").value.toLowerCase();
+
+let courses = document.querySelectorAll(".course-card");
+
+courses.forEach((course)=>{
+
+let text = course.innerText.toLowerCase();
+
+if(text.includes(input)){
+course.style.display="flex";
+}else{
+course.style.display="none";
+}
+
+});
+
+}
 
 function loadNotifications(){
 
