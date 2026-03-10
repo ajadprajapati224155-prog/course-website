@@ -237,6 +237,11 @@ phone:data.phone,
 username:data.username
 }));
 
+// 🔔 new user ko old notification na dikhe
+if(!localStorage.getItem("lastRead")){
+localStorage.setItem("lastRead", Date.now());
+}
+
 window.location.href="index.html";
 
 }else{
