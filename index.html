@@ -341,6 +341,9 @@ background:#3a7bff;
 color:white;
 font-size:15px;
 }
+.waBtn{
+background:#25D366 !important;
+}
   
 </style>
 
@@ -421,6 +424,8 @@ If anyone asks for money claiming to represent us, <b style="color:red;">PLEASE 
 </p>
 
 <button onclick="joinChannel()">🔔 JOIN OFFICIAL CHANNEL</button>
+
+<button class="waBtn" onclick="joinWhatsApp()">✨ JOIN WHATSAPP CHANNEL</button>
 
 <button onclick="closeNotice()">I HAVE ALREADY JOINED</button>
 
@@ -524,6 +529,10 @@ localStorage.setItem("noticeSeen","yes");
 
 function joinChannel(){
 window.open("https://t.me/YOURCHANNEL","_blank");
+}
+
+function joinWhatsApp(){
+window.open("https://whatsapp.com/channel/YOURCHANNEL","_blank");
 }
 
 window.onload=function(){
