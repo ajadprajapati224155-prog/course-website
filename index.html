@@ -739,10 +739,7 @@ let bio = document.getElementById("bio").value;
 let dob = document.getElementById("dob").value;
 let file = document.getElementById("photo").files[0];
 
-if(!file){
-alert("Please select photo");
-return;
-}
+if(file){
 
 let storageRef = firebase.storage().ref("profiles/"+user.uid);
 
@@ -751,20 +748,29 @@ storageRef.put(file).then(()=>{
 storageRef.getDownloadURL().then((url)=>{
 
 db.collection("students").doc(user.uid).set({
-
 bio: bio,
 dob: dob,
 photo: url
-
 });
 
-document.getElementById("profileImg").src=url;
+document.getElementById("profileImg").src = url;
 
 alert("Profile Saved ✅");
 
 });
 
 });
+
+}else{
+
+db.collection("students").doc(user.uid).set({
+bio: bio,
+dob: dob
+},{merge:true});
+
+alert("Profile Saved ✅");
+
+}
 
 }
 
