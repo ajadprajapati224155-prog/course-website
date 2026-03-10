@@ -609,10 +609,9 @@ let unread = 0;
 snapshot.forEach((doc)=>{
 
 let n = doc.data();
-
 let oneDay = 86400000;
 
-if(Date.now() - Number(n.time) < oneDay)
+if(Date.now() - Number(n.time) < oneDay){
 
 unread++;
 
