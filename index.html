@@ -595,12 +595,11 @@ function loadNotifications(){
 let list = document.getElementById("notificationList");
 let count = document.getElementById("notifCount");
 
-let loginTime = Number(localStorage.getItem("loginTime"));
-
 list.innerHTML="";
 count.innerText = 0;
 
 db.collection("notifications")
+.orderBy("time","desc")
 .get()
 .then((snapshot)=>{
 
@@ -609,21 +608,16 @@ let unread = 0;
 snapshot.forEach((doc)=>{
 
 let n = doc.data();
-let oneDay = 86400000;
-
-if(Date.now() - Number(n.time) < oneDay){
 
 unread++;
 
 list.innerHTML += `
 <div class="notificationCard">
 <div class="notificationTag">${n.title}</div>
-<span class="notificationTime">${new Date(Number(n.time)).toLocaleDateString()}</span>
+<span class="notificationTime">${new Date(n.time).toLocaleDateString()}</span>
 <p>${n.message}</p>
 </div>
 `;
-
-}
 
 });
 
