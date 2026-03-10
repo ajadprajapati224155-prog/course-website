@@ -229,6 +229,8 @@ if(data.password == pass){
 
 localStorage.setItem("login","true");
 
+localStorage.setItem("loginTime", Date.now());
+
 localStorage.setItem("student", JSON.stringify({
 name:data.name,
 phone:data.phone,
