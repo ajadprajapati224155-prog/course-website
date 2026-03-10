@@ -405,12 +405,17 @@ font-size:12px;
 color:#aaa;
 }
 
+.logoBox{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+text-align:center;
+}
+
 .logoTitle{
-font-size:32px;
+font-size:28px;
 font-weight:900;
 letter-spacing:2px;
-text-align:center;
-font-family:Segoe UI, Arial, sans-serif;
 }
 
 .logoWhite{
@@ -422,11 +427,31 @@ color:#4aa8ff;
 }
 
 .tagline{
-text-align:center;
-font-size:12px;
-letter-spacing:5px;
+font-size:11px;
+letter-spacing:4px;
 color:#9db4ff;
-margin-top:3px;
+margin-top:2px;
+}
+  
+.logoTitle{
+font-size:28px;
+font-weight:900;
+letter-spacing:2px;
+}
+
+.logoWhite{
+color:white;
+}
+
+.logoBlue{
+color:#4aa8ff;
+}
+
+.tagline{
+font-size:11px;
+letter-spacing:4px;
+color:#9db4ff;
+margin-top:2px;
 }
   
 </style>
@@ -453,6 +478,8 @@ window.location.href="login.html";
 <div class="menuIcon" onclick="openProfile()">☰</div>
 
 
+<div class="logoBox">
+
 <div class="logoTitle">
 <span class="logoWhite">SSC</span>
 <span class="logoBlue">LIBRARY</span>
@@ -460,6 +487,8 @@ window.location.href="login.html";
 
 <div class="tagline">
 EXCELLENCE IN LEARNING
+</div>
+
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
