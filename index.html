@@ -483,6 +483,11 @@ let dob = document.getElementById("dob").value;
 localStorage.setItem(user+"_bio", bio);
 localStorage.setItem(user+"_dob", dob);
 
+// 🔥 Firebase update
+db.collection("students").doc(user).update({
+dob: dob
+});
+
 alert("Profile Saved ✅");
 
 }
