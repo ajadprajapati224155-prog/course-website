@@ -337,14 +337,6 @@ color:white;
 border:2px solid #3a7bff;
 }
 
-.noticeBox{
-pointer-events:auto;
-}
-
-.noticePopup{
-pointer-events:auto;
-}
-  
 .noticeBox button{
 margin-top:15px;
 width:100%;
@@ -478,6 +470,7 @@ window.location.href="login.html";
 </div>
 
 </div>
+</div>
 
 <!-- 🔔 NOTICE POPUP -->
 
@@ -517,6 +510,7 @@ If anyone asks for money claiming to represent us, <b style="color:red;">PLEASE 
 
 </div>
 
+</div>
 <!-- SEARCH -->
 
 <div class="searchBox">
@@ -685,11 +679,7 @@ loadNotifications();
 
 function closeNotice(){
 document.getElementById("noticePopup").style.display="none";
-localStorage.setItem("noticeSeen", "yes");
-}
-
-if(localStorage.getItem("noticeSeen")=="yes"){
-document.getElementById("noticePopup").style.display="none";
+localStorage.setItem("noticeSeen","yes");
 }
 
 function joinChannel(){
@@ -719,8 +709,8 @@ document.getElementById("notificationPanel").style.display="none";
 }
 
 
-let student = JSON.parse(localStorage.getItem("student")) || {};
-let user = student.username || "guest";
+let student = JSON.parse(localStorage.getItem("student"));
+let user = student.username;
   
 function openProfile(){
 
@@ -787,9 +777,6 @@ alert("Profile Saved ✅");
 
 document.getElementById("photo").onchange = function(e){
 
-let student = JSON.parse(localStorage.getItem("student"));
-let user = student.username;
-
 let file = e.target.files[0];
 let reader = new FileReader();
 
@@ -803,9 +790,6 @@ reader.readAsDataURL(file);
 }
 
 window.onload = function(){
-
-let student = JSON.parse(localStorage.getItem("student")) || {};
-let user = student.username || "guest";
 
 // profile photo
 let savedPic = localStorage.getItem(user+"_profilePic");
@@ -828,7 +812,7 @@ document.getElementById("dob").value = dob;
 // student name
 let student = JSON.parse(localStorage.getItem("student"));
 
-if(student && student.name){
+if(student){
 document.getElementById("studentName").innerText = student.name;
 }
 
