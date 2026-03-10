@@ -614,14 +614,14 @@ let n = doc.data();
 
 let oneDay = 86400000;
 
-if(Date.now() - n.time < oneDay){
+if(Date.now() - Number(n.time) < oneDay && n.time > loginTime){
 
 unread++;
 
 list.innerHTML += `
 <div class="notificationCard">
 <div class="notificationTag">${n.title}</div>
-<span class="notificationTime">${new Date(n.time).toLocaleDateString()}</span>
+<span class="notificationTime">${new Date(Number(n.time)).toLocaleDateString()}</span>
 <p>${n.message}</p>
 </div>
 `;
@@ -668,13 +668,6 @@ function closeNotifications(){
 document.getElementById("notificationPanel").style.display="none";
 }
 
-window.onload=function(){
-
-if(localStorage.getItem("noticeSeen")=="yes"){
-document.getElementById("noticePopup").style.display="none";
-}
-
-}
 
 let student = JSON.parse(localStorage.getItem("student"));
 let user = student.username;
