@@ -595,6 +595,8 @@ function loadNotifications(){
 let list = document.getElementById("notificationList");
 let count = document.getElementById("notifCount");
 
+let lastRead = Number(localStorage.getItem("lastRead")) || 0;
+
 list.innerHTML="";
 count.innerText = 0;
 
@@ -609,7 +611,9 @@ snapshot.forEach((doc)=>{
 
 let n = doc.data();
 
+if(n.time > lastRead){
 unread++;
+}
 
 list.innerHTML += `
 <div class="notificationCard">
