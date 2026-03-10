@@ -765,8 +765,8 @@ alert("Profile Saved ✅");
 
 db.collection("students").doc(user.uid).set({
 bio: bio,
-dob: dob
-},{merge:true});
+dob: dob,
+}, { merge: true });
 
 alert("Profile Saved ✅");
 
