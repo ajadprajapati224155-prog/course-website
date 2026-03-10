@@ -629,8 +629,7 @@ count.innerText = 0;
 
 db.collection("notifications")
 .orderBy("time","desc")
-.get()
-.then((snapshot)=>{
+.onSnapshot((snapshot)=>{
 
 let unread = 0;
 
