@@ -599,6 +599,8 @@ list.innerHTML="";
 count.innerText = 0;
 
 db.collection("notifications").get().then((snapshot)=>{
+console.log(snapshot.docs.length);
+});
 
 let unread = 0;
 
