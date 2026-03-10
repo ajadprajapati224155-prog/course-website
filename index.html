@@ -613,14 +613,18 @@ let n = doc.data();
 
 let oneDay = 24 * 60 * 60 * 1000;
 
-// ⏳ 24 घंटे बाद delete
+// 24 घंटे बाद delete
 if(Date.now() - n.time > oneDay){
 db.collection("notifications").doc(doc.id).delete();
 return;
 }
 
-if(n.time > joinTime){
+// new user ko old notification na dikhe
+if(n.time < joinTime){
+return;
+}
 
+// unread count logic
 if(n.time > lastRead){
 unread++;
 }
@@ -632,8 +636,6 @@ list.innerHTML += `
 <p>${n.message}</p>
 </div>
 `;
-
-}
 
 });
 
