@@ -197,7 +197,7 @@ let message = document.getElementById("message").value;
 db.collection("notifications").add({
 title: title,
 message: message,
-time: Date.now()   // ✅ only this
+time: Date.now(),   // ✅ only this
 expireAt: Date.now() + (24*60*60*1000)
 });
 
