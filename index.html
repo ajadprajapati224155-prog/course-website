@@ -833,7 +833,7 @@ let data = doc.data();
 document.getElementById("bio").value = data.bio || "";
 document.getElementById("dob").value = data.dob || "";
 
-document.getElementById("profileImg").src = data.photo;
+document.getElementById("profileImg").src = data.photo || "https://cdn-icons-png.flaticon.com/512/847/847969.png";
 
 }
 
