@@ -769,6 +769,9 @@ bio: bio,
 dob: dob
 },{merge:true});
 
+localStorage.setItem(user+"_bio", bio);
+localStorage.setItem(user+"_dob", dob);
+
 alert("Profile Saved ✅");
 
 }
