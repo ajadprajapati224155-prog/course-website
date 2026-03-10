@@ -595,7 +595,7 @@ function loadNotifications(){
 let list = document.getElementById("notificationList");
 let count = document.getElementById("notifCount");
 
-let lastRead = Number(localStorage.getItem("lastRead")) || 0;
+let joinTime = Number(localStorage.getItem("userJoinTime") || Date.now());
 
 list.innerHTML="";
 count.innerText = 0;
@@ -619,10 +619,9 @@ db.collection("notifications").doc(doc.id).delete();
 return;
 }
 
-// unread count logic
-if(n.time > lastRead){
+if(n.time > joinTime){
+
 unread++;
-}
 
 list.innerHTML += `
 <div class="notificationCard">
@@ -631,6 +630,8 @@ list.innerHTML += `
 <p>${n.message}</p>
 </div>
 `;
+
+}
 
 });
 
