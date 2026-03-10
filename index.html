@@ -551,44 +551,41 @@ appId: "1:1062574277938:web:0e9427e75888816c07c32b"
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-function loadCourses(){
+function loadNotifications(){
 
-let container = document.getElementById("courseList");
+let list = document.getElementById("notificationList");
+let count = document.getElementById("notifCount");
 
-container.innerHTML="";
+list.innerHTML="";
+count.innerText = 0;
 
-db.collection("courses").get().then((snapshot)=>{
+db.collection("notifications").get().then((snapshot)=>{
+
+let unread = 0;
 
 snapshot.forEach((doc)=>{
 
-let course = doc.data();
+let n = doc.data();
 
-container.innerHTML += `
-<a href="${course.link}" class="course-card">
+unread++;
 
-<div style="display:flex;align-items:center">
-
-<div class="course-icon">🎓</div>
-
-<div class="course-info">
-<h3>${course.name}</h3>
-<p>${course.teacher}</p>
+list.innerHTML += `
+<div class="notificationCard">
+<div class="notificationTag">${n.title}</div>
+<span class="notificationTime">${new Date(n.time).toLocaleDateString()}</span>
+<p>${n.message}</p>
 </div>
-
-</div>
-
-<div class="course-arrow">➜</div>
-
-</a>
 `;
 
 });
+
+count.innerText = unread;
 
 });
 
 }
 
-loadCourses();
+loadNotifications();
 
 function loadNotifications(){
 
@@ -601,7 +598,6 @@ list.innerHTML="";
 count.innerText = 0;
 
 db.collection("notifications")
-.orderBy("time","desc")
 .get()
 .then((snapshot)=>{
 
