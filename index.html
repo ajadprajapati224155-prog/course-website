@@ -117,10 +117,13 @@ font-size:24px;
 }
 
 .courseTab{
-margin-top:160px;
-margin-left:15px;
-margin-right:15px;
-margin-bottom:120px;
+position:fixed;
+top:140px;        /* search bar के नीचे start होगा */
+left:15px;
+right:15px;
+bottom:110px;     /* social icons के ऊपर रुकेगा */
+overflow-y:auto;
+
 padding:10px;
 border-radius:25px;
 background:rgba(0,0,0,0.35);
@@ -470,12 +473,11 @@ margin-top:2px;
 
 .mainContent{
 position:fixed;
-top:110px;
-bottom:120px;
+top:140px;   /* header + search bar height */
 left:0;
 right:0;
-overflow-y:auto;
-padding-bottom:10px;
+bottom:120px;  /* social icons space */
+overflow:hidden;
 }
 
 /* SEARCH BAR FIX */
