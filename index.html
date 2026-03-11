@@ -76,13 +76,11 @@ box-shadow:0 0 10px #0b7dd3;
 /* COURSE */
 
 #courseList{
-margin-top:150px;
 display:flex;
 flex-direction:column;
+gap:18px;
 align-items:center;
-gap:20px;
 }
-.course-card{
 width:85%;
 background:#081a3a;
 padding:20px;
@@ -614,10 +612,13 @@ If anyone asks for money claiming to represent us, <b style="color:red;">PLEASE 
 <input id="searchInput" placeholder="🔎 Search your course..." onkeyup="searchCourse()">
 </div>
 
+<div class="courseTab">
+
 <div id="courseList"></div>
 
 </div>
 
+</div>
 <!-- SOCIAL -->
 
 <div class="social">
