@@ -456,6 +456,25 @@ letter-spacing:4px;
 color:#9db4ff;
 margin-top:2px;
 }
+
+.contentArea{
+position:fixed;
+top:120px;
+bottom:110px;
+left:0;
+right:0;
+overflow-y:auto;
+padding-bottom:10px;
+}
+
+.social{
+position:fixed;
+bottom:25px;
+width:100%;
+display:flex;
+justify-content:center;
+gap:25px;
+}
   
 </style>
 
@@ -572,17 +591,15 @@ If anyone asks for money claiming to represent us, <b style="color:red;">PLEASE 
 </div>
 <!-- SEARCH -->
 
+<div class="contentArea">
+
 <div class="searchBox">
 <input id="searchInput" placeholder="🔎 Search your course..." onkeyup="searchCourse()">
 </div>
 
-<!-- COURSES -->
-
-<div id="courseList">
-
+<div id="courseList"></div>
 
 </div>
-
 <!-- SOCIAL -->
 
 <div class="social">
