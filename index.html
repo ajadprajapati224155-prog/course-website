@@ -457,15 +457,29 @@ color:#9db4ff;
 margin-top:2px;
 }
 
-.contentArea{
+/* MAIN CONTENT AREA */
+
+.mainContent{
 position:fixed;
-top:120px;
-bottom:110px;
+top:110px;
+bottom:120px;
 left:0;
 right:0;
 overflow-y:auto;
 padding-bottom:10px;
 }
+
+/* SEARCH BAR FIX */
+
+.searchBox{
+position:sticky;
+top:0;
+background:#020d22;
+padding:10px 0;
+z-index:10;
+}
+
+/* SOCIAL BUTTON FIX */
 
 .social{
 position:fixed;
@@ -591,7 +605,7 @@ If anyone asks for money claiming to represent us, <b style="color:red;">PLEASE 
 </div>
 <!-- SEARCH -->
 
-<div class="contentArea">
+<div class="mainContent">
 
 <div class="searchBox">
 <input id="searchInput" placeholder="🔎 Search your course..." onkeyup="searchCourse()">
@@ -600,6 +614,7 @@ If anyone asks for money claiming to represent us, <b style="color:red;">PLEASE 
 <div id="courseList"></div>
 
 </div>
+
 <!-- SOCIAL -->
 
 <div class="social">
